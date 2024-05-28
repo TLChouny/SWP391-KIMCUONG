@@ -20,7 +20,7 @@ export default function Login() {
             if (user) {
                 console.log('Login successful:', user);
                 // Navigate to the desired page upon successful login
-                navigate("/desired-route");
+                navigate("/");
             } else {
                 console.log('Incorrect username or password');
                 message.error('Incorrect username or password');
