@@ -1,0 +1,188 @@
+/* General Styles (from previous code) */
+body,
+html,
+.signin-container {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* Container for the background image */
+.background-image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Background Image Style */
+.background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin-right: 10%;
+  margin-bottom: 5%;
+}
+
+/* Sign-in Content Style */
+.signin-container {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .signin-content {
+    padding: 15px;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .signin-content {
+    padding: 10px;
+    max-width: 100%;
+  }
+}
+
+/* Logo */
+.form-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  background-color: #f0f2f5b5;
+  padding: 0 118px;
+  max-width: 800px;
+  margin: 100px 400px;
+}
+
+.background-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  display: flex;
+  position: relative;
+  /* Removed left and top positioning */
+}
+
+.background-image {
+  position: relative;
+  /* Ensure relative positioning for absolute positioning of text */
+}
+
+.background-image h4 {
+  display: flex;
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+/* Phần login */
+.background-login {
+  background-color: white;
+  padding: 0 87px;
+  border-radius: 20px;
+  max-width: 800px;
+  transform: translateX(16%);
+}
+
+.background-login h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.formlogin {
+  display: block;
+  /* Removed relative positioning */
+  margin-left: -26%;
+
+}
+
+.remember-forgot-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Margin-left adjustment depends on desired layout */
+  margin-left: -2%;
+}
+
+.check {
+  margin-left: -30%;
+  white-space: nowrap;
+}
+
+.forgot-password-link {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  white-space: nowrap;
+  margin-left: 40%;
+}
+
+.form-item {
+  margin-top: 20px;
+}
+
+.form-item p {
+  text-align: right;
+}
+
+.form-item p a {
+  color: red;
+  text-decoration: none;
+}
+
+.form-item p a:hover {
+  text-decoration: underline;
+}
+
+.submit {
+  width: 150%;
+  /* Removed width: 150% and left positioning */
+  display: block;
+  /* Removed relative positioning */
+  color: white;
+  height: 40px;
+  border-radius: 20px;
+  font-size: 18px;
+  margin-left: -30%;
+}
+
+.changeform {
+  margin-left: -20%;
+  /* Adjust margin-left if needed */
+  margin-top: 10%;
+}
+
+.ant-form-item-explain-error {
+  text-align: left;
+  width: 150%;
+}

@@ -90,7 +90,7 @@ export default function Login() {
                                 }
                             ]}
                         >
-                            <Input style={{ width: '100%'}} />
+                            <Input style={{ width: '130%'}} />
                         </Form.Item>
 
                         <Form.Item
@@ -104,7 +104,7 @@ export default function Login() {
                                 },
                             ]}
                         >
-                            <Input.Password />
+                            <Input.Password style={{ width: '130%'}} />
                         </Form.Item>
                         <Form.Item
                             name="remember"
