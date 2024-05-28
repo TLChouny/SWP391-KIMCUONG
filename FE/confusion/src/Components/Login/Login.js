@@ -1,6 +1,7 @@
 import React from "react";
 import "../Login/Login.css"
 import { Button, Checkbox, Form, Input } from 'antd';
+import { Link } from "react-router-dom";
 const onFinish = (values) => {
     console.log('Success:', values);
 };
@@ -14,73 +15,90 @@ export default function Login() {
                 <img src="../assets/background.png" alt="Background" className="background-image" />
             </div>
 
-            <div className="background-login">
-                <Form
-                    name="basic"
-                    labelCol={{
-                        span: 8,
-                    }}
-                    wrapperCol={{
-                        span: 16,
-                    }}
-                    style={{
-                        maxWidth: 600,
-                    }}
-                    initialValues={{
-                        remember: true,
-                    }}
-                    onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
-                    autoComplete="off"
-                >
-                    <Form.Item
-                        label="Username"
-                        name="username"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your username!',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
+            <div className="form-login">
+                <div className="background-image">
+                    <img src="../assets/logo.jpg" alt="Logo" className="logo" />
+                    <h4>KLARE</h4>
+                </div>
 
-                    <Form.Item
-                        label="Password"
-                        name="password"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your password!',
-                            },
-                        ]}
-                    >
-                        <Input.Password />
-                    </Form.Item>
-
-                    <Form.Item
-                        name="remember"
-                        valuePropName="checked"
+                <div className="background-login">
+                    <h1>SIGN IN</h1>
+                    <Form
+                        name="basic"
+                        labelCol={{
+                            span: 8,
+                        }}
                         wrapperCol={{
-                            offset: 8,
                             span: 16,
                         }}
-                    >
-                        <Checkbox>Remember me</Checkbox>
-                    </Form.Item>
-
-                    <Form.Item
-                        wrapperCol={{
-                            offset: 8,
-                            span: 16,
+                        style={{
+                            maxWidth: 600,
                         }}
+                        initialValues={{
+                            remember: true,
+                        }}
+                        onFinish={onFinish}
+                        onFinishFailed={onFinishFailed}
+                        autoComplete="off"
+                        className="formlogin"
                     >
-                        <Button type="primary" htmlType="submit">
-                            Submit
-                        </Button>
-                    </Form.Item>
-                </Form>
+                        <Form.Item
+                            label="Username"
+                            name="username"
+                            style={{ fontWeight: "bold" }}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your username!',
+                                },
+                            ]}
+                        >
+                            <Input style={{ marginLeft: "20px" }} />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Password"
+                            name="password"
+                            style={{ fontWeight: "bold" }}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your password!',
+                                },
+                            ]}
+                        >
+                            <Input.Password style={{ marginLeft: "20px" }} />
+                        </Form.Item>
+                        <Form.Item
+                            name="remember"
+                            valuePropName="checked"
+                            wrapperCol={{
+                                offset: 8,
+                                span: 16,
+                            }}
+                            className="form-item"
+                        >
+                            <div class="remember-forgot-wrapper">
+                                <Checkbox className="check">Remember me</Checkbox>
+                                <Link to="/" className="forgot-password-link">Forgot Password</Link>
+                            </div>
+                        </Form.Item>
+
+                        <Form.Item
+                            wrapperCol={{
+                                offset: 8,
+                                span: 16,
+                            }}
+                        >
+                         
+                                <Button type="primary" htmlType="submit" className="submit">
+                                    Signin
+                                </Button>
+                                <p className="changeform">Don’t have an account? <Link to="/Signup" style={{ color: "red" }}>Sign up</Link></p>
+                           
+                        </Form.Item>
+                    </Form>
+                </div>
             </div>
         </div>
     );
