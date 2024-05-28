@@ -1,0 +1,56 @@
+/* General Styles */
+body, html, .signin-container {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ensures no overflow */
+    font-family: Arial, sans-serif;
+}
+
+/* Container for the background image */
+.background-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensures the image is behind any other content */
+}
+
+/* Background Image Style */
+.background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire container */
+}
+
+/* Sign-in Content Style */
+.signin-content {
+    position: relative;
+    z-index: 1; /* Ensures content is above the background image */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8); /* Slightly transparent background for readability */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px; /* Limits the width for better readability on larger screens */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .signin-content {
+        padding: 15px;
+        max-width: 90%; /* Adjusts the width for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .signin-content {
+        padding: 10px;
+        max-width: 100%; /* Adjusts the width for very small screens */
+    }
+}
