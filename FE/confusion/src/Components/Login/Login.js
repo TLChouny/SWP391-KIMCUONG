@@ -90,7 +90,7 @@ export default function Login() {
                                 }
                             ]}
                         >
-                            <Input style={{ width: '100%', maxWidth: '300px' }} />
+                            <Input style={{ width: '100%'}} />
                         </Form.Item>
 
                         <Form.Item
@@ -130,7 +130,7 @@ export default function Login() {
                             <Button type="primary" htmlType="submit" className="submit" loading={loading}>
                                 Signin
                             </Button>
-                            <p className="changeform">Don’t have an account? <Link to="/Signup" style={{ color: "red" }}>Sign up</Link></p>
+                            <p className="changeform">Don’t have an account? <Link to="/Register" style={{ color: "red" }}>Sign up</Link></p>
                         </Form.Item>
                     </Form>
                 </div>
