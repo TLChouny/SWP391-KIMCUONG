@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register"
+import Home from "./Components/Home/Home"
 function App() {
   return (
     <Router>
@@ -10,6 +11,8 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path='/Register' element={<Register/>}/>
+          <Route path='/Home' element={<Home/>}/>
+
         </Routes>
       </>
     </Router>

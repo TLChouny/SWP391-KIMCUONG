@@ -1,0 +1,38 @@
+*{
+padding: 0;
+width: auto;
+}
+.Header {
+    width: 1920px;
+    height: 150px;
+    background-color: #FADCF9;
+    margin-top: -24%;
+}
+.Header_Search {
+    display: block;
+    position: relative;
+    left: 18%;
+    top: 18%;
+}
+.Header_Search Input{
+background-color:#f0eaf0;
+display: inline-block;
+position: absolute;
+left: 3%;
+width: 10%;
+top: 2%;
+width: 25%;
+}
+.Searchicon  {
+    display: inline-block;
+    position: absolute;
+    top: 2.6%;
+    left: 18.5%;
+}
+.logo1{
+    width: 70px;
+    height: 70px;
+    margin-left: 50%;
+    margin-top: 2%;
+    border-radius: 50px;
+}
