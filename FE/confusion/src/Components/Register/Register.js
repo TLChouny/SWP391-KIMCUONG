@@ -1,67 +1,72 @@
-import React, { useState } from 'react';
-import {
-    AutoComplete,
-    Button,
-    Cascader,
-    Checkbox,
-    Col,
-    Form,
-    Input,
-    InputNumber,
-    Row,
-    Select,
-} from 'antd';
-import "../Register/Register.css"
-const { Option } = Select;
+import React from 'react';
+import { Button, Form, Input, Select, notification } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import "../Register/Register.css";
 
+const { Option } = Select;
 const formItemLayout = {
     labelCol: {
-        xs: {
-            span: 24,
-        },
-        sm: {
-            span: 8,
-        },
+        xs: { span: 24 },
+        sm: { span: 8 },
     },
     wrapperCol: {
-        xs: {
-            span: 24,
-        },
-        sm: {
-            span: 16,
-        },
+        xs: { span: 24 },
+        sm: { span: 16 },
     },
 };
 const tailFormItemLayout = {
     wrapperCol: {
-        xs: {
-            span: 24,
-            offset: 0,
-        },
-        sm: {
-            span: 16,
-            offset: 8,
-        },
+        xs: { span: 24, offset: 0 },
+        sm: { span: 16, offset: 8 },
     },
 };
+
 const Register = () => {
     const [form] = Form.useForm();
-    const onFinish = (values) => {
-        console.log('Received values of form: ', values);
+    const navigate = useNavigate();
+
+    const onFinish = async (values) => {
+        try {
+            const response = await fetch('https://6655a46c3c1d3b60293a7e4a.mockapi.io/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(values),
+            });
+
+            if (response.ok) {
+                notification.success({
+                    message: 'Registration Successful',
+                    description: 'Đăng kí thành công',
+                });
+                form.resetFields();
+                navigate('/login');
+            } else {
+                throw new Error('Registration failed');
+            }
+        } catch (error) {
+            notification.error({
+                message: 'Registration Failed',
+                description: 'Đăng kí không thành công',
+            });
+        }
     };
+
+    const onFinishFailed = () => {
+        notification.error({
+            message: 'Form Validation Error',
+            description: 'Vui lòng kiểm tra lại thông tin',
+        });
+    };
+
     const prefixSelector = (
         <Form.Item name="prefix" noStyle>
-            <Select
-                style={{
-                    width: 70,
-                }}
-            >
+            <Select style={{ width: 70 }}>
                 <Option value="84">+84</Option>
-                {/* <Option value="87">+87</Option> */}
             </Select>
         </Form.Item>
     );
-
 
     return (
         <div className="signin-container">
@@ -81,27 +86,16 @@ const Register = () => {
                         form={form}
                         name="register"
                         onFinish={onFinish}
-                        initialValues={{
-                            residence: [],
-                            prefix: '+84',
-                        }}
-                        style={{
-                            maxWidth: 600,
-                        }}
+                        onFinishFailed={onFinishFailed}
+                        initialValues={{ residence: [], prefix: '84' }}
+                        style={{ maxWidth: 600 }}
                         scrollToFirstError
                         className="formlogin"
                     >
                         <Form.Item
                             name="Firstname"
                             label="Firstname"
-                            rules={[
-                                {
-                                    type: 'text',
-                                },
-                                {
-                                    required: true,
-                                },
-                            ]}
+                            rules={[{ required: true, message: 'Please input your first name!' }]}
                         >
                             <Input />
                         </Form.Item>
@@ -109,14 +103,7 @@ const Register = () => {
                         <Form.Item
                             name="Lastname"
                             label="Lastname"
-                            rules={[
-                                {
-                                    type: 'text',
-                                },
-                                {
-                                    required: true,
-                                },
-                            ]}
+                            rules={[{ required: true, message: 'Please input your last name!' }]}
                         >
                             <Input />
                         </Form.Item>
@@ -124,12 +111,7 @@ const Register = () => {
                         <Form.Item
                             name="password"
                             label="Password"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please input your password!',
-                                },
-                            ]}
+                            rules={[{ required: true, message: 'Please input your password!' }]}
                             hasFeedback
                         >
                             <Input.Password />
@@ -141,10 +123,7 @@ const Register = () => {
                             dependencies={['password']}
                             hasFeedback
                             rules={[
-                                {
-                                    required: true,
-                                    message: 'Please confirm your password!',
-                                },
+                                { required: true, message: 'Please confirm your password!' },
                                 ({ getFieldValue }) => ({
                                     validator(_, value) {
                                         if (!value || getFieldValue('password') === value) {
@@ -162,36 +141,32 @@ const Register = () => {
                             name="email"
                             label="E-mail"
                             rules={[
-                                {
-                                    type: 'email',
-                                    message: 'The input is not valid E-mail!',
-                                },
-                                {
-                                    required: true,
-                                    message: 'Please input your E-mail!',
-                                },
+                                { type: 'email', message: 'The input is not valid E-mail!' },
+                                { required: true, message: 'Please input your E-mail!' },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                        if (!value || value.endsWith('@gmail.com')) {
+                                            return Promise.resolve();
+                                        }
+                                        return Promise.reject(new Error('Email must end with @gmail.com'));
+                                    },
+                                }),
                             ]}
                         >
                             <Input />
                         </Form.Item>
 
-
-
                         <Form.Item
                             name="phone"
                             label="Phone Number"
                             rules={[
-                                {
-                                    required: true,
-                                    message: 'Please input your phone number!',
-                                },
+                                { required: true, message: 'Please input your phone number!' },
+                                { pattern: /^\d{10}$/, message: 'Phone number must be exactly 10 digits!' },
                             ]}
                         >
                             <Input
                                 addonBefore={prefixSelector}
-                                style={{
-                                    width: '100%',
-                                }}
+                                style={{ width: '100%' }}
                             />
                         </Form.Item>
 
@@ -206,4 +181,5 @@ const Register = () => {
         </div>
     );
 };
+
 export default Register;

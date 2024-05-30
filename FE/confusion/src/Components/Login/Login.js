@@ -13,11 +13,16 @@ export default function Login() {
     const onFinish = async (values) => {
         setLoading(true);
         try {
-            const response = await fetch(URL);
-            const data = await response.json();
-            const { username, password } = values;
-            const user = data.find(item => item.username === username && item.password === password);
-            if (user) {
+            const response = await fetch(URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(values),
+            });
+            
+            if (response.ok) {
+                const user = await response.json();
                 console.log('Login successful:', user);
                 // Navigate to the desired page upon successful login
                 navigate("/");
