@@ -1,38 +1,122 @@
-*{
-padding: 0;
-width: auto;
+/* * {
+    padding: 0;
+    width: auto;
 }
+
 .Header {
     width: 1920px;
     height: 150px;
     background-color: #FADCF9;
     margin-top: -24%;
 }
+
 .Header_Search {
-    display: block;
-    position: relative;
-    left: 18%;
-    top: 18%;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    padding-left: 10px;
 }
-.Header_Search Input{
-background-color:#f0eaf0;
-display: inline-block;
-position: absolute;
-left: 3%;
-width: 10%;
-top: 2%;
-width: 25%;
+
+.Header_Search Input {
+    background-color: #f0eaf0;
+    width: 25%;
+    margin-top: 4%;
+    margin-left: 8%;
 }
-.Searchicon  {
-    display: inline-block;
-    position: absolute;
-    top: 2.6%;
-    left: 18.5%;
+
+.Searchicon {
+    font-size: 18px;
+    top: 10%;
 }
-.logo1{
+.Header_Logo {
+    margin-top: -5.5%;
+}
+.logo1 {
     width: 70px;
     height: 70px;
-    margin-left: 50%;
-    margin-top: 2%;
+    margin-left: 48%;
+    margin-top: 0%;
     border-radius: 50px;
+    align-items: center;
+}
+.Header_Name {
+    padding: -10px;
+    margin-left: 48.8%;
+}
+.Header_Account_Cart {
+    margin-left: 85%;
+} */
+
+* {
+    padding: 0;
+    margin: 0; /* Thêm margin 0 để loại bỏ khoảng cách */
+    box-sizing: border-box; /* Đảm bảo kích thước phần tử bao gồm padding và border */
+}
+
+.Header {
+    width: 282%;
+    height: 150px;
+    background-color: #FADCF9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-top: -74%;
+    margin-left: -91%;
+}
+
+.Header_Search {
+    display: flex;
+    align-items: center;
+    width: 20%;
+}
+
+.Header_Search Input {
+    background-color: #f0eaf0;
+    width: 96%;
+    margin-right: 10px;
+}
+
+.Searchicon {
+    font-size: 18px;
+    margin-left: -1275%;
+    display: flex;
+    position: relative;
+}
+
+.Header_Logo {
+  position: relative;
+}
+
+.logo1 {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%; /* Thay đổi border-radius thành 50% để tạo hình tròn */
+    /* margin-right: 10px; Thay đổi margin từ margin-left thành margin-right */
+    position: relative;
+    display: flex;
+}
+
+.Header_Name {
+    font-size: 18px; /* Thêm kích thước chữ cho tên */
+
+}
+
+.Header_Account_Cart {
+    display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử bên trong */
+    align-items: center; /* Căn chữa đứng giữa dọc */
+}
+
+.Header_Ads {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; 
+    justify-items: center;
+}
+
+
+
+
+.Body {
+    margin-top: 10%;
 }
