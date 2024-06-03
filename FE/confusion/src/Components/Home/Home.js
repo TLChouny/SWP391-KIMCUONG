@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "./Home.css";
+import "../Home/Home.css";
 import { Button, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { UserOutlined } from '@ant-design/icons';
 import { ShoppingCartOutlined } from '@ant-design/icons';
-
+import { Link } from "react-router-dom";
 function Header({ onSearch }) {
     const [searchValue, setSearchValue] = useState("");
 
@@ -19,19 +19,19 @@ function Header({ onSearch }) {
     return (
         <div className="Header">
             <div className="Header_Search">
-                <Input 
+                <Input
                     placeholder="Search..."
                     value={searchValue}
                     onChange={handleInputChange}
                 />
-                <Button onClick={handleSearch}><SearchOutlined/></Button>
+                <Button onClick={handleSearch}><SearchOutlined /></Button>
             </div>
             <div className="Header_Logo">
-                <img src="../assets/logo.jpg" alt="Logo" className="logo1" />
+                <Link to="/"><img src="../assets/logo.jpg" alt="Logo" className="logo1" /></Link>
+                <div className="Header_Name">Klare</div>
             </div>
-            <div className="Header_Name">Klare</div>
             <div className="Header_Account_Cart">
-                <UserOutlined className="Usericon" />
+                <Link to="/Prelogin"><UserOutlined className="Usericon" /></Link>
                 <ShoppingCartOutlined className="Carticon" />
             </div>
         </div>

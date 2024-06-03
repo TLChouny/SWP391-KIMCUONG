@@ -1,99 +1,84 @@
 @import url('https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
 * {
-    width: 100%;
-    height: 100%;
     margin: 0;
     padding: 0;
 }
-
-/* Header */
+/* Home.css */
 .Header {
-    width: 100%;
-    height: 20vh;
-    /* Sử dụng 20% chiều cao của màn hình làm chiều cao cho Header */
-    background-color: #FADCF9;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 0 5%;
-    /* Thay đổi padding để phù hợp với kích thước của khung trình duyệt */
-}
-
-/* Header Name */
-.Header_Name {
-    position: absolute;
-    top: calc(10% + 44px);
-    left: 96vh;
-    transform: translateX(-50%);
-    font-size: 4vh;
-    font-family: "Inria Serif", serif;
-    width: 100px;
-    height: 100px;
-}
-
-.Header_Logo {
-    height: 90px;
-    width: 90px;
-    margin-top: 24%;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: #FADCF9;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
     position: fixed;
-    top: -38%; /* Đưa nó vào trung tâm theo chiều dọc */
-    left: 50%; /* Đưa nó vào trung tâm theo chiều ngang */
-    transform: translate(-50%, -50%); 
-}
-
-.logo1 {
-    height: 10vh;
-    width: auto;
-    border-radius: 50%;
-}
-
-.Header_Account_Cart {
-    width: 350px;
-    height: 100px;
-    display: flex; /* Sử dụng display: flex; để chia đều không gian cho hai icon */
-    align-items: center; /* Căn giữa theo chiều dọc */
-}
-
-.Usericon, .Carticon {
-    flex-grow: 1;
-    width: 150px;
-    height: 100px;
-    margin: 0px 10px;
-    font-size: 40px;
-}
-.Carticon {
-    flex-grow: 1; /* Mỗi icon sẽ chiếm một phần bằng nhau của không gian */
-    margin: 0 20px; /* Tạo khoảng cách 10px giữa hai icon */
-    margin-right: 230px;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .Header_Search {
-    width: 300px;
-    height: 100px;
     display: flex;
+    align-items: center;
     position: relative;
+    left: 8%;
 }
-.Header_Search Input, .Header_Search Button {
-    height: 34px;
-    margin-top: 12%;
+
+.Header_Search .ant-input {
+    border-radius: 10px 0 0 10px;
+    border-right: none;
+    padding: 10px;
 }
-.Header_Search Button {
-    border-radius: 18%;
-    width: 20%;
+
+.Header_Search .ant-btn {
+    border-radius: 0 4px 4px 0;
+    background-color: rgba(0, 217, 255, 0.622);
+    border: none;
+    color: black;
+    height: 42px;
 }
 
 
-/* Body */
-.Body {
-    margin-top: 5vh;
-    /* Sử dụng 5% chiều cao của màn hình làm khoảng cách giữa Header và Body */
+
+.Header_Logo .logo1 {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    left: -26%;
 }
 
-/* Body Image */
-.body1 {
-    height: 10vh;
-    /* Sử dụng 10% chiều cao của màn hình làm kích thước hình ảnh */
-    width: auto;
-    /* Tự động điều chỉnh chiều rộng để giữ tỷ lệ */
+.Header_Name {
+    font-size: 32px;
+    font-weight: bold;
+    margin-left: 15px;
+    color: black;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    left: -50%;
+    text-transform: uppercase;
+}
+
+.Header_Account_Cart {
+    display: flex;
+    align-items: center;
+    position: relative;
+    right: 6%;
+    
+}
+
+.Header_Account_Cart .Usericon,
+.Header_Account_Cart .Carticon {
+    font-size: 26px;
+    margin-left: 20px;
+    cursor: pointer;
+    color: black;
+    
 }
