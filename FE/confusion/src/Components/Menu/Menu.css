@@ -1,0 +1,22 @@
+.Menu {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    margin-top: 18%;
+    display: grid;
+    grid-template-columns: repeat(120, 10fr);
+    grid-gap: 120px;
+    margin-left: 22%;
+}
+
+.menuHome, .menuAlbum, .menuReviews, .menuNews, .menuContact {
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+    font-size: 22px;
+}
+
+/* .line {
+    border-bottom: 1px solid black;
+  } */
+  

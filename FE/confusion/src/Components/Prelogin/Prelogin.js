@@ -14,7 +14,7 @@ export default function Prelogin() {
 
             <div className="form-prelogin">
                 <div className="background-image">
-                    <img src="../assets/logo.jpg" alt="Logo" className="logo" />
+                    <Link to = "/"><img src="../assets/logo.jpg" alt="Logo" className="logo" /></Link>
                     <h4>KLARE</h4>
                 </div>
 

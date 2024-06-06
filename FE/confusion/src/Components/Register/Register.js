@@ -27,7 +27,7 @@ const Register = () => {
 
     const onFinish = async (values) => {
         try {
-            const response = await fetch('https://6655a46c3c1d3b60293a7e4a.mockapi.io/login', {
+            const response = await fetch('http://localhost:8080/api/auth/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -93,50 +93,20 @@ const Register = () => {
                         className="formlogin"
                     >
                         <Form.Item
-                            name="Firstname"
-                            label="Firstname"
+                            name="username"
+                            label="Username"
                             rules={[{ required: true, message: 'Please input your first name!' }]}
                         >
                             <Input />
                         </Form.Item>
 
-                        <Form.Item
+                        {/* <Form.Item
                             name="Lastname"
                             label="Lastname"
                             rules={[{ required: true, message: 'Please input your last name!' }]}
                         >
                             <Input />
-                        </Form.Item>
-
-                        <Form.Item
-                            name="password"
-                            label="Password"
-                            rules={[{ required: true, message: 'Please input your password!' }]}
-                            hasFeedback
-                        >
-                            <Input.Password />
-                        </Form.Item>
-
-                        <Form.Item
-                            name="confirm"
-                            label="Confirm Password"
-                            dependencies={['password']}
-                            hasFeedback
-                            rules={[
-                                { required: true, message: 'Please confirm your password!' },
-                                ({ getFieldValue }) => ({
-                                    validator(_, value) {
-                                        if (!value || getFieldValue('password') === value) {
-                                            return Promise.resolve();
-                                        }
-                                        return Promise.reject(new Error('The new password that you entered do not match!'));
-                                    },
-                                }),
-                            ]}
-                        >
-                            <Input.Password />
-                        </Form.Item>
-
+                        </Form.Item> */}
                         <Form.Item
                             name="email"
                             label="E-mail"
@@ -157,7 +127,55 @@ const Register = () => {
                         </Form.Item>
 
                         <Form.Item
-                            name="phone"
+                            name="password"
+                            label="Password"
+                            rules={[{ required: true, message: 'Please input your password!' }]}
+                            hasFeedback
+                        >
+                            <Input.Password />
+                        </Form.Item>
+
+                        {/* <Form.Item
+                            name="confirm"
+                            label="Confirm Password"
+                            dependencies={['password']}
+                            hasFeedback
+                            rules={[
+                                { required: true, message: 'Please confirm your password!' },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                        if (!value || getFieldValue('password') === value) {
+                                            return Promise.resolve();
+                                        }
+                                        return Promise.reject(new Error('The new password that you entered do not match!'));
+                                    },
+                                }),
+                            ]}
+                        >
+                            <Input.Password />
+                        </Form.Item> */}
+
+                        {/* <Form.Item
+                            name="email"
+                            label="E-mail"
+                            rules={[
+                                { type: 'email', message: 'The input is not valid E-mail!' },
+                                { required: true, message: 'Please input your E-mail!' },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                        if (!value || value.endsWith('@gmail.com')) {
+                                            return Promise.resolve();
+                                        }
+                                        return Promise.reject(new Error('Email must end with @gmail.com'));
+                                    },
+                                }),
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item> */}
+
+                        <Form.Item
+                            name="phoneNumber"
                             label="Phone Number"
                             rules={[
                                 { required: true, message: 'Please input your phone number!' },
