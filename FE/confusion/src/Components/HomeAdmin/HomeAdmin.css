@@ -1,0 +1,105 @@
+
+.HomeAdmin {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow-y:auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.Top {
+    width: 100%;
+    height: 70px;
+    background-color: #D2C7C4;
+}
+
+.LogoutOutlined {
+    margin-top: 22px;
+    width: 40px;
+    height: 40px;
+    margin-left: 97%;
+}
+
+.AdminControlTable {
+    margin-left: 14%;
+    margin-top: 4%;
+    display: block;
+    position: absolute;
+    font-size: 30px;
+    color: #0E8313;
+    border: 2px solid #D2C7C4;
+    width: 1416px;
+}
+
+.AdminAvatar {
+    width: 150px;
+    height: 150px;
+    margin: 0;
+}
+
+.adminavatar {
+    width: 100px;
+    height: 100px;
+    margin-left: 24px;
+}
+
+.adminname {
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.AdminSummary {
+    margin-left: 18%;
+    display: flex;
+    position: absolute;
+    margin-top: -258px;
+    height: 180px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border: 2px solid black;
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+    /* Khoảng trống */
+    margin: 20px;
+    /* Khoảng cách giữa các bảng */
+}
+
+li {
+    padding: 10px;
+}
+
+.AdminContent {
+    margin-top: 6%;
+    margin-left: 15%;
+    font-size: 24px;
+    padding: 60px;
+}
+
+
+.OrderTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.OrderTable th,
+.OrderTable td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    width: 14.28%;
+}
+
+.OrderTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.OrderTable tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}

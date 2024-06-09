@@ -27,7 +27,7 @@ function Header() {
         // Sau 3 giây, ẩn danh sách sản phẩm
         setTimeout(function () {
             document.querySelector('.product-list').style.opacity = 0;
-        }, 3000);
+        }, 3000)
 
         function handleSearchInput(event) {
             const searchInput = event.target.value;
