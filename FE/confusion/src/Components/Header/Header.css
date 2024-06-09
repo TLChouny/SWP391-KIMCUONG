@@ -2,7 +2,7 @@
 
 * {
     width: 100%;
-    height: 100%;
+    height: auto;
     margin: 0;
     padding: 0;
 }
@@ -12,8 +12,10 @@
     width: 100%;
     height: 20vh;
     /* Sử dụng 20% chiều cao của màn hình làm chiều cao cho Header */
-    background-color: #FADCF9;
+    background-color: #D2C7C4;
     display: flex;
+    position: fixed;
+    top: 0;
     align-items: center;
     justify-content: space-between;
     padding: 0 5%;
@@ -23,13 +25,13 @@
 /* Header Name */
 .Header_Name {
     position: absolute;
-    top: calc(10% + 44px);
+    top: calc(10% + 104px);
     left: 96vh;
     transform: translateX(-50%);
     font-size: 4vh;
     font-family: "Inria Serif", serif;
     width: 100px;
-    height: 100px;
+    height: 44px;
 }
 
 .Header_Logo {
@@ -42,7 +44,7 @@
     transform: translate(-50%, -50%); 
 }
 
-.logo1 {
+.logo {
     height: 10vh;
     width: auto;
     border-radius: 50%;

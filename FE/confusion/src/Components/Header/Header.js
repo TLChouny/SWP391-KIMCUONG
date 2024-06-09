@@ -11,10 +11,6 @@ function Header() {
     const [products, setProducts] = useState(productList);
     const [searchVal, setSearchVal] = useState("");
     const [setSuggestedProducts] = useState([]);
-    const [showSelect, setShowSelect] = useState(false);
-    const toggleSelect = () => {
-        setShowSelect(!showSelect);
-      };
 
     function handleSearchClick() {
         if (searchVal === "") {
@@ -31,7 +27,7 @@ function Header() {
         // Sau 3 giây, ẩn danh sách sản phẩm
         setTimeout(function () {
             document.querySelector('.product-list').style.opacity = 0;
-        }, 3000);
+        }, 3000)
 
         function handleSearchInput(event) {
             const searchInput = event.target.value;
@@ -58,18 +54,14 @@ function Header() {
                 </div>
             </div>
             <div className="Header_Logo">
-                <img src="../assets/logo.jpg" alt="Logo" className="logo1" />
+                <img src="../assets/logo.jpg" alt="Logo" className="logo" />
             </div>
             <div className="Header_Name">Klare</div>
             <div className="Header_Account_Cart">
-                <UserOutlined className="Usericon" onClick={toggleSelect} />
-                {showSelect && (
-                    <select>
-                        <option value="Login">Login</option>
-                        <option value="Signup">Sign up</option>
-                    </select>
-                )}
+                <UserOutlined className="Usericon"/>
+
                 <ShoppingCartOutlined className="Carticon" />
+
             </div>
             <Menu />
         </div>
