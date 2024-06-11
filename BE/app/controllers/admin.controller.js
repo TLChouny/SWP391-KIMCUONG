@@ -1,5 +1,5 @@
 const db = require("../models");
-//const Admin = db.admin;
+const Admin = db.admin;
 const User = db.user;
 // Admin Controller
 
@@ -20,10 +20,7 @@ exports.getAllUsers = async (req, res) => {
     });
 };
 
-
-// Create a new user 1234
-// Create a new user main
-
+// Create a new user
 exports.createUser = async (req, res) => {
   try {
     const newUser = new User(req.body);
