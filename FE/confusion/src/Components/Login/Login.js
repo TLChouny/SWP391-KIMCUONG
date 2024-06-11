@@ -4,7 +4,7 @@ import "../Login/Login.css";
 import { Button, Checkbox, Form, Input, message } from 'antd';
 import { Link } from "react-router-dom";
 
-const URL = "https://6655a46c3c1d3b60293a7e4a.mockapi.io/login";
+//const URL = "http://localhost:8080/api/auth/signin";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ export default function Login() {
     const onFinish = async (values) => {
         setLoading(true);
         try {
-            const response = await fetch(URL, {
+            const response = await fetch('http://localhost:8080/api/auth/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ export default function Login() {
                 navigate("/");
             } else {
                 console.log('Incorrect username or password');
-                message.error('Incorrect username or password');
+                message.error('Login fail');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -82,8 +82,8 @@ export default function Login() {
                         className="formlogin"
                     >
                         <Form.Item
-                            label="Username"
-                            name="username"
+                            label="Email"
+                            name="email"
                             style={{ fontWeight: "bold" }}
                             rules={[
                                 {
