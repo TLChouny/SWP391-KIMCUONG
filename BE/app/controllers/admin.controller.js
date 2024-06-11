@@ -20,7 +20,10 @@ exports.getAllUsers = async (req, res) => {
     });
 };
 
+
 // Create a new user 1234
+// Create a new user main
+
 exports.createUser = async (req, res) => {
   try {
     const newUser = new User(req.body);
