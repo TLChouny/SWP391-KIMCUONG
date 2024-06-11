@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import "./HomeAdmin.css";
-import { LogoutOutlined, LineOutlined } from '@ant-design/icons';
+import { LogoutOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import QuanLyKhachHang from "../QuanLyKhachHang/QuanLyKhachHang";
 
 function HomeAdmin() {
 
@@ -32,12 +33,23 @@ function HomeAdmin() {
         }
         return acc;
     }, []).length;
-    
+
     // Tính tổng số lượng sản phẩm (có thể thay đổi tùy thuộc vào cách bạn lưu trữ thông tin sản phẩm)
     const tongSanPham = 30; // Tính tổng số lượng sản phẩm từ danh sách đơn hàng
 
     // Tính tổng số lượng đơn hàng
     const tongDonHang = donHangs.length;
+
+    // Tính tổng doanh thu
+    const tongDoanhThu = donHangs.reduce((acc, donHang) => {
+        // Lấy giá trị tổng tiền từ đơn hàng và loại bỏ các ký tự không phải số
+        const tongTien = parseFloat(donHang.tongTien.replace(/[^\d]/g, ''));
+        // Nếu tổng tiền hợp lệ (không phải NaN), thêm vào tổng doanh thu
+        if (!isNaN(tongTien)) {
+            acc += tongTien;
+        }
+        return acc;
+    }, 0);
 
     useEffect(() => {
         const table = document.createElement('table');
@@ -68,6 +80,8 @@ function HomeAdmin() {
         adminContentDetails.appendChild(table);
     }, [donHangs]);
 
+    
+
     return (
         <div className="HomeAdmin">
             <div className="Top">
@@ -75,6 +89,7 @@ function HomeAdmin() {
                     <LogoutOutlined className="LogoutOutlined" />
                 </Link>
             </div>
+            <div className="AdminHeader">
             <div className="AdminControlTable">
                 Bảng Điều Khiển
             </div>
@@ -82,13 +97,23 @@ function HomeAdmin() {
                 <img src="../assets/admin.png" className="adminavatar" />
                 <p className="adminname">Admin, Long Châu</p>
             </div>
-            <div id="AdminTable">
-                <ul id="AdminTableList">
-                    <li><a href="#section1">Mục 1</a></li>
-                    <li><a href="#section2">Mục 2</a></li>
-                    <li><a href="#section3">Mục 3</a></li>
-                    <li><a href="#section4">Mục 4</a></li>
-                    <li><a href="#section5">Mục 5</a></li>
+            <div className="AdminTable">
+                <ul className="AdminTableList">
+                    <li><Link to ="/QuanLyKhachHang">Quản lý khách hàng</Link>
+                    <img src="../assets/quanlykhachhang.jpg" alt="Logo" className="quanlykhachhang"/>
+                    </li>
+                    <li><Link to ="/QuanLySanPham">Quản lý sản phẩm</Link>
+                    <img src="../assets/quanlysanpham.png" alt="Logo" className="quanlysanpham"/>
+                    </li>
+                    <li><Link to ="/QuanLyDonHang">Quản lý đơn hàng</Link>
+                    <img src="../assets/quanlydonhang.png" alt="Logo" className="quanlydonhang"/>
+                    </li>
+                    <li><Link to ="/QuanLyDoanhThu">Quản lý doanh thu</Link>
+                    <img src="../assets/quanlydoanhthu.jpg" alt="Logo" className="quanlydoanhthu"/>
+                    </li>
+                    <li><Link to ="QuanLyNhanVien">Quản lý nhân viên</Link>
+                    <img src="../assets/quanlynhanvien.png" alt="Logo" className="quanlynhanvien"/>
+                    </li>
                 </ul>
             </div>
             <div className="AdminSummary">
@@ -102,9 +127,11 @@ function HomeAdmin() {
                     <li>Tổng đơn hàng : {tongDonHang} </li>
                 </ul>
                 <ul id="Tổng doanh thu">
-                    <li>Tổng doanh thu :  </li>
+                    <li>Tổng doanh thu : {tongDoanhThu.toLocaleString()}đ </li>
                 </ul>
             </div>
+            </div>
+            {/* /*bắt đầu cái mới*/}
             <div className="AdminContent">
                 Đơn hàng gần đây
             </div>

@@ -5,6 +5,8 @@ import Register from "./Components/Register/Register"
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import HomeAdmin from './Components/HomeAdmin/HomeAdmin';
+import QuanLyKhachHang from './Components/QuanLyKhachHang/QuanLyKhachHang';
+import QuanLySanPham from './Components/QuanLySanPham/QuanLySanPham';
 
 function App() {
   return (
@@ -17,6 +19,9 @@ function App() {
           <Route path='/Register' element={<Register/>}/>
           <Route path='/Header' element={<Header/>}/>
           <Route path='/HomeAdmin' element={<HomeAdmin/>}/>
+          <Route path='/QuanLyKhachHang' element={<QuanLyKhachHang/>}/>
+          <Route path='/QuanLySanPham' element={<QuanLySanPham/>}/>
+
 
         </Routes>
       </>
