@@ -1,16 +1,6 @@
-/* General Styles (from previous code) */
-body,
-html,
-.signin-container {
+*{
   margin: 0;
   padding: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
 }
 
 /* Container for the background image */

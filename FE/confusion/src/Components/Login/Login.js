@@ -4,7 +4,7 @@ import "../Login/Login.css";
 import { Button, Checkbox, Form, Input, message } from 'antd';
 import { Link } from "react-router-dom";
 
-//const URL = "http://localhost:8080/api/auth/signin";
+const URL = "https://6655a46c3c1d3b60293a7e4a.mockapi.io/login";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -13,22 +13,23 @@ export default function Login() {
     const onFinish = async (values) => {
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:8080/api/auth/signin', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(values),
-            });
-            
-            if (response.ok) {
-                const user = await response.json();
+            console.log('Attempting to fetch user data...');
+            const response = await fetch(URL);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log('User data fetched:', data);
+
+            const { username, password } = values;
+            const user = data.find(item => item.username === username && item.password === password);
+            if (user) {
                 console.log('Login successful:', user);
                 // Navigate to the desired page upon successful login
                 navigate("/");
             } else {
                 console.log('Incorrect username or password');
-                message.error('Login fail');
+                message.error('Incorrect username or password');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -82,8 +83,8 @@ export default function Login() {
                         className="formlogin"
                     >
                         <Form.Item
-                            label="Email"
-                            name="email"
+                            label="Username"
+                            name="username"
                             style={{ fontWeight: "bold" }}
                             rules={[
                                 {
@@ -95,7 +96,7 @@ export default function Login() {
                                 }
                             ]}
                         >
-                            <Input style={{ width: '130%'}} />
+                            <Input style={{ width: '100%', maxWidth: '300px' }} />
                         </Form.Item>
 
                         <Form.Item
@@ -109,7 +110,7 @@ export default function Login() {
                                 },
                             ]}
                         >
-                            <Input.Password style={{ width: '130%'}} />
+                            <Input.Password />
                         </Form.Item>
                         <Form.Item
                             name="remember"

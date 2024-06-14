@@ -92,39 +92,21 @@ const Register = () => {
                         scrollToFirstError
                         className="formlogin"
                     >
-                        <Form.Item
-                            name="username"
-                            label="Username"
+                        {/* <Form.Item
+                            name="Firstname"
+                            label="Firstname"
                             rules={[{ required: true, message: 'Please input your first name!' }]}
                         >
                             <Input />
                         </Form.Item>
 
-                        {/* <Form.Item
+                        <Form.Item
                             name="Lastname"
                             label="Lastname"
                             rules={[{ required: true, message: 'Please input your last name!' }]}
                         >
                             <Input />
                         </Form.Item> */}
-                        <Form.Item
-                            name="email"
-                            label="E-mail"
-                            rules={[
-                                { type: 'email', message: 'The input is not valid E-mail!' },
-                                { required: true, message: 'Please input your E-mail!' },
-                                ({ getFieldValue }) => ({
-                                    validator(_, value) {
-                                        if (!value || value.endsWith('@gmail.com')) {
-                                            return Promise.resolve();
-                                        }
-                                        return Promise.reject(new Error('Email must end with @gmail.com'));
-                                    },
-                                }),
-                            ]}
-                        >
-                            <Input />
-                        </Form.Item>
 
                         <Form.Item
                             name="password"
@@ -135,7 +117,7 @@ const Register = () => {
                             <Input.Password />
                         </Form.Item>
 
-                        {/* <Form.Item
+                        <Form.Item
                             name="confirm"
                             label="Confirm Password"
                             dependencies={['password']}
@@ -153,10 +135,10 @@ const Register = () => {
                             ]}
                         >
                             <Input.Password />
-                        </Form.Item> */}
+                        </Form.Item>
 
-                        {/* <Form.Item
-                            name="email"
+                        <Form.Item
+                            name="username"
                             label="E-mail"
                             rules={[
                                 { type: 'email', message: 'The input is not valid E-mail!' },
@@ -172,10 +154,10 @@ const Register = () => {
                             ]}
                         >
                             <Input />
-                        </Form.Item> */}
+                        </Form.Item>
 
                         <Form.Item
-                            name="phoneNumber"
+                            name="phone"
                             label="Phone Number"
                             rules={[
                                 { required: true, message: 'Please input your phone number!' },
