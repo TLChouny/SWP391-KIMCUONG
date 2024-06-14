@@ -20,6 +20,8 @@ module.exports = function (app) {
 
   app.get("/api/products/:id", productController.findById);
 
+  app.get("/api/products/category/:category", productController.findByCategory);
+
   app.put(
     "/api/products/:id",
     [authJwt.verifyToken, authJwt.isManager],
