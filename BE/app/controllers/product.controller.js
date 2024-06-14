@@ -49,6 +49,22 @@ exports.findById = (req, res) => {
     });
 };
 
+exports.findByCategory = (req, res) => {
+  // Find products by ProductCategory
+  Product.find({ ProductCategory: req.params.category })
+    .then((products) => {
+      if (products.length === 0) {
+        return res
+          .status(404)
+          .json({ message: "No products found for the given category" });
+      }
+      res.status(200).json(products);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.message });
+    });
+};
+
 exports.update = (req, res) => {
   // Update a product by ProductId
   Product.findOneAndUpdate(
