@@ -1,5 +1,5 @@
 
-.QuanLySanPham {
+.QuanLyDonHang {
     width: 100%;
     height: 100vh;
     padding: 0;
@@ -91,11 +91,11 @@
     color: #007bff; /* Màu chữ khi di chuột qua */
 }
 
-.qlsp{
+.qldh{
     width: 370px;
     box-shadow: 2px 8px 8px rgba(0, 0, 0, 1); /* Đổ bóng */
 }
-.qlsp a {
+.qldh a {
     font-weight: bold;
 }
 /* Định dạng phần tổng kết */

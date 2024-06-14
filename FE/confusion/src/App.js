@@ -7,6 +7,7 @@ import Home from './Components/Home/Home';
 import HomeAdmin from './Components/HomeAdmin/HomeAdmin';
 import QuanLyKhachHang from './Components/QuanLyKhachHang/QuanLyKhachHang';
 import QuanLySanPham from './Components/QuanLySanPham/QuanLySanPham';
+import QuanLyDonHang from './Components/QuanLyDonHang/QuanLyDonHang';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/HomeAdmin' element={<HomeAdmin/>}/>
           <Route path='/QuanLyKhachHang' element={<QuanLyKhachHang/>}/>
           <Route path='/QuanLySanPham' element={<QuanLySanPham/>}/>
+          <Route path='/QuanLyDonHang' element={<QuanLyDonHang/>}/>
 
 
         </Routes>
