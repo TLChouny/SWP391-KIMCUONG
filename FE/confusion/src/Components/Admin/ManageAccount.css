@@ -28,7 +28,7 @@
 }
 /* Khung bên trái */
 .left-panel {
-    flex: 3; /* Chiếm 30% chiều rộng */
+    flex: 2; /* Chiếm 30% chiều rộng */
     background-color: #f0f0f0;
     padding: 20px;
     overflow-y: auto; /* Cho phép cuộn nội dung trong left-panel nếu có */
@@ -37,7 +37,7 @@
 
 /* Khung bên phải */
 .right-panel {
-    flex: 7; /* Chiếm 70% chiều rộng */
+    flex: 8; /* Chiếm 70% chiều rộng */
     background-color: #e0e0e0;
     padding: 20px;
     overflow-y: auto; /* Cho phép cuộn nội dung trong right-panel nếu có */

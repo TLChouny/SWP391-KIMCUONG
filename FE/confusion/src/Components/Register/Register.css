@@ -55,11 +55,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 52vh;
+  height: 72vh;
   background-color: #f0f2f5b5;
   padding: 30px 130px;
   max-width: 800px;
-  margin: 131px 250px;
+  margin: 50px 250px;
 }
 
 .background-image {
