@@ -16,14 +16,14 @@ module.exports = function (app) {
       adminController.getDashboard
     );
   
-    app.get('/api/getAllUsers',adminController.getAllUsers);
+    app.get('/api/getAllUsers',[authJwt.verifyToken, authJwt.isAdmin],adminController.getAllUsers);
 
-    app.post('/api/createUser',  adminController.createUser);
+    app.post('/api/createUser',[authJwt.verifyToken, authJwt.isAdmin],  adminController.createUser);
 
-    app.get('/api/getUserById',  adminController.getUserById);
+    app.get('/api/getUserById',[authJwt.verifyToken, authJwt.isAdmin],  adminController.getUserById);
 
-    app.put('/api/updateUser',  adminController.updateUser);
+    app.put('/api/updateUser',[authJwt.verifyToken, authJwt.isAdmin],  adminController.updateUser);
 
-    app.delete('/api/deleteUser',  adminController.deleteUser);
+    app.delete('/api/deleteUser',[authJwt.verifyToken, authJwt.isAdmin],  adminController.deleteUser);
   };
   

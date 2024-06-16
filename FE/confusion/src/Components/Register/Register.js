@@ -76,7 +76,7 @@ const Register = () => {
             <div className="form-register">
                 <div className="background-image">
                     <img src="../assets/logo.jpg" alt="Logo" className="logo" />
-                    <h4 style={{marginBottom: "-18%"}}>KLARE</h4>
+                    <h4 style={{ marginBottom: "6%" }}>KLARE</h4>
                 </div>
 
                 <div className="background-login-register">
@@ -100,13 +100,7 @@ const Register = () => {
                             <Input />
                         </Form.Item>
 
-                        {/* <Form.Item
-                            name="Lastname"
-                            label="Lastname"
-                            rules={[{ required: true, message: 'Please input your last name!' }]}
-                        >
-                            <Input />
-                        </Form.Item> */}
+
 
                         <Form.Item
                             name="password"
@@ -155,6 +149,14 @@ const Register = () => {
                         >
                             <Input />
                         </Form.Item>
+                        
+                        <Form.Item
+                            name="address"
+                            label="Address"
+                            rules={[{ required: true, message: 'Please input your address!' }]}
+                        >
+                            <Input />
+                        </Form.Item>
 
                         <Form.Item
                             name="phoneNumber"
@@ -169,6 +171,8 @@ const Register = () => {
                                 style={{ width: '100%' }}
                             />
                         </Form.Item>
+
+
 
                         <Form.Item {...tailFormItemLayout}>
                             <Button type="primary" htmlType="submit" className="submit">

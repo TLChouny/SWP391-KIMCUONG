@@ -1,0 +1,148 @@
+/* CSS cũ - bỏ qua phần đã có */
+/* ... */
+
+/* Chỉnh sửa để chia màn hình 3:7 */
+.ManageAccount {
+    display: flex; /* Sử dụng flexbox */
+    height: 100vh; /* Chiều cao của toàn bộ trang */
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background-color: #ddd;
+}
+
+/* CSS cải thiện cho các phần của trang quản lý account */
+
+/* Phần top của trang */
+.Top {
+    background-color: #A37A78;
+    display: flex;
+    position: absolute;
+    justify-content: flex-end; /* Canh phải */
+    align-items: center;
+    height: 60px;
+    width: 100%;
+}
+.Top-logout {
+    margin-right: 10px;
+}
+/* Khung bên trái */
+.left-panel {
+    flex: 2; /* Chiếm 30% chiều rộng */
+    background-color: #f0f0f0;
+    padding: 20px;
+    overflow-y: auto; /* Cho phép cuộn nội dung trong left-panel nếu có */
+    margin-top: 60px; /* Dời khung trái xuống phía dưới của .Top */
+}
+
+/* Khung bên phải */
+.right-panel {
+    flex: 8; /* Chiếm 70% chiều rộng */
+    background-color: #e0e0e0;
+    padding: 20px;
+    overflow-y: auto; /* Cho phép cuộn nội dung trong right-panel nếu có */
+    margin-top: 60px; /* Dời khung phải xuống phía dưới của .Top */
+}
+
+/* Avatar của admin */
+.AdminAvatar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.adminavatar {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    border-radius: 50%; /* Bo tròn hình ảnh */
+}
+
+.adminname {
+    font-size: 18px;
+    color: #333;
+    margin-top: 0;
+}
+
+/* Danh sách quản lý */
+.AdminTableList {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.AdminTableList li {
+    padding: 12px 10px;
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.AdminTableList a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+    display: block;
+}
+
+.AdminTableList a:hover {
+    color: #007bff;
+}
+
+/* Các phần bổ sung cho quản lý đơn hàng */
+.AdminHeader {
+    background-color: #D2C7C4;
+    padding: 10px 20px;
+    font-size: 24px;
+    color: #303030;
+    border: 2px solid #ddd;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.AdminSummary {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+/* Phần nội dung chính */
+.AdminContent {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #D2C7C4;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Bảng hiển thị chi tiết người dùng */
+.OrderTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.OrderTable th,
+.OrderTable td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.OrderTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #303030;
+}
+
+.AdminTableList li img {
+    margin-right: 10px;
+}
