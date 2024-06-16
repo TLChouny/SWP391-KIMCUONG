@@ -4,7 +4,7 @@ import "../Login/Login.css";
 import { Button, Checkbox, Form, Input, message } from 'antd';
 import { Link } from "react-router-dom";
 
-//const URL = "http://localhost:8080/api/auth/signin";
+const URL = "http://localhost:8080/api/auth/signin";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -13,28 +13,48 @@ export default function Login() {
     const onFinish = async (values) => {
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:8080/api/auth/signin', {
+            console.log('Attempting to login with values:', values);
+            const response = await fetch(URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(values),
             });
-            
-            if (response.ok) {
-                const user = await response.json();
-                console.log('Login successful:', user);
+
+            if (!response.ok) {
+                const errorMessage = `HTTP error! Status: ${response.status}`;
+                console.error(errorMessage);
+                throw new Error(errorMessage);
+            }
+
+            const data = await response.json();
+            console.log('Login response:', data);
+
+            if (data.accessToken) {
+                console.log('Login successful:', data);
+                // Store the access token, e.g., in localStorage
+                localStorage.setItem('accessToken', data.accessToken);
+                const roles = data.roles || [];
                 // Navigate to the desired page upon successful login
-                navigate("/");
+                if (roles.includes('admin')) {
+                    navigate("/admin");
+                } else if (roles.includes('user')) {
+                    navigate("/user");
+                } else {
+                    navigate("/");
+                }
             } else {
-                console.log('Incorrect username or password');
-                message.error('Login fail');
+                const errorMessage = 'Incorrect username or password';
+                console.error(errorMessage);
+                message.error(errorMessage);
             }
         } catch (error) {
             console.error('Error:', error);
             message.error('An error occurred. Please try again later.');
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -82,7 +102,7 @@ export default function Login() {
                         className="formlogin"
                     >
                         <Form.Item
-                            label="Email"
+                            label="Username"
                             name="email"
                             style={{ fontWeight: "bold" }}
                             rules={[
@@ -95,7 +115,7 @@ export default function Login() {
                                 }
                             ]}
                         >
-                            <Input style={{ width: '130%'}} />
+                            <Input style={{ width: '100%', maxWidth: '300px' }} />
                         </Form.Item>
 
                         <Form.Item
@@ -109,7 +129,7 @@ export default function Login() {
                                 },
                             ]}
                         >
-                            <Input.Password style={{ width: '130%'}} />
+                            <Input.Password />
                         </Form.Item>
                         <Form.Item
                             name="remember"
@@ -122,7 +142,7 @@ export default function Login() {
                         >
                             <div className="remember-forgot-wrapper">
                                 <Checkbox className="check">Remember me</Checkbox>
-                                <Link to="/" className="forgot-password-link">Forgot Password</Link>
+                                <Link className="forgot-password-link">Forgot Password</Link>
                             </div>
                         </Form.Item>
 
