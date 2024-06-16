@@ -10,6 +10,7 @@ db.role = require("./role.model");
 db.product = require("./product.model");
 db.admin = require("./admin.model");
 db.sale = require("./sale.model");
+db.warranty = require("./warranty.model");
 
 db.ROLES = ["user", "admin", "manager", "delivery", "sale"];
 
