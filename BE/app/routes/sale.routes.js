@@ -1,5 +1,5 @@
 const { authJwt } = require("../middlewares");
-const productController = require("../controllers/product.controller");
+const saleController = require("../controllers/sale.controller");
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
@@ -11,26 +11,26 @@ module.exports = function (app) {
   });
 
   app.post(
-    "/api/products/create",
+    "/api/sales/create",
     [authJwt.verifyToken, authJwt.isManager],
-    productController.create
+    saleController.create
   );
 
-  app.get("/api/products", productController.findAll);
+  app.get("/api/sales", saleController.findAll);
 
-  app.get("/api/products/:id", productController.findById);
+  app.get("/api/sales/:id", saleController.findById);
 
-  app.get("/api/products/category/:category", productController.findByCategory);
+  app.get("/api/sales/product/:id", saleController.findByProductId);
 
   app.put(
-    "/api/products/:id",
+    "/api/sales/:id",
     [authJwt.verifyToken, authJwt.isManager],
-    productController.update
+    saleController.update
   );
 
   app.delete(
-    "/api/products/:id",
+    "/api/sales/:id",
     [authJwt.verifyToken, authJwt.isManager],
-    productController.delete
+    saleController.delete
   );
 };

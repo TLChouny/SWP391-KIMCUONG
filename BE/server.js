@@ -4,12 +4,12 @@ const dbConfig = require("./app/config/db.config");
 
 const app = express();
 dbConfig.connect();
-const corsOptions = {
-  origin: "http://localhost:3000",
-  optionsSuccessStatus: 200,
-};
+// const corsOptions = {
+//   origin: "http://localhost:3000",
+//   optionsSuccessStatus: 200,
+// };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -28,6 +28,7 @@ require("./app/routes/auth.routes")(app);
 require("./app/routes/product.routes")(app);
 //Include admin routes
 require("./app/routes/admin.routes")(app);
+require("./app/routes/sale.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

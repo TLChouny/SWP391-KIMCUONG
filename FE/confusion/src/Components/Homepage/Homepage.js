@@ -1,15 +1,12 @@
-import React from "react";
-import "../Homepage/Homepage.css"
-import Home from "../Home/Home";
-import Footer from "../Footer/Footer";
+import React, { useState } from "react";
+import Header from "../Header/Header";
+
+
 export default function Homepage() {
     return (
         <div>
-            <Home/>
-
-            {/* <Footer/> */}
+            <Header/>
+            
         </div>
     )
-
-
 }
