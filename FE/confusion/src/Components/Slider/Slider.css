@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.sliderimage {
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.sliderimage img {
+    max-width: 30%; /* Đảm bảo hình ảnh không vượt quá chiều rộng của container */
+    height: auto; /* Đảm bảo tỷ lệ khung hình được duy trì */
+    object-fit: cover; /* Đảm bảo hình ảnh bao phủ toàn bộ khu vực được chỉ định */
+    margin:0px; /* Khoảng cách giữa các hình ảnh */
+}
+
+.titleimage{
+    font-size: 24px; /* Kích thước phông chữ */
+    display: flex;
+    justify-content: center;
+    margin-top: -16%;
+    color: rgba(0, 0, 0, 0.595);
+}
