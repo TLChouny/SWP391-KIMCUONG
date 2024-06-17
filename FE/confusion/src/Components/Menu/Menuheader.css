@@ -1,0 +1,16 @@
+.menu-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .ant-menu-horizontal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Optional: Centers vertically if needed */
+  }
+  
+  .ant-menu-horizontal .ant-menu-item,
+  .ant-menu-horizontal .ant-menu-submenu {
+    margin: 0 50px; /* Adjust the horizontal spacing as needed */
+  }
+  

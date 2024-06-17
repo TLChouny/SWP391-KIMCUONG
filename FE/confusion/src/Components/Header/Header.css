@@ -1,0 +1,36 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header-page{
+    display: flex;
+    align-items: center;
+    background-color: #D2C7C4;
+}
+
+.background-image-header{
+    margin-left: 34%;
+    margin-top: 2%;
+
+}
+.headerlogo{
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20%;
+}
+
+.background-image-header p {
+    font-size: 26px;
+    font-weight: bold;
+    margin-left: 20%;
+    margin-top: -10%;
+    margin-bottom: 6%;
+}
+
+.header-account{
+    margin-left: 34%; 
+}
+

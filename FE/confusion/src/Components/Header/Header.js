@@ -1,32 +1,39 @@
 import React from 'react';
 import { AudioOutlined } from '@ant-design/icons';
-import { Input, Space } from 'antd';
-// import Logo from "../assets/logo.jpg"
+import { Input, Select, Space } from 'antd';
+import { Link } from 'react-router-dom';
+import "../Header/Header.css"
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 const { Search } = Input;
-const suffix = (
-    <AudioOutlined
-        style={{
-            fontSize: 16,
-            color: '#1677ff',
-        }}
-    />
-);
+
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 const Header = () => (
-    <div>
-        <Space direction="vertical">
-            <Search
-                placeholder="input search text"
-                onSearch={onSearch}
-                style={{
-                    width: 200,
-                }}
-            />
-        </Space>
+    <div className='header-page'>
+        <div>
+            <Space direction="vertical">
+                <Search
+                    placeholder="Search..."
+                    onSearch={onSearch}
+                    style={{
+                        width: 200,
+                        marginLeft: "60%"
+                    }}
+                />
+            </Space>
+        </div>
 
         <div className='background-image-header'>
-            {/* <Logo/> */}
+            <Link to="/"><img src="../assets/logo.jpg" alt='logo' className='headerlogo' /></Link>
+            <p>Klare</p>
         </div>
+
+        <div className='header-account'>
+            <Link to="/prelogin" ><AccountCircleIcon style={{ fontSize: 34 }} /></Link>
+            <AddShoppingCartIcon style={{fontSize: 34, marginLeft: 20}} />
+
+        </div>
+
     </div>
 );
 export default Header;

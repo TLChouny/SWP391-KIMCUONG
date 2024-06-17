@@ -55,8 +55,8 @@ const Register = () => {
 
     const onFinishFailed = () => {
         notification.error({
-            message: 'Form Validation Error',
-            description: 'Vui lòng kiểm tra lại thông tin',
+            message: 'Please fill in information',
+            description: 'Vui lòng điền thông tin',
         });
     };
 
