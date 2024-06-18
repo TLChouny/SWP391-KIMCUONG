@@ -1,0 +1,42 @@
+.menu-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: #A37A78;
+    /* Màu nền của menu container */
+    padding: 0;
+    /* Bỏ padding xung quanh */
+    border-radius: 0;
+    /* Bỏ độ cong các góc */
+}
+
+.ant-menu-horizontal {
+    display: flex;
+    justify-content: flex-start;
+    /* Căn trái các menu item */
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    /* Bỏ viền */
+}
+
+.ant-menu-horizontal .ant-menu-item,
+.ant-menu-horizontal .ant-menu-submenu {
+    margin: 0 60px;
+    /* Khoảng cách giữa các menu item */
+    color: #ffffff !important;
+    /* Màu chữ luôn là màu trắng */
+}
+
+.ant-menu-horizontal .ant-menu-item:hover,
+.ant-menu-horizontal .ant-menu-submenu:hover {
+    color: #ffffff !important;
+    /* Màu chữ khi hover vẫn là màu trắng */
+}
+
+.ant-menu-horizontal .ant-menu-submenu-title {
+    padding: 0;
+    /* Bỏ padding cho các submenu */
+    color: white;
+}

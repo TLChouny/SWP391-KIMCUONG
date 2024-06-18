@@ -104,7 +104,7 @@ export default function Login() {
                         <Form.Item
                             label="Username"
                             name="email"
-                            style={{ fontWeight: "bold" }}
+                            // style={{ fontWeight: "bold" }}
                             rules={[
                                 {
                                     required: true,
@@ -121,7 +121,7 @@ export default function Login() {
                         <Form.Item
                             label="Password"
                             name="password"
-                            style={{ fontWeight: "bold" }}
+                            // style={{ fontWeight: "bold" }}
                             rules={[
                                 {
                                     required: true,

@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import Header from "../Header/Header";
-
-
+import Menuheader from "../Menu/Menuheader"
+import Slider from "../Slider/Slider"
+import Bodycategory from "../Bodycateogry/Bodycategory";
+import "../Homepage/Homepage.css"
 export default function Homepage() {
     return (
-        <div>
-            <Header/>
-            
+        <div style={{ height: '100vh', overflowY: 'auto' }}>
+            <div className="home">
+                <Header />
+                <Menuheader />
+            </div>
+            <Slider />
+            <Bodycategory/>
         </div>
     )
 }

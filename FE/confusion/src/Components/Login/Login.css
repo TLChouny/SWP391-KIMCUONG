@@ -55,15 +55,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70vh;
+  height: 56vh;
   background-color: #f0f2f5b5;
   padding: 0 124px;
   max-width: 800px;
-  margin: 100px 320px;
+  margin: 180px 414px;
 }
 
 .background-image {
-  flex: 1;
+  flex: 1 1;
   display: flex;
   align-items: center;
   justify-content: center;
