@@ -64,7 +64,7 @@ function ManageProduct() {
                         Tên: Long Châu
 
                         SĐT: 0784871238
-                        
+
                         Role: Manager
                     </div>
                 </div>
