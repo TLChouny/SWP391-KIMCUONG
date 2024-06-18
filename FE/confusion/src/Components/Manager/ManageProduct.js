@@ -3,7 +3,7 @@ import "./ManageProduct.css";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { Container, Row, Col, Form, Button, ListGroup, Modal } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
 
 function ManageProduct() {

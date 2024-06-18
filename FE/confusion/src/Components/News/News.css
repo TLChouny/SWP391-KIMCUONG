@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0
+}
+
+.News h1{
+    text-align: center;
+    background-color: #ffa4e1c2;
+    max-width: 10%;
+    padding: 20px;
+    display: block;
+    justify-content: center;
+    border-radius: 100px;
+    margin-left: 44%;
+}
+
+.News h3 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 40px;
+}
