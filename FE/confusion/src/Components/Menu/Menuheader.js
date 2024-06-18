@@ -22,7 +22,7 @@ const items = [
           {
             label: 'Bông tai',
             path: '/album/bong-tai',
-          },
+          },  
           {
             label: 'Dây chuyền',
             path: '/album/day-chuyen',
