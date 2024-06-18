@@ -15,29 +15,138 @@
 
 /* Phần top của trang */
 .Top {
-    background-color: #A37A78;
+    background-color: floralwhite;
     display: flex;
     position: absolute;
     justify-content: flex-end; /* Canh phải */
     align-items: center;
     height: 60px;
     width: 100%;
+    box-shadow: 1px 4px 5px rgba(1, 0, 0, 0.5);
+
 }
-.Top-logout {
+/*nút log out*/
+.Btn {
+    --black: #000000;
+    --ch-black: #141414;
+    --eer-black: #1b1b1b;
+    --night-rider: #318b45;
+    --white: #ffffff;
+    --af-white: #f3f3f3;
+    --ch-white: #e1e1e1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: var(--night-rider);
     margin-right: 10px;
-}
+  }
+  
+  /* plus sign */
+  .sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sign svg {
+    width: 17px;
+  }
+  
+  .sign svg path {
+    fill: var(--af-white);
+  }
+  /* text */
+  .text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: var(--af-white);
+    font-size: 1.2em;
+    font-weight: 600;
+    transition-duration: .3s;
+  }
+  /* hover effect on button width */
+  .Btn:hover {
+    width: 125px;
+    border-radius: 5px;
+    transition-duration: .3s;
+  }
+  
+  .Btn:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 20px;
+  }
+  /* hover effect button's text */
+  .Btn:hover .text {
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 10px;
+  }
+  /* button click effect*/
+  .Btn:active {
+    transform: translate(2px ,2px);
+  }
+
 /* Khung bên trái */
 .left-panel {
-    flex: 2; /* Chiếm 30% chiều rộng */
-    background-color: #f0f0f0;
+    flex: 1.5; /* Chiếm 30% chiều rộng */
+    background-color: #f5f5f5;
     padding: 20px;
     overflow-y: auto; /* Cho phép cuộn nội dung trong left-panel nếu có */
-    margin-top: 60px; /* Dời khung trái xuống phía dưới của .Top */
+    margin-top: 60px; /* Dời khung trái xuống phía dưới của .Top */  
 }
+
+.left-panel h2 {
+    color: #333333; /* Màu chữ tối để dễ đọc */
+    margin-bottom: 20px; /* Khoảng cách giữa tiêu đề và nội dung */
+}
+
+.left-panel ul {
+    list-style-type: none; /* Loại bỏ dấu đầu dòng của danh sách */
+    padding: 0;
+    margin: 0;
+}
+
+.left-panel li {
+    margin-bottom: 10px; /* Khoảng cách giữa các mục trong danh sách */
+}
+
+.left-panel a {
+    text-decoration: none; /* Loại bỏ gạch chân của liên kết */
+    color: #007bff; /* Màu chữ của liên kết */
+}
+
+.left-panel a:hover {
+    text-decoration: underline; /* Gạch chân khi rê chuột vào liên kết */
+}
+
+
+@media (max-width: 768px) {
+    .left-panel {
+        margin-top: 0; /* Xóa margin-top khi độ rộng màn hình nhỏ hơn 768px */
+        border-radius: 0; /* Xóa bo góc khi độ rộng màn hình nhỏ hơn 768px */
+        box-shadow: none; /* Xóa đổ bóng khi độ rộng màn hình nhỏ hơn 768px */
+    }
+}
+
 
 /* Khung bên phải */
 .right-panel {
-    flex: 8; /* Chiếm 70% chiều rộng */
+    flex: 8.5; /* Chiếm 70% chiều rộng */
     background-color: #e0e0e0;
     padding: 20px;
     overflow-y: auto; /* Cho phép cuộn nội dung trong right-panel nếu có */
@@ -45,10 +154,31 @@
 }
 
 /* Avatar của admin */
+/* ManageProduct.css */
+
 .AdminAvatar {
-    display: flex;
-    align-items: center;
+    position: relative; /* Để sử dụng position:absolute cho .admininfo */
+    display: inline-block; /* Để .admininfo có thể chồng lên .adminavatar */
     margin-bottom: 20px;
+}
+
+.admininfo {
+    position: absolute; /* Đặt vị trí tuyệt đối */
+    top: -6%; /* Đặt phần tử .admininfo hiển thị phía dưới hình ảnh */
+    left: 80%; /* Đặt phần tử .admininfo ở giữa */
+    transform: translateX(-50%); /* Dịch chuyển phần tử .admininfo lên trên */
+    background-color: #fff; /* Đặt màu nền */
+    padding: 10px; /* Khoảng cách giữa các biên bên trong phần tử */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Đặt hiệu ứng bóng */
+    border-radius: 5px; /* Đặt vòng tròn cho phần tử .admininfo */
+    opacity: 0; /* Ẩn phần tử .admininfo ban đầu */
+    transition: opacity 0.3s ease; /* Hiển thị chuyển động mờ  */
+    width: 10rem;
+    height: 6rem;
+}
+
+.AdminAvatar:hover .admininfo {
+    opacity: 1; /* Hiển thị phần tử .admininfo khi đưa chuột lên .AdminAvatar */
 }
 
 .adminavatar {
@@ -59,7 +189,7 @@
 }
 
 .adminname {
-    font-size: 18px;
+    font-size: 24px;
     color: #333;
     margin-top: 0;
 }
@@ -68,16 +198,15 @@
 .AdminTableList {
     padding: 0;
     margin: 0;
-    list-style-type: none;
+    list-style-type: none;    
 }
 
 .AdminTableList li {
-    padding: 12px 10px;
-    font-size: 20px;
-    text-align: center;
+    padding: 10px 2px;
+    font-size: 16px;
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .AdminTableList a {
@@ -85,21 +214,21 @@
     color: #333;
     transition: color 0.3s;
     display: block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font chữ */
 }
 
 .AdminTableList a:hover {
-    color: #007bff;
+    color: #318b45;
 }
 
 /* Các phần bổ sung cho quản lý đơn hàng */
 .AdminHeader {
-    background-color: #D2C7C4;
-    padding: 10px 20px;
+    padding: 22px 10px;
     font-size: 24px;
     color: #303030;
     border: 2px solid #ddd;
     margin-bottom: 20px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .AdminSummary {
@@ -117,11 +246,17 @@
 
 /* Phần nội dung chính */
 .AdminContent {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #D2C7C4;
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    padding: 4px;
+    font-size: 18px;
+}
+
+.AdminControlTable {
+
+}
+
+.AdminContentDetails {
+    background-color:floralwhite;
 }
 
 /* Bảng hiển thị chi tiết người dùng */
@@ -129,6 +264,8 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    color:var(--black);
+    
 }
 
 .OrderTable th,
@@ -138,7 +275,7 @@
 }
 
 .OrderTable th {
-    background-color: #f2f2f2;
+    background-color:tan;
     font-weight: bold;
     color: #303030;
 }
