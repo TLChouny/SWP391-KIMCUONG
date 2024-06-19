@@ -24,7 +24,9 @@ app.get("/", (req, res) => {
 
 // routes
 require("./app/routes/auth.routes")(app);
-// require("./app/routes/user.routes")(app);
+//user routes
+require("./app/routes/user.routes")(app);
+//product routes
 require("./app/routes/product.routes")(app);
 //Include admin routes
 require("./app/routes/admin.routes")(app);

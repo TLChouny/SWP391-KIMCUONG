@@ -11,19 +11,19 @@ module.exports = function (app) {
     });
   
     app.get(
-      "/api/getDashboard",
+      "/api/admin/getDashboard",
       [authJwt.verifyToken, authJwt.isAdmin],
       adminController.getDashboard
     );
   
-    app.get('/api/getAllUsers',[authJwt.verifyToken, authJwt.isAdmin],adminController.getAllUsers);
+    app.get('/api/admin/getAllUsers',[authJwt.verifyToken, authJwt.isAdmin],adminController.getAllUsers);
 
-    app.post('/api/createUser',[authJwt.verifyToken, authJwt.isAdmin],  adminController.createUser);
+    app.post('/api/admin/createUser',[authJwt.verifyToken, authJwt.isAdmin],  adminController.createUser);
 
-    app.get('/api/getUserById',[authJwt.verifyToken, authJwt.isAdmin],  adminController.getUserById);
+    app.get('/api/admin/getUserById',[authJwt.verifyToken, authJwt.isAdmin],  adminController.getUserById);
 
-    app.put('/api/updateUser',[authJwt.verifyToken, authJwt.isAdmin],  adminController.updateUser);
+    app.put('/api/admin/updateUser',[authJwt.verifyToken, authJwt.isAdmin],  adminController.updateUser);
 
-    app.delete('/api/deleteUser',[authJwt.verifyToken, authJwt.isAdmin],  adminController.deleteUser);
+    app.delete('/api/admin/deleteUser',[authJwt.verifyToken, authJwt.isAdmin],  adminController.deleteUser);
   };
   
