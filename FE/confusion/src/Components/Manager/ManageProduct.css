@@ -1,4 +1,3 @@
-/* ManageProduct.css */
 .ManageProduct {
     display: flex; /* Sử dụng flexbox */
     height: 100vh; /* Chiều cao của toàn bộ trang */
@@ -8,11 +7,160 @@
     background-color: #ddd;
 }
 
+/* nút create sp */
+.ManageProduct .but {
+    width: 148px;
+    height: 50px;
+    border: 3px solid #0056b3;
+    border-radius: 45px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: white;
+    font-size: 1em;
+    font-weight: 550;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.ManageProduct .but:hover {
+    background: #0056b3;
+    color: white;
+    font-size: 1.2em;
+}
+
+/* bảng hiện lên khi nhấn create */
+.modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4); /* nền mờ semi-transparent */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-content {
+    background-color: lightsteelblue;
+    padding: 0rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    max-width: 100vh;
+    width: 100vh;
+    height: 50vh;
+    max-height: 80vh;
+    overflow-y: auto;
+    margin: auto;
+}
+
+.modal-content .table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+.modal-content .table th, 
+.modal-content .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.modal-content .table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+.modal-content .table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.modal-content .table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.modal-content .table .btn {
+    margin: 0 5px;
+}
+
+.modal-content .table .btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.modal-content .table .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* table list sp */
+.manager-table-product {
+    margin: -2px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    margin-top: 10px;
+}
+
+.manager-table-product .table {
+    margin-bottom: 0;
+    background-color: #ffffff;
+    width: 1350px;
+}
+
+.manager-table-product .table th {
+    background-color: #007bff;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    border-top: none;
+    border-bottom: 2px solid #007bff;
+}
+
+.manager-table-product .table td {
+    text-align: center;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.manager-table-product .table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.manager-table-product .table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+.manager-table-product .table tbody td button {
+    margin: 0 5px;
+}
+
+.manager-table-product .table thead th {
+    font-size: 1.1em;
+    padding: 10px;
+}
+
+.manager-table-product .table tbody td {
+    font-size: 1em;
+    padding: 10px;
+}
+
+/* table thêm sp */
 .qlsp {
     margin-top: 2rem;
     width: 100%;
     height: 100vh;
+}
 
+.hqlsp {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333333;
 }
 
 .container {
@@ -23,14 +171,8 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-/* //// */
 
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333333;
-}
-
+/* css cho form table thêm sp */
 .form-group {
     display: flex;
     align-items: center;
@@ -42,7 +184,7 @@ h1 {
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background-color: #333;
     color: #ffffff;
     border: none;
     cursor: pointer;
@@ -78,4 +220,19 @@ h1 {
 
 .btn-info:hover {
     background-color: #117a8b;
+}
+
+.admininfo {
+    font-size: 15px;
+    height: 4rem;
+    padding-top: 24px;
+}
+.manager-table-product .table tbody td button.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.manager-table-product .table tbody td button.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
 }
