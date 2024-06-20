@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const ProductSchema = new mongoose.Schema({
   ProductId: {
-    type: Number,
+    type: String,
     required: true,
     unique: true,
   },
@@ -18,15 +18,28 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  ProductStockQuantity: {
+  ProductQuantity: {
     type: Number,
     required: true,
+    min: 0,
   },
   ProductImageURL: {
     type: String,
     required: true,
   },
   ProductCategory: {
+    type: String,
+    required: true,
+  },
+  ProductMain: {
+    type: String,
+    required: true,
+  },
+  ProductSub: {
+    type: String,
+    required: true,
+  },
+  ProductMounting: {
     type: String,
     required: true,
   },

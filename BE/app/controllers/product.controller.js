@@ -8,9 +8,12 @@ exports.create = (req, res) => {
     ProductName: req.body.ProductName,
     ProductDescription: req.body.ProductDescription,
     ProductPrice: req.body.ProductPrice,
-    ProductStockQuantity: req.body.ProductStockQuantity,
+    ProductQuantity: req.body.ProductQuantity,
     ProductImageURL: req.body.ProductImageURL,
     ProductCategory: req.body.ProductCategory,
+    ProductMain: req.body.ProductMain,
+    ProductSub: req.body.ProductSub,
+    ProductMounting: req.body.ProductMounting,
   });
 
   // Save the product to the database
@@ -73,9 +76,12 @@ exports.update = (req, res) => {
       ProductName: req.body.ProductName,
       ProductDescription: req.body.ProductDescription,
       ProductPrice: req.body.ProductPrice,
-      ProductStockQuantity: req.body.ProductStockQuantity,
+      ProductQuantity: req.body.ProductQuantity,
       ProductImageURL: req.body.ProductImageURL,
       ProductCategory: req.body.ProductCategory,
+      ProductMain: req.body.ProductMain,
+      ProductSub: req.body.ProductSub,
+      ProductMounting: req.body.ProductMounting,
     },
     { new: true }
   )
