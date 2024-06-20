@@ -4,6 +4,7 @@ import Menuheader from "../Menu/Menuheader"
 import Slider from "../Slider/Slider"
 import Bodycategory from "../Bodycateogry/Bodycategory";
 import "../Homepage/Homepage.css"
+import News from "../News/News";
 export default function Homepage() {
     return (
         <div style={{ height: '100vh', overflowY: 'auto' }}>
@@ -13,6 +14,7 @@ export default function Homepage() {
             </div>
             <Slider />
             <Bodycategory/>
+            <News/>
         </div>
     )
 }

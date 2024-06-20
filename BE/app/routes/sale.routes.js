@@ -11,7 +11,7 @@ module.exports = function (app) {
   });
 
   app.post(
-    "/api/sales/create",
+    "/api/manager/sales/create",
     [authJwt.verifyToken, authJwt.isManager],
     saleController.create
   );
@@ -23,13 +23,13 @@ module.exports = function (app) {
   app.get("/api/sales/product/:id", saleController.findByProductId);
 
   app.put(
-    "/api/sales/:id",
+    "/api/manager/sales/:id",
     [authJwt.verifyToken, authJwt.isManager],
     saleController.update
   );
 
   app.delete(
-    "/api/sales/:id",
+    "/api/manager/sales/:id",
     [authJwt.verifyToken, authJwt.isManager],
     saleController.delete
   );

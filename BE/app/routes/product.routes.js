@@ -11,7 +11,7 @@ module.exports = function (app) {
   });
 
   app.post(
-    "/api/products/create",
+    "/api/manager/products/create",
     [authJwt.verifyToken, authJwt.isManager],
     productController.create
   );
@@ -23,13 +23,13 @@ module.exports = function (app) {
   app.get("/api/products/category/:category", productController.findByCategory);
 
   app.put(
-    "/api/products/:id",
+    "/api/manager/products/:id",
     [authJwt.verifyToken, authJwt.isManager],
     productController.update
   );
 
   app.delete(
-    "/api/products/:id",
+    "/api/manager/products/:id",
     [authJwt.verifyToken, authJwt.isManager],
     productController.delete
   );

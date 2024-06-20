@@ -24,12 +24,14 @@ app.get("/", (req, res) => {
 
 // routes
 require("./app/routes/auth.routes")(app);
-// require("./app/routes/user.routes")(app);
+//user routes
+require("./app/routes/user.routes")(app);
+//product routes
 require("./app/routes/product.routes")(app);
 //Include admin routes
 require("./app/routes/admin.routes")(app);
 require("./app/routes/sale.routes")(app);
-
+require("./app/routes/warranty.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
