@@ -33,7 +33,7 @@ const Header = () => {
       </div>
 
       <div className='background-image-header'>
-        <Link to="/"><img src="../assets/logo.jpg" alt='logo' className='headerlogo' /></Link>
+        <Link to="/homepagelogin"><img src="../assets/logo.jpg" alt='logo' className='headerlogo' /></Link>
         <p>Klare</p>
       </div>
 
