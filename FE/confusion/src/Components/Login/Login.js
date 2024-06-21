@@ -39,8 +39,8 @@ export default function Login() {
                 // Navigate to the desired page upon successful login
                 if (roles.includes('admin')) {
                     navigate("/admin");
-                } else if (roles.includes('user')) {
-                    navigate("/user");
+                } else if (roles.includes('ROLE_USER')) {
+                    navigate("/homepagelogin");
                 } else {
                     navigate("/");
                 }

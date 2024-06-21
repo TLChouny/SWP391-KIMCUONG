@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.contactall h1{
+    margin-top: 2%;
+}
+
+.contactalldes {
+    margin-left: 20%;
+}
+
+.contact-title p {
+    line-height: 60px;
+}
+
+.contact-box{
+    margin-left: 4%;
+}
