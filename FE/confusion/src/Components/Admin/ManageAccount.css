@@ -1,4 +1,3 @@
-/* CSS cũ - bỏ qua phần đã có */
 /* ... */
 
 /* Chỉnh sửa để chia màn hình 3:7 */
@@ -15,7 +14,7 @@
 
 /* Phần top của trang */
 .Top {
-    background-color: floralwhite;
+    background-color:#303030;
     display: flex;
     position: absolute;
     justify-content: flex-end; /* Canh phải */
@@ -134,7 +133,6 @@
     text-decoration: underline; /* Gạch chân khi rê chuột vào liên kết */
 }
 
-
 @media (max-width: 768px) {
     .left-panel {
         margin-top: 0; /* Xóa margin-top khi độ rộng màn hình nhỏ hơn 768px */
@@ -142,7 +140,6 @@
         box-shadow: none; /* Xóa đổ bóng khi độ rộng màn hình nhỏ hơn 768px */
     }
 }
-
 
 /* Khung bên phải */
 .right-panel {
@@ -173,7 +170,7 @@
     border-radius: 5px; /* Đặt vòng tròn cho phần tử .admininfo */
     opacity: 0; /* Ẩn phần tử .admininfo ban đầu */
     transition: opacity 0.3s ease; /* Hiển thị chuyển động mờ  */
-    width: 10rem;
+    width: 8rem;
     height: 6rem;
 }
 
@@ -249,10 +246,6 @@
     margin-top: 50px;
     padding: 4px;
     font-size: 18px;
-}
-
-.AdminControlTable {
-
 }
 
 .AdminContentDetails {

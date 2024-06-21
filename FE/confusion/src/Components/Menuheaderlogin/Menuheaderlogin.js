@@ -1,12 +1,12 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
-import './Menuheader.css';
+import './Menuheaderlogin.css';
 
 const items = [
   {
     label: 'Home',
-    path: '/',
+    path: '/homepagelogin',
   },
   {
     label: 'Album',
@@ -45,11 +45,11 @@ const items = [
   },
   {
     label: 'Contact',
-    path: '/contact',
+    path: '/contactlogin',
   },
 ];
 
-const Menuheader = () => {
+const Menuheaderlogin = () => {
   const navigate = useNavigate();
 
   const handleSubMenuClick = (e, path) => {
@@ -96,4 +96,4 @@ const Menuheader = () => {
   );
 };
 
-export default Menuheader;
+export default Menuheaderlogin;

@@ -16,6 +16,8 @@ export default function News() {
                     </div>
                 ))}
             </div>
+
+            <p>FOLLOW US @diamondshop</p>
         </div>
     );
 }

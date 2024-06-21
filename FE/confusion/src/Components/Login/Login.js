@@ -1,8 +1,11 @@
+// Login.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../Login/Login.css";
-import { Button, Checkbox, Form, Input, message } from 'antd';
+import { Button, Checkbox, Form, Input } from 'antd';
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import "../Login/Login.css";
 
 const URL = "http://localhost:8080/api/auth/signin";
 
@@ -39,19 +42,21 @@ export default function Login() {
                 // Navigate to the desired page upon successful login
                 if (roles.includes('admin')) {
                     navigate("/admin");
-                } else if (roles.includes('user')) {
-                    navigate("/user");
+                } else if (roles.includes('ROLE_USER')) {
+                    navigate("/homepagelogin");
                 } else {
                     navigate("/");
                 }
+                // Show success toast
+                toast.success('Login successful!');
             } else {
                 const errorMessage = 'Incorrect username or password';
                 console.error(errorMessage);
-                message.error(errorMessage);
+                toast.error(errorMessage);
             }
         } catch (error) {
             console.error('Error:', error);
-            message.error('An error occurred. Please try again later.');
+            toast.error('An error occurred. Please try again later.');
         } finally {
             setLoading(false);
         }
@@ -59,6 +64,8 @@ export default function Login() {
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
+        // Show error toast for form validation failure
+        toast.error('Please fill in all required fields correctly.');
     };
 
     const validateUsername = (_, value) => {
@@ -104,7 +111,6 @@ export default function Login() {
                         <Form.Item
                             label="Username"
                             name="email"
-                            // style={{ fontWeight: "bold" }}
                             rules={[
                                 {
                                     required: true,
@@ -121,7 +127,6 @@ export default function Login() {
                         <Form.Item
                             label="Password"
                             name="password"
-                            // style={{ fontWeight: "bold" }}
                             rules={[
                                 {
                                     required: true,
@@ -160,6 +165,7 @@ export default function Login() {
                     </Form>
                 </div>
             </div>
+            <ToastContainer style={{textAlign: "left"}} /> {/* ToastContainer nằm ở cuối của component */}
         </div>
     );
 }
