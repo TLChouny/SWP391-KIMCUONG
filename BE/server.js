@@ -30,7 +30,7 @@ require("./app/routes/user.routes")(app);
 require("./app/routes/product.routes")(app);
 //Include admin routes
 require("./app/routes/admin.routes")(app);
-require("./app/routes/sale.routes")(app);
+require("./app/routes/promotion.routes")(app);
 require("./app/routes/warranty.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
