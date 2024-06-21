@@ -6,13 +6,14 @@ import Bodycategory from "../Bodycateogry/Bodycategory";
 import "../Homepagelogin/Homepagelogin.css"
 import News from "../News/News";
 import Footer from "../Footer/Footer"
-import Headerlogin from "../Headerlogin.js/Headerlogin";
+import Headerlogin from "../Headerlogin/Headerlogin";
+import Menuheaderlogin from "../Menuheaderlogin/Menuheaderlogin";
 export default function Homepagelogin() {
     return (
         <div style={{ height: '100vh', overflowY: 'auto' }}>
             <div className="home">
                 <Headerlogin />
-                <Menuheader />
+                <Menuheaderlogin />
             </div>
             <Slider />
             <Bodycategory/>

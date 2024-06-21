@@ -8,7 +8,7 @@ const { Search } = Input;
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 
-const Header = () => {
+const Headerlogin = () => {
   const menu = (
     <Menu>
       <Menu.Item key="1"><Link to="">Profile</Link></Menu.Item>
@@ -48,4 +48,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Headerlogin;

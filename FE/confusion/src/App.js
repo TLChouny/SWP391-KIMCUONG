@@ -10,6 +10,10 @@ import Header from './Components/Header/Header';
 import Menuheader from './Components/Menu/Menuheader';
 import Footer from './Components/Footer/Footer';
 import Homepagelogin from './Components/Homepagelogin/Homepagelogin';
+import Album from './Components/Album/album';
+import Contactlogin from './Components/Contaclogin/Contactlogin';
+import Headerlogin from './Components/Headerlogin/Headerlogin';
+import Menuheaderlogin from './Components/Menuheaderlogin/Menuheaderlogin';
 function App() {
   return (
     <Router>
@@ -22,7 +26,9 @@ function App() {
           <Route path='/Admin' element={<ManageAccount />} />
           <Route path='/Manager' element={<ManageProduct />} />
           <Route path='/contact' element={<><Header /><Menuheader /><Contact /><Footer /></>} />
-          < Route path='/homepagelogin' element={<Homepagelogin />} />
+          <Route path='/homepagelogin' element={<Homepagelogin />} />
+          <Route path='/album' element={<Album/>}/>
+          <Route path='/contactlogin' element={<><Headerlogin /><Menuheaderlogin /><Contactlogin/><Footer /></>}/>
         </Routes>
       </>
     </Router>
