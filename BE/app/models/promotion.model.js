@@ -1,23 +1,23 @@
 const mongoose = require("mongoose");
 
-const SaleSchema = new mongoose.Schema({
-  saleId: {
+const PromotionSchema = new mongoose.Schema({
+  promotionId: {
     type: Number,
     required: true,
     unique: true,
   },
   ProductId: {
-    type: Number,
+    type: String,
     required: true,
     ref: "Product",
   },
-  saleValue: {
+  promotionValue: {
     type: Number,
     required: true,
     min: 0,
   },
 });
 
-const Sale = mongoose.model("Sale", SaleSchema);
+const Promotion = mongoose.model("Promotion", PromotionSchema);
 
-module.exports = Sale;
+module.exports = Promotion;
