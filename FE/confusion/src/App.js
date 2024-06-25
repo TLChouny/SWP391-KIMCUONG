@@ -14,6 +14,7 @@ import Album from './Components/Album/album';
 import Contactlogin from './Components/Contaclogin/Contactlogin';
 import Headerlogin from './Components/Headerlogin/Headerlogin';
 import Menuheaderlogin from './Components/Menuheaderlogin/Menuheaderlogin';
+import Product from "./Components/Product/Product"
 function App() {
   return (
     <Router>
@@ -29,6 +30,7 @@ function App() {
           <Route path='/homepagelogin' element={<Homepagelogin />} />
           <Route path='/album' element={<Album/>}/>
           <Route path='/contactlogin' element={<><Headerlogin /><Menuheaderlogin /><Contactlogin/><Footer /></>}/>
+          <Route path='/Product' element={<Product/>}/>
         </Routes>
       </>
     </Router>
