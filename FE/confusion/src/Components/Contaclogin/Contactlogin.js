@@ -48,13 +48,13 @@ export default function Contactlogin() {
     const handleFormSubmit = async () => {
         // Kiểm tra điều kiện có dữ liệu nhập vào hay không
         if (!formData.name || !formData.email || !formData.phoneNumber || !formData.message) {
-            toast.error("Bạn vui lòng nhập vào form để liên hệ với chúng tôi.");
+            toast.error("Please fill in the form to contact us.");
             return;
         }
 
         // Kiểm tra định dạng email
         if (!formData.email.endsWith("@gmail.com")) {
-            toast.error("Vui lòng nhập địa chỉ email hợp lệ (ví dụ: example@gmail.com)");
+            toast.error("Please enter a valid email address (e.g.example@gmail.com)");
             setEmailError(true);
             return;
         }
@@ -96,7 +96,7 @@ export default function Contactlogin() {
 
     return (
         <div className="contactall">
-            <ToastContainer />
+            <ToastContainer style={{width: "18%"}} />
             <h1>Contact Us</h1>
             <div className="contactalldes">
                 <div className="contact-title">
@@ -140,7 +140,7 @@ export default function Contactlogin() {
                                 value={formData.phoneNumber}
                                 onChange={handleInputChange}
                                 error={phoneNumberError}
-                                helperText={phoneNumberError ? "Chỉ được nhập số và không quá 10 chữ số." : ""}
+                                helperText={phoneNumberError ? "Only enter numbers and no more than 10 digits." : ""}
                                 sx={{ m: 1, width: '109ch' }}
                             />
                         </div>
