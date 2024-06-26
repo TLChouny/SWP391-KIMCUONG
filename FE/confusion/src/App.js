@@ -15,7 +15,7 @@ import Contactlogin from './Components/Contaclogin/Contactlogin';
 import Headerlogin from './Components/Headerlogin/Headerlogin';
 import Menuheaderlogin from './Components/Menuheaderlogin/Menuheaderlogin';
 import Product from "./Components/Product/Product";
-import Album from './Components/Album/Album';
+import Albumlist from './Components/Album/Albumlist';
 function App() {
   return (
     <Router>
@@ -32,7 +32,7 @@ function App() {
           <Route path='/albumlogin' element={<Albumlogin/>}/>
           <Route path='/contactlogin' element={<><Headerlogin /><Menuheaderlogin /><Contactlogin/><Footer /></>}/>
           <Route path='/Product' element={<Product/>}/>
-          <Route path='/album' element={<Album/>}/>
+          <Route path='/album' element={<Albumlist/>}/>
         </Routes>
       </>
     </Router>
