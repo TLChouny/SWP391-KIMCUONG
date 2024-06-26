@@ -27,7 +27,7 @@ const Album = () => {
     <>
       <Headerlogin />
       <Menuheaderlogin />
-      <Layout>
+      <Layout style={{ height: "100vh", overflow: "hidden" }}>
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div className="demo-logo-vertical" />
           <Menu
@@ -89,6 +89,7 @@ const Album = () => {
               minHeight: 2000,
               background: colorBgContainer,
               borderRadius: borderRadiusLG,
+              overflowY: 'auto',
             }}
           >
             {currentPage === '1' && <Overviewhome />}
