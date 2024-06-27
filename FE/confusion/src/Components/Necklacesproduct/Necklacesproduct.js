@@ -58,7 +58,7 @@ export default function Necklacesproduct() {
           ))}
         </div>
       ) : (
-        <p>No bracelet products found.</p>
+        <p>No Necklaces products found.</p>
       )}
 
       {/* Login Modal */}

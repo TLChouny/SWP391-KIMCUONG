@@ -58,7 +58,7 @@ export default function Ringsproduct() {
           ))}
         </div>
       ) : (
-        <p>No bracelet products found.</p>
+        <p>No rings products found.</p>
       )}
 
       {/* Login Modal */}
