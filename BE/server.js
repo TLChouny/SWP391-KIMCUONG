@@ -32,6 +32,7 @@ require("./app/routes/product.routes")(app);
 require("./app/routes/admin.routes")(app);
 require("./app/routes/promotion.routes")(app);
 require("./app/routes/warranty.routes")(app);
+require("./app/routes/order.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
