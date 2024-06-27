@@ -7,7 +7,7 @@ import { Button, Layout, Menu, theme } from 'antd';
 import Headerlogin from '../Headerlogin/Headerlogin';
 import Menuheaderlogin from '../Menuheaderlogin/Menuheaderlogin';
 import Overviewhome from '../Overviewhomealbum/Overviewhome';
-import Product from '../Product/Product';
+import Product from '../Product/Productlist';
 
 const { Header, Sider, Content } = Layout;
 

@@ -1,17 +1,17 @@
 import { HashLink as Link } from 'react-router-hash-link';
 import React, { useEffect, useState } from "react";
-<<<<<<< HEAD
-import { Container, Row, Col, Form, Button, Table, Modal } from 'react-bootstrap';
-import "./ManageProduct.css";
-import SampleProducts from "../Sample/SampleProducts";
-=======
+
+// import { Container, Row, Col, Form, Button, Table, Modal } from 'react-bootstrap';
+// import "./ManageProduct.css";
+// import SampleProducts from "../Sample/SampleProducts";
+
 import { v4 as uuidv4 } from 'uuid';
 import { Container, Row, Col, Form, Button, Table, Modal } from 'react-bootstrap';
 import "./ManageProduct.css";
-import SampleProducts from "./Sample/SampleProducts";
+import SampleProducts from "../Sample/SampleProducts";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import Link from "react-router-dom";
->>>>>>> fe8512465707852d61d54b546dd216d45c9ff763
+
 
 function ManageProduct() {
     const [productID, setProductID] = useState('');

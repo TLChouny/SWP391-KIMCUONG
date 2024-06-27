@@ -16,19 +16,19 @@ const items = [
         type: 'group',
         children: [
           {
-            label: 'Bracelet',
+            label: 'Bracelets',
             path: '/album/Bracelet',
           },
           {
-            label: 'Earring',
+            label: 'Earrings',
             path: '/album/Earring',
           },
           {
-            label: 'Necklace',
+            label: 'Necklaces',
             path: '/album/Necklace',
           },
           {
-            label: 'Ring',
+            label: 'Rings',
             path: '/album/Ring',
           },
         ],
