@@ -18,6 +18,8 @@ module.exports = function (app) {
   
     app.get('/api/admin/getAllUsers',[authJwt.verifyToken, authJwt.isAdmin],adminController.getAllUsers);
 
+    app.get("/api/admin/users/:role",[authJwt.verifyToken, authJwt.isAdmin],adminController.getUsersByRole);
+
     app.post('/api/admin/createUser',[authJwt.verifyToken, authJwt.isAdmin],  adminController.createUser);
 
     app.get('/api/admin/getUserById',[authJwt.verifyToken, authJwt.isAdmin],  adminController.getUserById);

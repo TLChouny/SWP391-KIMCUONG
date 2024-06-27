@@ -1,6 +1,7 @@
 const db = require("../models");
 const Admin = db.admin;
 const User = db.user;
+const Role = db.role;
 // Admin Controller
 
 // Get admin dashboard data
@@ -28,6 +29,24 @@ exports.createUser = async (req, res) => {
     res.status(201).json(newUser);
   } catch (err) {
     res.status(400).json({ message: err.message });
+  }
+};
+
+// Get users by role
+exports.getUsersByRole = async (req, res) => {
+  try {
+    const roleName = req.params.role;
+    const role = await Role.findOne({ name: roleName });
+
+    if (!role) {
+      return res.status(404).json({ message: `Role ${roleName} not found` });
+    }
+
+    const users = await User.find({ roles: role._id });
+
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
