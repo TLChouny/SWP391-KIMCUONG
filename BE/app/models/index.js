@@ -9,8 +9,12 @@ db.user = require("./user.model");
 db.role = require("./role.model");
 db.product = require("./product.model");
 db.admin = require("./admin.model");
-db.sale = require("./sale.model");
+db.promotion = require("./promotion.model");
 db.warranty = require("./warranty.model");
+db.manager = require("./manager.model");
+db.delivery = require("./delivery.model");
+db.sale = require("./sale.model");
+
 
 db.ROLES = ["user", "admin", "manager", "delivery", "sale"];
 

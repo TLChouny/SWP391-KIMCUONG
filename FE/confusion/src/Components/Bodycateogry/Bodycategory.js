@@ -11,22 +11,22 @@ export default function Bodycategory() {
                         <Link to="/album/nhan" style={{ textDecoration: "none" }} >
                             <img src="../assets/Ring_Guest.jpg" alt="Nhẫn" />
                         </Link>
-                        <Link to="/album/nhan" style={{ textDecoration: "none" }} className="link-image">
+                        {/* <Link to="/album/nhan" style={{ textDecoration: "none" }} className="link-image">
                             <div>
                                 Details
                             </div>
-                        </Link>
+                        </Link> */}
                     </>
 
                     <>
                         <Link to="/album/bong-tai" style={{ textDecoration: "none" }}>
                             <img src="../assets/banner-bong-tai-kim-cuong-tu-nhien-jemmia.vn_-600x600.jpg" alt="Bông tai" className="bodycate-container-image-2" />
                         </Link>
-                        <Link to="/album/bong-tai" style={{ textDecoration: "none" }} className="link-image">
+                        {/* <Link to="/album/bong-tai" style={{ textDecoration: "none" }} className="link-image">
                             <div>
                                 Details
                             </div>
-                        </Link>
+                        </Link> */}
                     </>
                 </div>
 
@@ -36,11 +36,11 @@ export default function Bodycategory() {
                         <img src="../assets/Earring_Guest.jpg" alt="Bông tai" />
                     </Link>
 
-                    <Link to="/album/bong-tai" style={{ textDecoration: "none" }}>
+                    {/* <Link to="/album/bong-tai" style={{ textDecoration: "none" }}>
                         <div className="link-image-2">
                             Details
                         </div>
-                    </Link>
+                    </Link> */}
                 </div>
 
             </div>

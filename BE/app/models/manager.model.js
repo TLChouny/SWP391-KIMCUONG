@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const SaleSchema = new mongoose.Schema({
+const ManagerSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
@@ -12,4 +12,4 @@ const SaleSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model('Sale', SaleSchema);
+module.exports = mongoose.model('Manager', ManagerSchema);

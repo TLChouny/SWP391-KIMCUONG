@@ -1,6 +1,8 @@
 import React from 'react';
-import { Button, Form, Input, Select, notification } from 'antd';
+import { Button, Form, Input, Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify'; // Import toast and ToastContainer from react-toastify
+import 'react-toastify/dist/ReactToastify.css';
 import "../Register/Register.css";
 
 const { Option } = Select;
@@ -36,41 +38,33 @@ const Register = () => {
             });
 
             if (response.ok) {
-                notification.success({
-                    message: 'Registration Successful',
-                    description: 'Đăng kí thành công',
-                });
+                toast.success('Registration Successful');
                 form.resetFields();
                 navigate('/login');
             } else {
                 throw new Error('Registration failed');
             }
         } catch (error) {
-            notification.error({
-                message: 'Registration Failed',
-                description: 'Đăng kí không thành công',
-            });
+            toast.error('Registration Failed');
         }
     };
 
     const onFinishFailed = () => {
-        notification.error({
-            message: 'Please fill in information',
-            description: 'Vui lòng điền thông tin',
-        });
+        toast.error('Please fill in information');
     };
 
     const prefixSelector = (
         <Form.Item name="prefix" noStyle>
             <Select style={{ width: 70 }}>
                 <Option value="84">+84</Option>
-            </Select>
+            </Select>                   
         </Form.Item>
     );
 
     return (
         <div className="signin-container">
-            <div className="background-image-container">
+            <ToastContainer style={{textAlign: "left"}} /> {/* Place ToastContainer at an appropriate level */}
+            <div className="background-image-container">                    
                 <img src="../assets/background.png" alt="Background" className="background-image" />
             </div>
             <div className="form-register">
@@ -100,8 +94,6 @@ const Register = () => {
                             <Input />
                         </Form.Item>
 
-
-
                         <Form.Item
                             name="password"
                             label="Password"
@@ -123,7 +115,7 @@ const Register = () => {
                                         if (!value || getFieldValue('password') === value) {
                                             return Promise.resolve();
                                         }
-                                        return Promise.reject(new Error('The new password that you entered do not match!'));
+                                        return Promise.reject(new Error('The passwords do not match!'));
                                     },
                                 }),
                             ]}
@@ -171,8 +163,6 @@ const Register = () => {
                                 style={{ width: '100%' }}
                             />
                         </Form.Item>
-
-
 
                         <Form.Item {...tailFormItemLayout}>
                             <Button type="primary" htmlType="submit" className="submit">

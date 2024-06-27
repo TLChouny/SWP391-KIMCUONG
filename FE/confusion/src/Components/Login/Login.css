@@ -177,3 +177,17 @@
   text-align: left;
   width: 150%;
 }
+
+/* Add this in your CSS file */
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.welcome-message {
+  font-size: 2rem;
+}
+
