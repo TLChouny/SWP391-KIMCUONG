@@ -1,11 +1,17 @@
 import { HashLink as Link } from 'react-router-hash-link';
 import React, { useEffect, useState } from "react";
+
+// import { Container, Row, Col, Form, Button, Table, Modal } from 'react-bootstrap';
+// import "./ManageProduct.css";
+// import SampleProducts from "../Sample/SampleProducts";
+
 import { v4 as uuidv4 } from 'uuid';
 import { Container, Row, Col, Form, Button, Table, Modal } from 'react-bootstrap';
 import "./ManageProduct.css";
-import SampleProducts from "./Sample/SampleProducts";
+import SampleProducts from "../Sample/SampleProducts";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import Link from "react-router-dom";
+
 
 function ManageProduct() {
     const [productID, setProductID] = useState('');
@@ -126,7 +132,7 @@ function ManageProduct() {
                     <button className="but" onClick={() => setShowProductForm(true)}>
                         Create product
                     </button>
-                    <Modal show={showProductForm} onHide={() => setShowProductForm(false)}className="modal-container">
+                    <Modal show={showProductForm} onHide={() => setShowProductForm(false)} className="modal-container">
                         <Modal.Header closeButton>
                             <Modal.Title>Quản lý Sản phẩm</Modal.Title>
                         </Modal.Header>
@@ -265,7 +271,7 @@ function ManageProduct() {
                             </tbody>
                         </Table>
                     </div>
-                    {/* <Container id='mtt-5' className="mt-5">
+                    <Container id='mtt-5' className="mt-5">
                         <Row>
                             <Col>
                                 <div className="hqlsp">Quản lý Sản phẩm</div>
@@ -349,114 +355,117 @@ function ManageProduct() {
                                             </Button>
                                         </Col>
                                     </Form.Group>
-                                </Form> */}
-                                  <Modal show={showModal} onHide={handleCloseModal}className='modal-container'>
-                                    <Modal.Header closeButton>
-                                        <Modal.Title>Chỉnh sửa sản phẩm</Modal.Title>
-                                    </Modal.Header>
-                                    <Modal.Body>
-                                        <Form>
-                                            <Form.Group>
-                                                <Form.Label>ID</Form.Label>
-                                                <Form.Control
-                                                    type="text"
-                                                    placeholder="ID"
-                                                    name="id"
-                                                    value={modalProduct?.id || ''}
-                                                    readOnly
-                                                />
-                                            </Form.Group>
-                                            <Form.Group>
-                                                <Form.Label>Tên sản phẩm</Form.Label>
-                                                <Form.Control
-                                                    type="text"
-                                                    placeholder="Tên sản phẩm"
-                                                    name="name"
-                                                    value={modalProduct?.name || ''}
-                                                    onChange={handleEditChange}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group>
-                                                <Form.Label>Hình ảnh</Form.Label>
-                                                <Form.Control
-                                                    type="text"
-                                                    placeholder="Hình ảnh"
-                                                    name="image"
-                                                    value={modalProduct?.image || ''}
-                                                    onChange={handleEditChange}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group>
-                                                <Form.Label>Viên chính</Form.Label>
-                                                <Form.Control
-                                                    type="text"
-                                                    placeholder="Viên chính"
-                                                    name="mainIngredient"
-                                                    value={modalProduct?.mainIngredient || ''}
-                                                    onChange={handleEditChange}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group>
-                                                <Form.Label>Viên phụ</Form.Label>
-                                                <Form.Control
-                                                    type="text"
-                                                    placeholder="Viên phụ"
-                                                    name="secondaryIngredient"
-                                                    value={modalProduct?.secondaryIngredient || ''}
-                                                    onChange={handleEditChange}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group>
-                                                <Form.Label>Vỏ</Form.Label>
-                                                <Form.Control
-                                                    type="text"
-                                                    placeholder="Vỏ"
-                                                    name="cover"
-                                                    value={modalProduct?.cover || ''}
-                                                    onChange={handleEditChange}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group>
-                                                <Form.Label>Loại</Form.Label>
-                                                <Form.Control
-                                                    type="text"
-                                                    placeholder="Loại"
-                                                    name="type"
-                                                    value={modalProduct?.type || ''}
-                                                    onChange={handleEditChange}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group>
-                                                <Form.Label>Giá</Form.Label>
-                                                <Form.Control
-                                                    type="number"
-                                                    placeholder="Giá"
-                                                    name="price"
-                                                    value={modalProduct?.price || ''}
-                                                    onChange={handleEditChange}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group>
-                                                <Form.Label>Số lượng</Form.Label>
-                                                <Form.Control
-                                                    type="number"
-                                                    placeholder="Số lượng"
-                                                    name="quantity"
-                                                    value={modalProduct?.quantity || ''}
-                                                    onChange={handleEditChange}
-                                                />
-                                            </Form.Group>
-                                        </Form>
-                                    </Modal.Body>
-                                    <Modal.Footer>
-                                        <Button variant="secondary" onClick={handleCloseModal}>
-                                            Đóng
-                                        </Button>
-                                        <Button variant="primary" onClick={saveEditProduct}>
-                                            Lưu thay đổi
-                                        </Button>
-                                    </Modal.Footer>
-                                </Modal>
+                                </Form>
+                                   </Col>
+                                </Row>
+                            </Container>
+                    <Modal show={showModal} onHide={handleCloseModal} className='modal-container'>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Chỉnh sửa sản phẩm</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form>
+                                <Form.Group>
+                                    <Form.Label>ID</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="ID"
+                                        name="id"
+                                        value={modalProduct?.id || ''}
+                                        readOnly
+                                    />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Tên sản phẩm</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Tên sản phẩm"
+                                        name="name"
+                                        value={modalProduct?.name || ''}
+                                        onChange={handleEditChange}
+                                    />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Hình ảnh</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Hình ảnh"
+                                        name="image"
+                                        value={modalProduct?.image || ''}
+                                        onChange={handleEditChange}
+                                    />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Viên chính</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Viên chính"
+                                        name="mainIngredient"
+                                        value={modalProduct?.mainIngredient || ''}
+                                        onChange={handleEditChange}
+                                    />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Viên phụ</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Viên phụ"
+                                        name="secondaryIngredient"
+                                        value={modalProduct?.secondaryIngredient || ''}
+                                        onChange={handleEditChange}
+                                    />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Vỏ</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Vỏ"
+                                        name="cover"
+                                        value={modalProduct?.cover || ''}
+                                        onChange={handleEditChange}
+                                    />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Loại</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Loại"
+                                        name="type"
+                                        value={modalProduct?.type || ''}
+                                        onChange={handleEditChange}
+                                    />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Giá</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        placeholder="Giá"
+                                        name="price"
+                                        value={modalProduct?.price || ''}
+                                        onChange={handleEditChange}
+                                    />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Số lượng</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        placeholder="Số lượng"
+                                        name="quantity"
+                                        value={modalProduct?.quantity || ''}
+                                        onChange={handleEditChange}
+                                    />
+                                </Form.Group>
+                            </Form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleCloseModal}>
+                                Đóng
+                            </Button>
+                            <Button variant="primary" onClick={saveEditProduct}>
+                                Lưu thay đổi
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
             </div>
         </div>

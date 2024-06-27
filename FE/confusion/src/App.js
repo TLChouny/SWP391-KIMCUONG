@@ -10,10 +10,22 @@ import Header from './Components/Header/Header';
 import Menuheader from './Components/Menu/Menuheader';
 import Footer from './Components/Footer/Footer';
 import Homepagelogin from './Components/Homepagelogin/Homepagelogin';
-import Album from './Components/Album/album';
+import Albumlogin from './Components/Albumlogin/albumlogin';
 import Contactlogin from './Components/Contaclogin/Contactlogin';
 import Headerlogin from './Components/Headerlogin/Headerlogin';
 import Menuheaderlogin from './Components/Menuheaderlogin/Menuheaderlogin';
+import Product from "./Components/Product/Productlist";
+import Albumlist from './Components/Album/Albumlist';
+import Productlist from './Components/Product/Productlist';
+import Braceletsproduct from './Components/Braceletsproduct/Braceletsproduct';
+import Earringsproduct from './Components/Earringsproduct/Earringsproduct';
+import Necklacesproduct from './Components/Necklacesproduct/Necklacesproduct';
+import Ringsproduct from './Components/Ringsproduct/Ringsproduct';
+import Braceletsproductmenu from './Components/Braceletsproductmenu/Braceletsproductmenu';
+import ProductlistBrace from './Components/ProductlistBrace/ProductlistBrace';
+import Earringsproductmenu from './Components/Earringsproductmenu/Earringsproductmenu';
+import Necklacesproductmenu from './Components/Necklacesproductmenu/Necklacesproductmenu';
+import Ringsproductmenu from './Components/Ringsproductmenu/Ringsproductmenu';
 function App() {
   return (
     <Router>
@@ -27,8 +39,14 @@ function App() {
           <Route path='/Manager' element={<ManageProduct />} />
           <Route path='/contact' element={<><Header /><Menuheader /><Contact /><Footer /></>} />
           <Route path='/homepagelogin' element={<Homepagelogin />} />
-          <Route path='/album' element={<Album/>}/>
+          <Route path='/albumlogin' element={<Albumlogin/>}/>
           <Route path='/contactlogin' element={<><Headerlogin /><Menuheaderlogin /><Contactlogin/><Footer /></>}/>
+          <Route path='/Product' element={<Productlist/>}/>
+          <Route path='/Album' element={<Albumlist/>}/>
+          <Route path='/album/Bracelet' element={<Braceletsproductmenu/>}/>
+          <Route path='/album/Earring' element={<Earringsproductmenu/>}/>
+          <Route path='/album/Necklace' element={<Necklacesproductmenu/>}/>
+          <Route path='/album/Ring' element={<Ringsproductmenu/>}/> 
         </Routes>
       </>
     </Router>

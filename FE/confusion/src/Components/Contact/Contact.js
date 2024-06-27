@@ -48,13 +48,13 @@ export default function Contact() {
     const handleFormSubmit = async () => {
         // Kiểm tra điều kiện có dữ liệu nhập vào hay không
         if (!formData.name || !formData.email || !formData.phoneNumber || !formData.message) {
-            toast.error("Bạn vui lòng nhập vào form để liên hệ với chúng tôi.");
+            toast.error("Please fill in the form to contact us.");
             return;
         }
 
         // Kiểm tra định dạng email
         if (!formData.email.endsWith("@gmail.com")) {
-            toast.error("Vui lòng nhập địa chỉ email hợp lệ (ví dụ: example@gmail.com)");
+            toast.error("Please enter a valid email address (e.g.example@gmail.com)");
             setEmailError(true);
             return;
         }

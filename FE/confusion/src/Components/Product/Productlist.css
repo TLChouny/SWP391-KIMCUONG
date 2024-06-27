@@ -1,0 +1,19 @@
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .ant-layout {
+    height: 100%;
+  }
+  
+  .ant-layout-header,
+  .ant-layout-sider {
+    height: auto;
+  }
+  
+  .ant-layout-content {
+    overflow: auto;
+  }
+  

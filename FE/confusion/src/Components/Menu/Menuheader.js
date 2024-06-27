@@ -16,20 +16,20 @@ const items = [
         type: 'group',
         children: [
           {
-            label: 'Vòng tay',
-            path: '/album/vong-tay',
+            label: 'Bracelets',
+            path: '/album/Bracelet',
           },
           {
-            label: 'Bông tai',
-            path: '/album/bong-tai',
+            label: 'Earrings',
+            path: '/album/Earring',
           },
           {
-            label: 'Dây chuyền',
-            path: '/album/day-chuyen',
+            label: 'Necklaces',
+            path: '/album/Necklace',
           },
           {
-            label: 'Nhẫn',
-            path: '/album/nhan',
+            label: 'Rings',
+            path: '/album/Ring',
           },
         ],
       },

@@ -24,29 +24,33 @@ export default function Login() {
                 },
                 body: JSON.stringify(values),
             });
-
+        
             if (!response.ok) {
                 const errorMessage = `HTTP error! Status: ${response.status}`;
                 console.error(errorMessage);
                 throw new Error(errorMessage);
             }
-
+        
             const data = await response.json();
             console.log('Login response:', data);
-
+        
             if (data.accessToken) {
                 console.log('Login successful:', data);
                 // Store the access token, e.g., in localStorage
                 localStorage.setItem('accessToken', data.accessToken);
                 const roles = data.roles || [];
+            
                 // Navigate to the desired page upon successful login
-                if (roles.includes('admin')) {
-                    navigate("/admin");
+                if (roles.includes('ROLE_MANAGER')) {
+                    navigate("/Manager");
                 } else if (roles.includes('ROLE_USER')) {
                     navigate("/homepagelogin");
+                } else if (roles.includes('ROLE_ADMIN')) {
+                    navigate("/admin");
                 } else {
-                    navigate("/");
+                    navigate("/"); // Navigate to homepage or a default route
                 }
+            
                 // Show success toast
                 toast.success('Login successful!');
             } else {
@@ -54,13 +58,14 @@ export default function Login() {
                 console.error(errorMessage);
                 toast.error(errorMessage);
             }
+            
         } catch (error) {
             console.error('Error:', error);
             toast.error('An error occurred. Please try again later.');
         } finally {
             setLoading(false);
         }
-    };
+    }        
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -165,7 +170,7 @@ export default function Login() {
                     </Form>
                 </div>
             </div>
-            <ToastContainer style={{textAlign: "left"}} /> {/* ToastContainer nằm ở cuối của component */}
+            <ToastContainer style={{ textAlign: "left" }} /> {/* ToastContainer nằm ở cuối của component */}
         </div>
     );
 }

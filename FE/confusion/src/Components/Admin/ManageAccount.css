@@ -1,5 +1,3 @@
-/* ... */
-
 /* Chỉnh sửa để chia màn hình 3:7 */
 .ManageAccount {
     display: flex; /* Sử dụng flexbox */
@@ -10,11 +8,9 @@
     background-color: #ddd;
 }
 
-/* CSS cải thiện cho các phần của trang quản lý account */
-
 /* Phần top của trang */
 .Top {
-    background-color:#303030;
+    background-color: #303030;
     display: flex;
     position: absolute;
     justify-content: flex-end; /* Canh phải */
@@ -22,17 +18,10 @@
     height: 60px;
     width: 100%;
     box-shadow: 1px 4px 5px rgba(1, 0, 0, 0.5);
-
 }
-/*nút log out*/
+
+/* Nút log out */
 .Btn {
-    --black: #000000;
-    --ch-black: #141414;
-    --eer-black: #1b1b1b;
-    --night-rider: #318b45;
-    --white: #ffffff;
-    --af-white: #f3f3f3;
-    --ch-white: #e1e1e1;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -45,60 +34,65 @@
     overflow: hidden;
     transition-duration: .3s;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
-    background-color: var(--night-rider);
+    background-color: #318b45;
     margin-right: 10px;
-  }
-  
-  /* plus sign */
-  .sign {
+}
+
+/* Plus sign */
+.sign {
     width: 100%;
     transition-duration: .3s;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .sign svg {
+}
+
+.sign svg {
     width: 17px;
-  }
-  
-  .sign svg path {
-    fill: var(--af-white);
-  }
-  /* text */
-  .text {
+}
+
+.sign svg path {
+    fill: #f3f3f3;
+}
+
+/* Text */
+
+.text {
     position: absolute;
     right: 0%;
     width: 0%;
-    opacity: 0;
-    color: var(--af-white);
+    opacity: 0.1;
+    color: #f3f3f3;
     font-size: 1.2em;
     font-weight: 600;
     transition-duration: .3s;
-  }
-  /* hover effect on button width */
-  .Btn:hover {
+}
+
+/* Hover effect on button width */
+.Btn:hover {
     width: 125px;
     border-radius: 5px;
     transition-duration: .3s;
-  }
-  
-  .Btn:hover .sign {
+}
+
+.Btn:hover .sign {
     width: 30%;
     transition-duration: .3s;
     padding-left: 20px;
-  }
-  /* hover effect button's text */
-  .Btn:hover .text {
+}
+
+/* Hover effect button's text */
+.Btn:hover .text {
     opacity: 1;
     width: 70%;
     transition-duration: .3s;
     padding-right: 10px;
-  }
-  /* button click effect*/
-  .Btn:active {
-    transform: translate(2px ,2px);
-  }
+}
+
+/* Button click effect */
+.Btn:active {
+    transform: translate(2px, 2px);
+}
 
 /* Khung bên trái */
 .left-panel {
@@ -151,8 +145,6 @@
 }
 
 /* Avatar của admin */
-/* ManageProduct.css */
-
 .AdminAvatar {
     position: relative; /* Để sử dụng position:absolute cho .admininfo */
     display: inline-block; /* Để .admininfo có thể chồng lên .adminavatar */
@@ -166,10 +158,10 @@
     transform: translateX(-50%); /* Dịch chuyển phần tử .admininfo lên trên */
     background-color: #fff; /* Đặt màu nền */
     padding: 10px; /* Khoảng cách giữa các biên bên trong phần tử */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Đặt hiệu ứng bóng */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đặt hiệu ứng bóng */
     border-radius: 5px; /* Đặt vòng tròn cho phần tử .admininfo */
     opacity: 0; /* Ẩn phần tử .admininfo ban đầu */
-    transition: opacity 0.3s ease; /* Hiển thị chuyển động mờ  */
+    transition: opacity 0.3s ease; /* Hiển thị chuyển động mờ */
     width: 8rem;
     height: 6rem;
 }
@@ -249,7 +241,7 @@
 }
 
 .AdminContentDetails {
-    background-color:floralwhite;
+    background-color: floralwhite;
 }
 
 /* Bảng hiển thị chi tiết người dùng */
@@ -257,8 +249,7 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    color:var(--black);
-    
+    color: var(--black);
 }
 
 .OrderTable th,
@@ -268,7 +259,7 @@
 }
 
 .OrderTable th {
-    background-color:tan;
+    background-color: tan;
     font-weight: bold;
     color: #303030;
 }

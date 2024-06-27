@@ -10,26 +10,26 @@ const items = [
   },
   {
     label: 'Album',
-    path: '/album',
+    path: '/albumlogin',
     children: [
       {
         type: 'group',
         children: [
           {
-            label: 'Vòng tay',
-            path: '/album/vong-tay',
+            label: 'Bracelet',
+            path: '/album/Bracelet',
           },
           {
-            label: 'Bông tai',
-            path: '/album/bong-tai',
+            label: 'Earring',
+            path: '/album/Earring',
           },
           {
-            label: 'Dây chuyền',
-            path: '/album/day-chuyen',
+            label: 'Necklace',
+            path: '/album/Necklace',
           },
           {
-            label: 'Nhẫn',
-            path: '/album/nhan',
+            label: 'Ring',
+            path: '/album/Ring',
           },
         ],
       },

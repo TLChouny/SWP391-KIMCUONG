@@ -1,0 +1,25 @@
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .fixed-header, .fixed-menuheader {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .fixed-header {
+    top: 0;
+  }
+  
+  .fixed-menuheader {
+    top: 64px; /* Adjust this based on the height of your Header */
+  }
+  
+  .content-container {
+    overflow: auto;
+    height: calc(90vh - 128px); /* Adjust this based on the combined height of your Header and Menuheader */
+  }
+  

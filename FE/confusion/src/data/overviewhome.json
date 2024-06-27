@@ -1,0 +1,32 @@
+[
+    {
+        "image": "../assets/BestSeller_Album.jpg",
+        "name": "All product",
+        "title": "All product",
+        "link": "/Product"
+    },
+    {
+        "image": "../assets/Bracelets_Album.jpg",
+        "name": "Bracelets",
+        "title": "Bracelets",
+        "link": "/album/Bracelet"
+    },
+    {
+        "image": "../assets/Earring_Album.jpg",
+        "name": "Earrings",
+        "title": "Earrings",
+        "link": "/album/Earring"
+    },
+    {
+        "image": "../assets/Necklaces_Album.jpg",
+        "name": "Necklaces",
+        "title": "Necklaces",
+        "link": "/album/Necklace"
+    },
+    {
+        "image": "../assets/Ring_Album.jpg",
+        "name": "Rings",
+        "title": "Rings",
+        "link": "/album/Ring"
+    }
+]
