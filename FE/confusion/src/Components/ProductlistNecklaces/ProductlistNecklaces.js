@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import "../ProductlistNecklaces/ProductlistNecklaces.css";
 import AllProduct from '../Allproduct/Allproduct';
 import Braceletsproduct from '../Braceletsproduct/Braceletsproduct';
@@ -19,96 +17,118 @@ const { Header, Sider, Content } = Layout;
 const ProductlistNecklaces = () => {
     const [collapsed, setCollapsed] = useState(false);
     const [selectedKey, setSelectedKey] = useState('4');
+    const navigate = useNavigate();
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
 
     const handleMenuClick = (e) => {
         setSelectedKey(e.key);
+        switch (e.key) {
+            case '1':
+                navigate('/album');
+                break;
+            case '2':
+                navigate('/album/Bracelet');
+                break;
+            case '3':
+                navigate('/album/Earring');
+                break;
+            case '4':
+                navigate('/album/Necklace');
+                break;
+            case '5':
+                navigate('/album/Ring');
+                break;
+            default:
+                break;
+        }
     };
 
     const renderContent = () => {
         switch (selectedKey) {
             case '1':
-                return <AllProduct/>;
+                return <AllProduct />;
             case '2':
-                return <Braceletsproduct/>;
+                return <Braceletsproduct />;
             case '3':
-                return <Earringsproduct/>;
+                return <Earringsproduct />;
             case '4':
-                return <Necklacesproduct/>;
+                return <Necklacesproduct />;
             case '5':
-                return <Ringsproduct/>;
+                return <Ringsproduct />;
+            default:
+                return null;
         }
     };
 
     return (
         <>
-        <Header/>
-        <Layout>
-            <Sider trigger={null} collapsible collapsed={collapsed}>
-                <div className="demo-logo-vertical" />
-                <Menu
-                    theme="dark"
-                    mode="inline"
-                    defaultSelectedKeys={['4']}
-                    selectedKeys={[selectedKey]}
-                    onClick={handleMenuClick}
-                    items={[
-                        {
-                            key: '1',
-                            label: 'All product',
-                        },
-                        {
-                            key: '2',
-                            label: 'Bracelets',
-                        },
-                        {
-                            key: '3',
-                            label: 'Earrings',
-                        },
-                        {
-                            key: '4',
-                            label: 'Necklaces',
-                        },
-                        {
-                            key: '5',
-                            label: 'Rings',
-                        },
-                    ]}
-                />
-            </Sider>
+            <Header />
             <Layout>
-                <Header
-                    style={{
-                        padding: 0,
-                        background: colorBgContainer,
-                    }}
-                >
-                    <Button
-                        type="text"
-                        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                        onClick={() => setCollapsed(!collapsed)}
-                        style={{
-                            fontSize: '16px',
-                            width: 64,
-                            height: 64,
-                        }}
+                <Sider trigger={null} collapsible collapsed={collapsed}>
+                    <div className="demo-logo-vertical" />
+                    <Menu
+                        theme="dark"
+                        mode="inline"
+                        defaultSelectedKeys={['4']}
+                        selectedKeys={[selectedKey]}
+                        onClick={handleMenuClick}
+                        items={[
+                            {
+                                key: '1',
+                                label: 'All product',
+                            },
+                            {
+                                key: '2',
+                                label: 'Bracelets',
+                            },
+                            {
+                                key: '3',
+                                label: 'Earrings',
+                            },
+                            {
+                                key: '4',
+                                label: 'Necklaces',
+                            },
+                            {
+                                key: '5',
+                                label: 'Rings',
+                            },
+                        ]}
                     />
-                </Header>
-                <Content
-                    style={{
-                        margin: '24px 16px',
-                        padding: 24,
-                        minHeight: 280,
-                        background: colorBgContainer,
-                        borderRadius: borderRadiusLG,
-                    }}
-                >
-                    {renderContent()}
-                </Content>
+                </Sider>
+                <Layout>
+                    <Header
+                        style={{
+                            padding: 0,
+                            background: colorBgContainer,
+                        }}
+                    >
+                        <Button
+                            type="text"
+                            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                            onClick={() => setCollapsed(!collapsed)}
+                            style={{
+                                fontSize: '16px',
+                                width: 64,
+                                height: 64,
+                            }}
+                        />
+                    </Header>
+                    <Content
+                        style={{
+                            margin: '24px 16px',
+                            padding: 24,
+                            minHeight: 280,
+                            background: colorBgContainer,
+                            borderRadius: borderRadiusLG,
+                        }}
+                    >
+                        {renderContent()}
+                    </Content>
+                </Layout>
             </Layout>
-        </Layout>
         </>
     );
 };
