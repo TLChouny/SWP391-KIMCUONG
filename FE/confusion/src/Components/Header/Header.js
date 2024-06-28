@@ -68,21 +68,21 @@ const Header = () => {
 
             {/* Modal for login prompt */}
             <Modal
-                title="Bạn chưa đăng nhập"
+                title="You are not logged in"
                 visible={modalVisible}
                 onCancel={handleModalClose}
                 footer={[
                     <Button key="cancel" onClick={handleModalClose} style={{marginRight: "2%"}}>
-                        Đóng
+                        Close
                     </Button>,
                     <Link to="/prelogin">
                         <Button key="login" type="primary" onClick={handleLogin}>
-                            Đăng nhập
+                            Login
                         </Button>
                     </Link>
                 ]}
             >
-                <p>Vui lòng đăng nhập để tiếp tục mua hàng.</p>
+                <p>Please login to continue shopping.</p>
             </Modal>
         </div>
     );

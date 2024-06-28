@@ -10,7 +10,7 @@ const items = [
   },
   {
     label: 'Album',
-    path: '/album',
+    path: '/catalog',
     children: [
       {
         type: 'group',

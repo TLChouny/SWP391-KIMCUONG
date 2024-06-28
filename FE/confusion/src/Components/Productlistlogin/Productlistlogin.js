@@ -5,19 +5,20 @@ import {
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import "../ProductlistEarring/ProductlistEarring.css";
+import "../Product/Productlist.css";
 import AllProduct from '../Allproduct/Allproduct';
 import Braceletsproduct from '../Braceletsproduct/Braceletsproduct';
 import Earringsproduct from '../Earringsproduct/Earringsproduct';
 import Necklacesproduct from '../Necklacesproduct/Necklacesproduct';
 import Ringsproduct from '../Ringsproduct/Ringsproduct';
 import Overviewhome from '../Overviewhomealbum/Overviewhome';
+import Headerlogin from '../Headerlogin/Headerlogin';
 
 const { Header, Sider, Content } = Layout;
 
-const ProductlistEarring = () => {
+const Productcatalog = () => {
     const [collapsed, setCollapsed] = useState(false);
-    const [selectedKey, setSelectedKey] = useState('4');
+    const [selectedKey, setSelectedKey] = useState('1');
     const navigate = useNavigate();
     const {
         token: { colorBgContainer, borderRadiusLG },
@@ -70,14 +71,14 @@ const ProductlistEarring = () => {
 
     return (
         <>
-            <Header />
+            {/* <Headerlogin /> */}
             <Layout>
                 <Sider trigger={null} collapsible collapsed={collapsed}>
                     <div className="demo-logo-vertical" />
                     <Menu
                         theme="dark"
                         mode="inline"
-                        defaultSelectedKeys={['4']}
+                        defaultSelectedKeys={['1']}
                         selectedKeys={[selectedKey]}
                         onClick={handleMenuClick}
                         items={[
@@ -143,4 +144,4 @@ const ProductlistEarring = () => {
     );
 };
 
-export default ProductlistEarring;
+export default Productcatalog;

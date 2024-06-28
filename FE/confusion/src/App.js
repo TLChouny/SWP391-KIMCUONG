@@ -26,6 +26,8 @@ import ProductlistBrace from './Components/ProductlistBrace/ProductlistBrace';
 import Earringsproductmenu from './Components/Earringsproductmenu/Earringsproductmenu';
 import Necklacesproductmenu from './Components/Necklacesproductmenu/Necklacesproductmenu';
 import Ringsproductmenu from './Components/Ringsproductmenu/Ringsproductmenu';
+import Overviewhome from './Components/Overviewhomealbum/Overviewhome';
+import Catalog from './Components/Catalog/Catalog';
 function App() {
   return (
     <Router>
@@ -42,11 +44,12 @@ function App() {
           <Route path='/albumlogin' element={<Albumlogin/>}/>
           <Route path='/contactlogin' element={<><Headerlogin /><Menuheaderlogin /><Contactlogin/><Footer /></>}/>
           <Route path='/Product' element={<Productlist/>}/>
-          <Route path='/Album' element={<Albumlist/>}/>
+          <Route path='/album' element={<Albumlist/>}/>
           <Route path='/album/Bracelet' element={<Braceletsproductmenu/>}/>
           <Route path='/album/Earring' element={<Earringsproductmenu/>}/>
           <Route path='/album/Necklace' element={<Necklacesproductmenu/>}/>
           <Route path='/album/Ring' element={<Ringsproductmenu/>}/> 
+          <Route path='/catalog' element={<Catalog/>}/>
         </Routes>
       </>
     </Router>
