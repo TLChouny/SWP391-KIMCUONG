@@ -5,7 +5,7 @@
     } from '@ant-design/icons';
     import { Button, Layout, Menu, theme } from 'antd';
     import { useNavigate } from 'react-router-dom';
-    import "../Product/Productlist.css";
+    import "./Productlist.css";
     import AllProduct from '../Allproduct/Allproduct';
     import Braceletsproduct from '../Braceletsproduct/Braceletsproduct';
     import Earringsproduct from '../Earringsproduct/Earringsproduct';

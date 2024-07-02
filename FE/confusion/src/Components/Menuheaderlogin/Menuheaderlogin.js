@@ -10,26 +10,26 @@ const items = [
   },
   {
     label: 'Album',
-    path: '/albumlogin',
+    path: '/catalogin',
     children: [
       {
         type: 'group',
         children: [
           {
             label: 'Bracelet',
-            path: '/album/Bracelet',
+            path: '/albumlogin/Bracelet',
           },
           {
             label: 'Earring',
-            path: '/album/Earring',
+            path: '/albumlogin/Earring',
           },
           {
             label: 'Necklace',
-            path: '/album/Necklace',
+            path: '/albumlogin/Necklace',
           },
           {
             label: 'Ring',
-            path: '/album/Ring',
+            path: '/albumlogin/Ring',
           },
         ],
       },

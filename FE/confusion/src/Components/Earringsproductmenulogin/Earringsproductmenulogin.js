@@ -1,17 +1,16 @@
 import React from "react";
-
-import "./albumlogin.css"; // Assuming the CSS file is named Albumlist.css
-import Menuheaderlogin from "../Menuheaderlogin/Menuheaderlogin";
+import Header from "../Header/Header";
+import Menuheader from "../Menu/Menuheader";
+import ProductlistEarringlogin from "../ProductlistEarringlogin/ProductlistEarringlogin";
 import Headerlogin from "../Headerlogin/Headerlogin";
-import Productlistlogin from "../Productlistlogin/Productlistlogin";
-
-export default function Albumlogin() {
+import Menuheaderlogin from "../Menuheaderlogin/Menuheaderlogin";
+export default function Earringsproductmenulogin() {
     return (
         <div style={{ height: '100vh', overflow: 'hidden' }}>
             <Headerlogin className="fixed-header" />
             <Menuheaderlogin className="fixed-menuheader" />
             <div className="content-container">
-                <Productlistlogin />
+                <ProductlistEarringlogin />
             </div>
         </div>
     )

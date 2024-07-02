@@ -5,19 +5,25 @@ import {
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import "../Productlist/Productlist.css";
+import "../ProductlistRingslogin/ProductlistRingslogin.css";
 import AllProduct from '../Allproduct/Allproduct';
 import Braceletsproduct from '../Braceletsproduct/Braceletsproduct';
 import Earringsproduct from '../Earringsproduct/Earringsproduct';
 import Necklacesproduct from '../Necklacesproduct/Necklacesproduct';
 import Ringsproduct from '../Ringsproduct/Ringsproduct';
 import Overviewhome from '../Overviewhomealbum/Overviewhome';
+import Overviewhomelogin from '../Overviewhomelogin/Overviewhomelogin';
+import Allproductlogin from '../Allproductlogin/Allproductlogin';
+import Braceletsproductlogin from '../Braceletsproductlogin/Braceletsproductlogin';
+import Earringsproductlogin from '../Earringsproductlogin/Earringsproductlogin';
+import Necklacesproductlogin from '../Necklacesproductlogin/Necklacesproductlogin';
+import Ringsproductlogin from '../Ringsproductlogin/Ringsproductlogin';
 
 const { Header, Sider, Content } = Layout;
 
-const Productcatalog = () => {
+const ProductlistRingslogin = () => {
     const [collapsed, setCollapsed] = useState(false);
-    const [selectedKey, setSelectedKey] = useState('1');
+    const [selectedKey, setSelectedKey] = useState('6');
     const navigate = useNavigate();
     const {
         token: { colorBgContainer, borderRadiusLG },
@@ -27,22 +33,22 @@ const Productcatalog = () => {
         setSelectedKey(e.key);
         switch (e.key) {
             case '1':
-                navigate('/catalog');
+                navigate('/catalogin');
                 break;
             case '2':
-                navigate('/album');
+                navigate('/albumlogin');
                 break;
             case '3':
-                navigate('/album/Bracelet');
+                navigate('/albumlogin/Bracelet');
                 break;
             case '4':
-                navigate('/album/Earring');
+                navigate('/albumlogin/Earring');
                 break;
             case '5':
-                navigate('/album/Necklace');
+                navigate('/albumlogin/Necklace');
                 break;
             case '6':
-                navigate('/album/Ring');
+                navigate('/albumlogin/Ring');
                 break;
             default:
                 break;
@@ -52,17 +58,17 @@ const Productcatalog = () => {
     const renderContent = () => {
         switch (selectedKey) {
             case '1':
-                return <Overviewhome />;
+                return <Overviewhomelogin />;
             case '2':
-                return <AllProduct />;
+                return <Allproductlogin />;
             case '3':
-                return <Braceletsproduct />;
+                return <Braceletsproductlogin />;
             case '4':
-                return <Earringsproduct />;
+                return <Earringsproductlogin />;
             case '5':
-                return <Necklacesproduct />;
+                return <Necklacesproductlogin />;
             case '6':
-                return <Ringsproduct />;
+                return <Ringsproductlogin />;
             default:
                 return null;
         }
@@ -77,7 +83,7 @@ const Productcatalog = () => {
                     <Menu
                         theme="dark"
                         mode="inline"
-                        defaultSelectedKeys={['1']}
+                        defaultSelectedKeys={['5']}
                         selectedKeys={[selectedKey]}
                         onClick={handleMenuClick}
                         items={[
@@ -143,4 +149,4 @@ const Productcatalog = () => {
     );
 };
 
-export default Productcatalog;
+export default ProductlistRingslogin;

@@ -1,0 +1,46 @@
+.product-detail-container {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    height: 640px;
+    /* Chiều cao bằng chiều cao của cửa sổ trình duyệt */
+    padding: 20px;
+    overflow-y: auto;
+    /* margin-top: -20px; */
+}
+
+.product-detail-content {
+    flex: 1;
+    /* Để phần nội dung tự động mở rộng */
+    max-width: 50%;
+    /* Điều chỉnh chiều rộng tối đa của phần nội dung */
+    padding: 20px;
+}
+
+.product-detail-image {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 20px;
+    /* Canh giữa theo chiều ngang và thêm margin bottom */
+    display: block;
+    /* Để hình ảnh được hiển thị là một block element */
+    width: 50%;
+    /* Điều chỉnh chiều rộng của hình ảnh */
+}
+
+.product-detail-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-detail-table th,
+.product-detail-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.product-detail-table th {
+    width: 30%;
+    background-color: #f2f2f2;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../Header/Header";
 import Menuheader from "../Menu/Menuheader";
-import Productlist from "../Product/Productlist";
+import Productlist from "../Productlist/Productlist";
 import "./Albumlist.css"; // Assuming the CSS file is named Albumlist.css
 
 export default function Albumlist() {

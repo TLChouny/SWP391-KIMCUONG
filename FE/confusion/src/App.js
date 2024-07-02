@@ -14,9 +14,9 @@ import Albumlogin from './Components/Albumlogin/albumlogin';
 import Contactlogin from './Components/Contaclogin/Contactlogin';
 import Headerlogin from './Components/Headerlogin/Headerlogin';
 import Menuheaderlogin from './Components/Menuheaderlogin/Menuheaderlogin';
-import Product from "./Components/Product/Productlist";
+import Product from "./Components/Productlist/Productlist";
 import Albumlist from './Components/Album/Albumlist';
-import Productlist from './Components/Product/Productlist';
+import Productlist from './Components/Productlist/Productlist';
 import Braceletsproduct from './Components/Braceletsproduct/Braceletsproduct';
 import Earringsproduct from './Components/Earringsproduct/Earringsproduct';
 import Necklacesproduct from './Components/Necklacesproduct/Necklacesproduct';
@@ -28,6 +28,12 @@ import Necklacesproductmenu from './Components/Necklacesproductmenu/Necklacespro
 import Ringsproductmenu from './Components/Ringsproductmenu/Ringsproductmenu';
 import Overviewhome from './Components/Overviewhomealbum/Overviewhome';
 import Catalog from './Components/Catalog/Catalog';
+import Catalogin from './Components/Catalogin/Catalogin';
+import Braceletsproductmenulogin from './Components/Braceletsproductmenulogin/Braceletsproductmenulogin';
+import Earringsproductmenulogin from './Components/Earringsproductmenulogin/Earringsproductmenulogin';
+import Necklacesproductmenulogin from './Components/Necklacesproductmenulogin/Necklacesproductmenulogin';
+import Ringsproductmenulogin from './Components/Ringsproductmenulogin/Ringsproductmenulogin';
+import ProductDetail from './Components/ProductDetail/ProductDetail';
 function App() {
   return (
     <Router>
@@ -41,7 +47,6 @@ function App() {
           <Route path='/Manager' element={<ManageProduct />} />
           <Route path='/contact' element={<><Header /><Menuheader /><Contact /><Footer /></>} />
           <Route path='/homepagelogin' element={<Homepagelogin />} />
-          <Route path='/albumlogin' element={<Albumlogin/>}/>
           <Route path='/contactlogin' element={<><Headerlogin /><Menuheaderlogin /><Contactlogin/><Footer /></>}/>
           <Route path='/Product' element={<Productlist/>}/>
           <Route path='/album' element={<Albumlist/>}/>
@@ -50,6 +55,15 @@ function App() {
           <Route path='/album/Necklace' element={<Necklacesproductmenu/>}/>
           <Route path='/album/Ring' element={<Ringsproductmenu/>}/> 
           <Route path='/catalog' element={<Catalog/>}/>
+          <Route path='/catalogin' element={<Catalogin/>}/>
+          <Route path='/albumlogin' element={<Albumlogin/>}/>
+          <Route path='/albumlogin/Bracelet' element={<Braceletsproductmenulogin/>}/>
+          <Route path='/albumlogin/Earring' element={<Earringsproductmenulogin/>}/>
+          <Route path='/albumlogin/Necklace' element={<Necklacesproductmenulogin/>}/>
+          <Route path='/albumlogin/Ring' element={<Ringsproductmenulogin/>}/>
+
+          <Route path="/productdetail/:productId" element={<ProductDetail/>} />
+          <Route path="/productdetailNecklaces/:productId" element={<Necklacesproductmenulogin/>} />
         </Routes>
       </>
     </Router>

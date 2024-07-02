@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "./Allproductlogin.css";
-import { Button } from "antd"; // Import Button from Ant Design
+import "./Ringsproductlogin.css";
+import { Button } from "antd";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast from react-toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
-import { Link } from "react-router-dom";
 
 const URL = "http://localhost:8080/api/products";
 
-const Allproductlogin = () => {
+export default function Ringsproductlogin() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]); // State to manage the cart items
 
@@ -16,12 +16,14 @@ const Allproductlogin = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data); // Log the data to check its structure
-        setProducts(data);
+        // Filter products to show only those with category 'earring'
+        const filteredProducts = data.filter(product => product.ProductCategory === 'ring');
+        setProducts(filteredProducts);
       })
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
-  // Function to handle adding a product to the cart
+  // Function to handle adding a product to cart
   const addToCart = (product, event) => {
     const imgElement = event.target.closest('.product-item').querySelector('img');
 
@@ -51,41 +53,36 @@ const Allproductlogin = () => {
   };
 
   return (
-    <div className="all-products">
-      <h1>All Products</h1>
-      {products.length > 0 ? (
-        <div className="product-grid">
-          {products.map((product) => (
-            <div key={product.ProductId} className="product-item">
-              <Link to={`/product/${product.ProductId}`}>
-                <img
-                  src={product.ProductImageURL}
-                  alt={product.ProductName}
-                  className="product-image"
-                />
-              </Link>
-              <h2 className="product-name">
-                <Link to={`/productdetail/${product.ProductId}`}>
-                  {product.ProductName}
+    <>
+      <div className="all-products">
+        <h1>Rings Products</h1>
+        {products.length > 0 ? (
+          <div className="product-grid">
+            {products.map((product) => (
+              <div key={product.ProductId} className="product-item">
+                <Link to={`/productdetail/${product.ProductId}`} className="product-link">
+                  <img
+                    src={product.ProductImageURL}
+                    alt={product.ProductName}
+                    className="product-image"
+                  />
+                  <h2 className="product-name">{product.ProductName}</h2>
                 </Link>
-              </h2>
-              <p className="product-price">Price: {product.ProductPrice}</p>
-              <Button
-                className="add-to-cart-button"
-                onClick={(e) => addToCart(product, e)}
-              >
-                Add to Cart
-              </Button>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>No products found.</p>
-      )}
-
-      <ToastContainer />
-    </div>
+                <p className="product-price">Price: {product.ProductPrice}</p>
+                <Button
+                  className="add-to-cart-button"
+                  onClick={(e) => addToCart(product, e)}
+                >
+                  Add to Cart
+                </Button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No earrings products found.</p>
+        )}
+      </div>
+      <ToastContainer /> {/* Place ToastContainer at a higher level in your app to display toasts */}
+    </>
   );
-};
-
-export default Allproductlogin;
+}
