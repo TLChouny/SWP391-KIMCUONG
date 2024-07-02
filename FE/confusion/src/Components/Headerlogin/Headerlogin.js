@@ -42,7 +42,7 @@ const Headerlogin = () => {
           
           <AccountCircleIcon style={{ fontSize: 34, cursor: 'pointer' }} />
         </Dropdown>
-        <AddShoppingCartIcon style={{ fontSize: 34, marginLeft: 20, cursor: 'pointer' }} />
+        <Link to="/cart"><AddShoppingCartIcon style={{ fontSize: 34, marginLeft: 20, cursor: 'pointer' }} /></Link>
       </div>
     </div>
   );

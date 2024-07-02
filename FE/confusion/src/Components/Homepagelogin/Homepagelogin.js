@@ -8,6 +8,7 @@ import News from "../News/News";
 import Footer from "../Footer/Footer"
 import Headerlogin from "../Headerlogin/Headerlogin";
 import Menuheaderlogin from "../Menuheaderlogin/Menuheaderlogin";
+import Bodycateogrylogin from "../Bodycateogrylogin/Bodycateogrylogin";
 export default function Homepagelogin() {
     return (
         <div style={{ height: '100vh', overflowY: 'auto' }}>
@@ -16,7 +17,7 @@ export default function Homepagelogin() {
                 <Menuheaderlogin />
             </div>
             <Slider />
-            <Bodycategory/>
+            <Bodycateogrylogin/>
             <News/>
             <Footer/>
         </div>

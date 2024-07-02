@@ -62,8 +62,8 @@ function App() {
           <Route path='/albumlogin/Necklace' element={<Necklacesproductmenulogin/>}/>
           <Route path='/albumlogin/Ring' element={<Ringsproductmenulogin/>}/>
 
-          <Route path="/productdetail/:productId" element={<ProductDetail/>} />
-          <Route path="/productdetailNecklaces/:productId" element={<Necklacesproductmenulogin/>} />
+          <Route path="/productdetail/:productId" element={<><ProductDetail/></>} />
+          {/* <Route path="/productdetailNecklaces/:productId" element={<Necklacesproductmenulogin/>} /> */}
         </Routes>
       </>
     </Router>
