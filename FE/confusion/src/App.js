@@ -34,6 +34,8 @@ import Earringsproductmenulogin from './Components/Earringsproductmenulogin/Earr
 import Necklacesproductmenulogin from './Components/Necklacesproductmenulogin/Necklacesproductmenulogin';
 import Ringsproductmenulogin from './Components/Ringsproductmenulogin/Ringsproductmenulogin';
 import ProductDetail from './Components/ProductDetail/ProductDetail';
+import Cart from './Components/Cart/Cart';
+import Payment from './Components/Payment/Payment';
 function App() {
   return (
     <Router>
@@ -44,7 +46,7 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path='/Register' element={<Register />} />
           <Route path='/Admin' element={<ManageAccount />} />
-          <Route path='/Manager' element={<ManageProduct />} />
+          <Route path='/Manager' element={<ManageProduct />} /> 
           <Route path='/contact' element={<><Header /><Menuheader /><Contact /><Footer /></>} />
           <Route path='/homepagelogin' element={<Homepagelogin />} />
           <Route path='/contactlogin' element={<><Headerlogin /><Menuheaderlogin /><Contactlogin/><Footer /></>}/>
@@ -61,9 +63,10 @@ function App() {
           <Route path='/albumlogin/Earring' element={<Earringsproductmenulogin/>}/>
           <Route path='/albumlogin/Necklace' element={<Necklacesproductmenulogin/>}/>
           <Route path='/albumlogin/Ring' element={<Ringsproductmenulogin/>}/>
-
           <Route path="/productdetail/:productId" element={<><ProductDetail/></>} />
-          {/* <Route path="/productdetailNecklaces/:productId" element={<Necklacesproductmenulogin/>} /> */}
+          <Route path='/cart' element={<Cart/>}/>
+          {/* <Route path='/news' element={<News/>}/> */}
+          <Route path='/payment' element={<Payment/>}/>
         </Routes>
       </>
     </Router>

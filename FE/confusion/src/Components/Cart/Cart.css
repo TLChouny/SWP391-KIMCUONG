@@ -1,0 +1,114 @@
+.cart {
+    /* margin: 20px auto; */
+    /* max-width: 800px; */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 640px;
+    overflow-y: auto;
+}
+
+.cart h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ff00f7;
+}
+
+.cart-items {
+    margin-top: 20px;
+}
+
+.cart-items table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-items th, .cart-items td {
+    /* border: 1px solid #ddd; */
+    padding: 10px;
+    text-align: center;
+}
+
+.cart-items th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.cart-items img {
+    max-width: 80px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.cart-item-product{
+    display: flex;
+    /* width: 50%; */
+    margin-left: 4%;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-item-product img {
+    margin-right: 10%;
+}
+.item-details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.item-details h2 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity button {
+    background-color: #1890ff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    /* padding: 10px 10px; */
+    transition: background-color 0.3s ease;
+}
+
+.quantity span {
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+.cart-total {
+    margin-top: 20px;
+    text-align: right;
+    font-size: 20px;
+}
+
+
+.cart-total h2::before {
+    content: "Tổng tiền: ";
+    font-weight: normal;
+}
+
+.cart-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FADCF9;
+    color: black;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 20px; /* Điều chỉnh khoảng cách với các phần tử trên */
+    transition: background-color 0.3s ease;
+}
+
+.cart-link:hover {
+    background-color: #40a9ff;
+}
+
+.empty-cart-message {
+   text-align: center;
+}
