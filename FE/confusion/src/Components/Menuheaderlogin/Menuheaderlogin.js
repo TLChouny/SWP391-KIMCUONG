@@ -37,7 +37,7 @@ const items = [
   },
   {
     label: 'About us',
-    path: '/about',
+    path: '/aboutus',
   },
   {
     label: 'News',
