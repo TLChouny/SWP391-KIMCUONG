@@ -27,12 +27,10 @@ export default function Ringsproductlogin() {
   const addToCart = (product, event) => {
     const imgElement = event.target.closest('.product-item').querySelector('img');
 
-    // Clone the product image element
     const clonedImg = imgElement.cloneNode(true);
     clonedImg.classList.add('fly-animation');
     document.body.appendChild(clonedImg);
 
-    // Get the position of the original image
     const { top, left, width, height } = imgElement.getBoundingClientRect();
     clonedImg.style.position = 'fixed';
     clonedImg.style.top = `${top}px`;
@@ -40,16 +38,27 @@ export default function Ringsproductlogin() {
     clonedImg.style.width = `${width}px`;
     clonedImg.style.height = `${height}px`;
 
-    // Add the product to the cart
-    setCart((prevCart) => [...prevCart, product]);
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
 
-    // Show a toast notification indicating the product has been added to the cart
     toast.success(`${product.ProductName} has been added to your cart.`);
 
-    // Remove the cloned image after the animation
     setTimeout(() => {
       document.body.removeChild(clonedImg);
-    }, 1000);
+    }, 0);
+  };
+
+  const formatPrice = (price) => {
+
+    let parts = price.toFixed(0).toString().split(".");
+
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    if (parts.length === 1) {
+      return parts[0] + "đ";
+    } else {
+      return parts.join(".") + "đ";
+    }
   };
 
   return (
@@ -68,7 +77,7 @@ export default function Ringsproductlogin() {
                   />
                   <h2 className="product-name">{product.ProductName}</h2>
                 </Link>
-                <p className="product-price">Price: {product.ProductPrice}</p>
+                <p className="product-price">{formatPrice(product.ProductPrice)}</p>
                 <Button
                   className="add-to-cart-button"
                   onClick={(e) => addToCart(product, e)}
@@ -79,7 +88,7 @@ export default function Ringsproductlogin() {
             ))}
           </div>
         ) : (
-          <p>No earrings products found.</p>
+          <p>No rings products found.</p>
         )}
       </div>
       <ToastContainer /> {/* Place ToastContainer at a higher level in your app to display toasts */}

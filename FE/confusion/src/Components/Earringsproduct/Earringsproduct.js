@@ -33,7 +33,17 @@ export default function Earringsproduct() {
   const handleModalClose = () => {
     setModalVisible(false);
   };
+  const formatPrice = (price) => {
 
+    let parts = price.toFixed(0).toString().split(".");
+
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    if (parts.length === 1) {
+      return parts[0] + "đ";
+    } else {
+      return parts.join(".") + "đ";
+    }
+  };
   return (
     <div className="all-products">
       <h1>Earrings Products</h1>
@@ -41,13 +51,19 @@ export default function Earringsproduct() {
         <div className="product-grid">
           {products.map((product) => (
             <div key={product.ProductId} className="product-item">
-              <img
-                src={product.ProductImageURL}
-                alt={product.ProductName}
-                className="product-image"
-              />
-              <h2 className="product-name">{product.ProductName}</h2>
-              <p className="product-price">Price: {product.ProductPrice}</p>
+              <Link to={`/product/${product.ProductId}`}>
+                <img
+                  src={product.ProductImageURL}
+                  alt={product.ProductName}
+                  className="product-image"
+                />
+              </Link>
+              <h2 className="product-name">
+                <Link to={`/product/${product.ProductId}`}>
+                  {product.ProductName}
+                </Link>
+              </h2>
+              <p className="product-price">{formatPrice(product.ProductPrice)}</p>
               <Button
                 className="add-to-cart-button"
                 onClick={() => addToCart(product)}

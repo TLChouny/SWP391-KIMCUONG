@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Button, Spin } from "antd";
+import { Button, Spin, Modal } from "antd";
 import { ToastContainer, toast } from "react-toastify"; // Import toast và ToastContainer từ react-toastify
 import "react-toastify/dist/ReactToastify.css"; // Import CSS cho toastify
-import "./ProductDetail.css";
-import Headerlogin from "../Headerlogin/Headerlogin";
-import Menuheaderlogin from "../Menuheaderlogin/Menuheaderlogin";
+import "./Product.css";
+import Header from "../Header/Header";
+import Menuheader from "../Menu/Menuheader";
+import Footer from "../Footer/Footer";
+// import LoginModal from "../LoginModal/LoginModal"; // Assuming you have a LoginModal component
 
-const ProductDetail = () => {
+const Product = () => {
     const { productId } = useParams();
     const navigate = useNavigate(); // Access navigate function from react-router-dom
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [showLoginModal, setShowLoginModal] = useState(false);
 
     useEffect(() => {
         fetch(`http://localhost:8080/api/products/${productId}`)
@@ -24,17 +27,18 @@ const ProductDetail = () => {
     }, [productId]);
 
     const handleBuyNow = () => {
-        // Xử lý thêm vào giỏ hàng ở đây (nếu cần)
-        // Ví dụ lưu vào local storage
-        let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-        cartItems.push(product);
-        localStorage.setItem("cart", JSON.stringify(cartItems));
+        // Check if user is logged in (example check)
+        const isLoggedIn = localStorage.getItem("isLoggedIn"); // Example check for logged in status
 
-        toast.success("The product has been added to cart");
-
-        setTimeout(() => {
-            toast.dismiss();
-        }, 5000);
+        if (!isLoggedIn) {
+            setShowLoginModal(true); // Show login modal if not logged in
+        } else {
+            // Perform buy now action
+            toast.success("The product has been added to cart");
+            setTimeout(() => {
+                toast.dismiss();
+            }, 5000);
+        }
     };
 
     const formatPrice = (price) => {
@@ -48,12 +52,13 @@ const ProductDetail = () => {
             return parts.join(".") + "đ";
         }
     };
-
     return (
         <>
-            <Headerlogin />
-            <Menuheaderlogin />
-            <ToastContainer /> {/* Để toastify hoạt động, cần đặt ToastContainer ở một nơi duy nhất trong ứng dụng */}
+            <Header />
+            <Menuheader />
+            <ToastContainer />
+
+            {/* Product Detail Section */}
             <div className="product-detail-container">
                 {loading ? (
                     <div className="loading-spinner">
@@ -98,10 +103,6 @@ const ProductDetail = () => {
                                         <td>{product.ProductMain}</td>
                                     </tr>
                                     <tr>
-                                        <th>Product Mounting</th>
-                                        <td>{product.ProductMounting}</td>
-                                    </tr>
-                                    <tr>
                                         <th>Category</th>
                                         <td>{product.ProductCategory}</td>
                                     </tr>
@@ -117,8 +118,29 @@ const ProductDetail = () => {
                     <p>No products found</p>
                 )}
             </div>
+
+            {/* Login Modal */}
+            <Modal
+                title="Login Required"
+                visible={showLoginModal}
+                onCancel={() => setShowLoginModal(false)}
+                footer={[
+                    <Button key="cancel" onClick={() => setShowLoginModal(false)}>
+                        Close
+                    </Button>,
+                    <Button key="login" type="primary" onClick={() => {
+                        setShowLoginModal(false);
+                        navigate("/prelogin"); // Redirect to login page
+                    }}>
+                        Login
+                    </Button>,
+                ]}
+            >
+                <p>Please login to add to list product</p>
+            </Modal>
+            {/* <Footer style={{marginTop: "-20%"}}/> */}
         </>
     );
 };
 
-export default ProductDetail;
+export default Product;

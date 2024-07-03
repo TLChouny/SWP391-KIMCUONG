@@ -39,10 +39,22 @@ const Allproductlogin = () => {
     localStorage.setItem('cart', JSON.stringify(cart));
 
     toast.success(`${product.ProductName} has been added to your cart.`);
-
+    
     setTimeout(() => {
       document.body.removeChild(clonedImg);
     }, 0);
+  };
+
+  const formatPrice = (price) => {
+
+    let parts = price.toFixed(0).toString().split(".");
+
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    if (parts.length === 1) {
+      return parts[0] + "đ";
+    } else {
+      return parts.join(".") + "đ";
+    }
   };
 
   return (
@@ -52,7 +64,7 @@ const Allproductlogin = () => {
         <div className="product-grid">
           {products.map((product) => (
             <div key={product.ProductId} className="product-item">
-              <Link to={`/product/${product.ProductId}`}>
+              <Link to={`/productdetail/${product.ProductId}`}>
                 <img
                   src={product.ProductImageURL}
                   alt={product.ProductName}
@@ -64,7 +76,7 @@ const Allproductlogin = () => {
                   {product.ProductName}
                 </Link>
               </h2>
-              <p className="product-price">Price: {product.ProductPrice}đ</p>
+              <p className="product-price">{formatPrice(product.ProductPrice)}</p>
               <Button
                 className="add-to-cart-button"
                 onClick={(e) => addToCart(product, e)}

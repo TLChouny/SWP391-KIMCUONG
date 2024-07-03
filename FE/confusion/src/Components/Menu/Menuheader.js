@@ -36,8 +36,8 @@ const items = [
     ],
   },
   {
-    label: 'Review',
-    path: '/review',
+    label: 'About us',
+    path: '/about',
   },
   {
     label: 'News',
