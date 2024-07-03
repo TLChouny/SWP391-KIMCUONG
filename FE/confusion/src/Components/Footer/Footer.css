@@ -36,6 +36,7 @@
     display: flex;
     align-items: center;
     line-height: 24px;
+    color: black;
 }
 
 .footer-column li svg {
