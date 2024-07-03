@@ -3,7 +3,7 @@
         "image": "../assets/BestSeller_Album.jpg",
         "name": "All product",
         "title": "All product",
-        "link": "/Product"
+        "link": "/album"
     },
     {
         "image": "../assets/Bracelets_Album.jpg",

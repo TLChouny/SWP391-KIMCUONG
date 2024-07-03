@@ -10,7 +10,7 @@ const items = [
   },
   {
     label: 'Album',
-    path: '/album',
+    path: '/catalog',
     children: [
       {
         type: 'group',
@@ -36,8 +36,8 @@ const items = [
     ],
   },
   {
-    label: 'Review',
-    path: '/review',
+    label: 'About us',
+    path: '/about',
   },
   {
     label: 'News',
