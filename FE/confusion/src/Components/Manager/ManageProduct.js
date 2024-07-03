@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 // import "./ManageProduct.css";
 // import SampleProducts from "../Sample/SampleProducts";
 
-import { v4 as uuidv4 } from 'uuid';
 import { Container, Row, Col, Form, Button, Table, Modal } from 'react-bootstrap';
 import "./ManageProduct.css";
 import SampleProducts from "../Sample/SampleProducts";
