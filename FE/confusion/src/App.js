@@ -39,6 +39,8 @@ import Product from './Components/Product/Product';
 import Profile from './Components/Profile/Profile';
 import Aboutus from './Components/About us/Aboutus';
 import About from './Components/About/About';
+import Aboutuslogin from './Components/Aboutuslogin/Aboutuslogin';
+import Aboutlogin from './Components/Aboutlogin/Aboutlogin';
 function App() {
   return (
     <Router>
@@ -73,6 +75,7 @@ function App() {
           {/* <Route path='/news' element={<News/>}/> */}
           <Route path='/Profile' element={<><Headerlogin/><Menuheaderlogin/><Profile/></>}/>
           <Route path='/about' element={<><About/></>}/>
+          <Route path='/aboutus' element={<Aboutlogin/>}/>
           {/* <Route path='/about' element={<><Headerlogin/><Menuheaderlogin/><Aboutus/></>}/> */}
         </Routes>
       </>
