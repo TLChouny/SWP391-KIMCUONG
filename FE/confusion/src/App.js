@@ -38,6 +38,7 @@ import Payment from './Components/Payment/Payment';
 import Product from './Components/Product/Product';
 import Profile from './Components/Profile/Profile';
 import Aboutus from './Components/About us/Aboutus';
+import About from './Components/About/About';
 function App() {
   return (
     <Router>
@@ -71,7 +72,7 @@ function App() {
           <Route path='/payment' element={<Payment/>}/>
           {/* <Route path='/news' element={<News/>}/> */}
           <Route path='/Profile' element={<><Headerlogin/><Menuheaderlogin/><Profile/></>}/>
-          <Route path='/about' element={<><Header/><Menuheader/><Aboutus/></>}/>
+          <Route path='/about' element={<><About/></>}/>
           {/* <Route path='/about' element={<><Headerlogin/><Menuheaderlogin/><Aboutus/></>}/> */}
         </Routes>
       </>

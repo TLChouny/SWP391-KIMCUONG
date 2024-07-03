@@ -37,9 +37,9 @@ export default function Footer() {
                 <div className="footer-column">
                     <h2>QUICK LINKS</h2>
                     <ul>
-                        <li>About Us</li>
-                        <li>Blog</li>
-                        <li>Contact Us</li>
+                        <Link to="/about" style={{textDecoration: "none"}}><li>About Us</li></Link>
+                        <Link to="/news" style={{textDecoration: "none"}}><li>News</li></Link>
+                        <Link to="/contact" style={{textDecoration: "none"}}><li>Contact Us</li></Link>
                     </ul>
                 </div>
 
