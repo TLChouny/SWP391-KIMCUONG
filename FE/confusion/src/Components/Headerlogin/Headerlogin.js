@@ -20,14 +20,11 @@ const Headerlogin = () => {
     }
   }, []);
 
-  // Function to handle logout
   const handleLogout = () => {
-    // Clear the cart on logout
     localStorage.removeItem('cart');
     setCart([]);
   };
 
-  // Function to handle search
   const onSearch = async (value) => {
     if (value.trim() === "") {
       setDropdownVisible(false);

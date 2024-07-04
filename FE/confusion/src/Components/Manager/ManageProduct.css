@@ -1,13 +1,12 @@
 .ManageProduct {
-    display: flex; /* Sử dụng flexbox */
-    height: 100vh; /* Chiều cao của toàn bộ trang */
+    display: flex; 
+    height: 100vh;
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
     background-color: #ddd;
 }
 
-/* nút create sp */
 .ManageProduct .but {
     width: 148px;
     height: 50px;
@@ -27,12 +26,11 @@
     font-size: 1.2em;
 }
 
-/* bảng hiện lên khi nhấn create */
 .modal-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.4); /* nền mờ semi-transparent */
+    background-color: rgba(0, 0, 0, 0.4); 
     position: fixed;
     top: 0;
     left: 0;
@@ -94,7 +92,6 @@
     border-color: #dc3545;
 }
 
-/* table list sp */
 .manager-table-product {
     margin: -2px;
     padding: 10px;
@@ -149,7 +146,6 @@
     padding: 10px;
 }
 
-/* table thêm sp */
 .qlsp {
     margin-top: 2rem;
     width: 100%;
@@ -172,7 +168,6 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* css cho form table thêm sp */
 .form-group {
     display: flex;
     align-items: center;

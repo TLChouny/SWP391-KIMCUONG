@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button, Spin } from "antd";
-import { ToastContainer, toast } from "react-toastify"; // Import toast và ToastContainer từ react-toastify
-import "react-toastify/dist/ReactToastify.css"; // Import CSS cho toastify
+import { ToastContainer, toast } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css";
 import "./ProductDetail.css";
-import Headerlogin from "../Headerlogin/Headerlogin";
-import Menuheaderlogin from "../Menuheaderlogin/Menuheaderlogin";
+
 
 const ProductDetail = () => {
     const { productId } = useParams();
-    const navigate = useNavigate(); // Access navigate function from react-router-dom
+    const navigate = useNavigate(); 
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -24,8 +23,6 @@ const ProductDetail = () => {
     }, [productId]);
 
     const handleBuyNow = () => {
-        // Xử lý thêm vào giỏ hàng ở đây (nếu cần)
-        // Ví dụ lưu vào local storage
         let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
         cartItems.push(product);
         localStorage.setItem("cart", JSON.stringify(cartItems));

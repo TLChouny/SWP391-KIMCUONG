@@ -65,18 +65,14 @@ const Cart = () => {
     };
 
     const removeItem = (productId) => {
-        // Find index of item to remove
         const index = cart.findIndex(item => item.ProductId === productId);
     
         if (index !== -1) {
-            // Create a new array with item removed
             const updatedCart = [...cart];
             updatedCart.splice(index, 1);
     
-            // Update state with the new cart array
             setCart(updatedCart);
     
-            // Update localStorage with the updated cart array
             localStorage.setItem(localStorageKey, JSON.stringify(updatedCart));
         }
     };
@@ -95,7 +91,7 @@ const Cart = () => {
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
-                                    <th></th> {/* New column for delete button */}
+                                    <th></th> 
                                 </tr>
                             </thead>
                             <tbody>

@@ -1,4 +1,3 @@
-/* General Styles (from previous code) */
 body,
 html,
 .signin-container {
@@ -10,7 +9,6 @@ html,
   font-family: Arial, sans-serif;
 }
 
-/* Container for the background image */
 .background-image-container {
   position: absolute;
   top: 0;
@@ -20,7 +18,6 @@ html,
   z-index: -1;
 }
 
-/* Background Image Style */
 .background-image {
   width: 100%;
   height: 100%;
@@ -29,7 +26,6 @@ html,
   margin-bottom: 5%;
 }
 
-/* Sign-in Content Style */
 .signin-container {
   position: relative;
   z-index: 1;
@@ -44,7 +40,6 @@ html,
 
 
 
-/* Logo */
 .form-prelogin {
   display: flex;
   align-items: center;
@@ -69,12 +64,10 @@ html,
   border-radius: 50%;
   display: flex;
   position: relative;
-  /* Removed left and top positioning */
 }
 
 .background-image {
   position: relative;
-  /* Ensure relative positioning for absolute positioning of text */
 }
 
 .background-image h4 {
@@ -89,7 +82,6 @@ html,
   font-weight: bold;
 }
 
-/* Phần login */
 .background-login-pre {
   background-color: white;
   padding: 40px 104px;

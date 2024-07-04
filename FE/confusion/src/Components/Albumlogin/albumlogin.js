@@ -1,6 +1,5 @@
 import React from "react";
-
-import "./albumlogin.css"; // Assuming the CSS file is named Albumlist.css
+import "./albumlogin.css"; 
 import Menuheaderlogin from "../Menuheaderlogin/Menuheaderlogin";
 import Headerlogin from "../Headerlogin/Headerlogin";
 import Productlistlogin from "../Productlistlogin/Productlistlogin";

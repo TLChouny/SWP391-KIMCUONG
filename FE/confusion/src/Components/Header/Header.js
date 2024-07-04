@@ -15,7 +15,6 @@ const Header = () => {
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const navigate = useNavigate();
 
-    // Function to handle search
     const onSearch = async (value) => {
         if (value.trim() === "") {
             setDropdownVisible(false);
@@ -33,7 +32,6 @@ const Header = () => {
         }
     };
 
-    // Function to handle click on shopping cart icon
     const handleShoppingCartClick = () => {
         if (!isLoggedIn) {
             setModalVisible(true);
@@ -42,25 +40,21 @@ const Header = () => {
         }
     };
 
-    // Function to handle modal close
     const handleModalClose = () => {
         setModalVisible(false);
     };
 
-    // Function to handle login action (simulate for demo purposes)
     const handleLogin = () => {
         console.log('Login logic will go here');
         setIsLoggedIn(true);
         setModalVisible(false);
     };
 
-    // Function to handle clicking on a search result
     const handleSearchResultClick = (product) => {
         setDropdownVisible(false);
         navigate(`/album/${product.ProductCategory.toLowerCase()}`);
     };
 
-    // Create dropdown menu items from search results
     const menu = (
         <Menu>
             {searchResults.map((product) => (
@@ -73,7 +67,6 @@ const Header = () => {
 
     return (
         <div className='header-page'>
-            {/* Search bar section */}
             <div>
                 <Space direction="vertical">
                     <Dropdown overlay={menu} visible={dropdownVisible} onVisibleChange={(visible) => setDropdownVisible(visible)}>
@@ -89,13 +82,11 @@ const Header = () => {
                 </Space>
             </div>
 
-            {/* Logo section */}
             <div className='background-image-header'>
                 <Link to="/"><img src="../assets/logo.jpg" alt='logo' className='headerlogo' /></Link>
                 <p>Klare</p>
             </div>
 
-            {/* Account and shopping cart section */}
             <div className='header-account'>
                 <Link to="/prelogin"><AccountCircleIcon style={{ fontSize: 34 }} /></Link>
                 <AddShoppingCartIcon
@@ -104,7 +95,6 @@ const Header = () => {
                 />
             </div>
 
-            {/* Modal for login prompt */}
             <Modal
                 title="You are not logged in"
                 visible={modalVisible}

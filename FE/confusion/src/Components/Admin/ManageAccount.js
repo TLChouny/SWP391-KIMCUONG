@@ -120,7 +120,6 @@ const ManageAccount = () => {
     };
 
     const handleEditOk = () => {
-        // Logic to save changes
         setIsEditModalOpen(false);
         setEditUser(null);
     };
@@ -263,7 +262,6 @@ const ManageAccount = () => {
             </div>
             <div className="right-panel">
                 <div className="Title">
-                    {/* <p>Manage Accounts</p> */}
                 </div>
                 <div className="AdminContent">
                 <div id="Manage-Customer" className="Manage-Customer">

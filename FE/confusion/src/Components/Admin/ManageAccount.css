@@ -1,26 +1,23 @@
-/* Chỉnh sửa để chia màn hình 3:7 */
 .ManageAccount {
-    display: flex; /* Sử dụng flexbox */
-    height: 100vh; /* Chiều cao của toàn bộ trang */
+    display: flex; 
+    height: 100vh; 
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
     background-color: #ddd;
 }
 
-/* Phần top của trang */
 .Top {
     background-color: #303030;
     display: flex;
     position: absolute;
-    justify-content: flex-end; /* Canh phải */
+    justify-content: flex-end; 
     align-items: center;
     height: 60px;
     width: 100%;
     box-shadow: 1px 4px 5px rgba(1, 0, 0, 0.5);
 }
 
-/* Nút log out */
 .Btn {
     display: flex;
     align-items: center;
@@ -38,7 +35,6 @@
     margin-right: 10px;
 }
 
-/* Plus sign */
 .sign {
     width: 100%;
     transition-duration: .3s;
@@ -55,7 +51,6 @@
     fill: #f3f3f3;
 }
 
-/* Text */
 
 .text {
     position: absolute;
@@ -68,7 +63,6 @@
     transition-duration: .3s;
 }
 
-/* Hover effect on button width */
 .Btn:hover {
     width: 125px;
     border-radius: 5px;
@@ -81,7 +75,6 @@
     padding-left: 20px;
 }
 
-/* Hover effect button's text */
 .Btn:hover .text {
     opacity: 1;
     width: 70%;
@@ -89,92 +82,88 @@
     padding-right: 10px;
 }
 
-/* Button click effect */
 .Btn:active {
     transform: translate(2px, 2px);
 }
 
-/* Khung bên trái */
 .left-panel {
-    flex: 1.5; /* Chiếm 30% chiều rộng */
+    flex: 1.5;
     background-color: #f5f5f5;
     padding: 20px;
-    overflow-y: auto; /* Cho phép cuộn nội dung trong left-panel nếu có */
-    margin-top: 60px; /* Dời khung trái xuống phía dưới của .Top */  
+    overflow-y: auto; 
+    margin-top: 60px;  
 }
 
 .left-panel h2 {
-    color: #333333; /* Màu chữ tối để dễ đọc */
-    margin-bottom: 20px; /* Khoảng cách giữa tiêu đề và nội dung */
+    color: #333333; 
+    margin-bottom: 20px; 
 }
 
 .left-panel ul {
-    list-style-type: none; /* Loại bỏ dấu đầu dòng của danh sách */
+    list-style-type: none; 
     padding: 0;
     margin: 0;
 }
 
 .left-panel li {
-    margin-bottom: 10px; /* Khoảng cách giữa các mục trong danh sách */
+    margin-bottom: 10px;
 }
 
 .left-panel a {
-    text-decoration: none; /* Loại bỏ gạch chân của liên kết */
-    color: #007bff; /* Màu chữ của liên kết */
+    text-decoration: none;
+    color: #007bff; 
 }
 
 .left-panel a:hover {
-    text-decoration: underline; /* Gạch chân khi rê chuột vào liên kết */
+    text-decoration: underline;
 }
 
 @media (max-width: 768px) {
     .left-panel {
-        margin-top: 0; /* Xóa margin-top khi độ rộng màn hình nhỏ hơn 768px */
-        border-radius: 0; /* Xóa bo góc khi độ rộng màn hình nhỏ hơn 768px */
-        box-shadow: none; /* Xóa đổ bóng khi độ rộng màn hình nhỏ hơn 768px */
+        margin-top: 0; 
+        border-radius: 0;
+        box-shadow: none; 
     }
 }
 
-/* Khung bên phải */
 .right-panel {
-    flex: 8.5; /* Chiếm 70% chiều rộng */
+    flex: 8.5; 
     background-color: #e0e0e0;
     padding: 20px;
-    overflow-y: auto; /* Cho phép cuộn nội dung trong right-panel nếu có */
-    margin-top: 60px; /* Dời khung phải xuống phía dưới của .Top */
+    overflow-y: auto;
+    margin-top: 60px; 
 }
 
-/* Avatar của admin */
 .AdminAvatar {
-    position: relative; /* Để sử dụng position:absolute cho .admininfo */
-    display: inline-block; /* Để .admininfo có thể chồng lên .adminavatar */
+    position: relative;
+    display: inline-block; 
     margin-bottom: 20px;
 }
 
 .admininfo {
-    position: absolute; /* Đặt vị trí tuyệt đối */
-    top: -6%; /* Đặt phần tử .admininfo hiển thị phía dưới hình ảnh */
-    left: 80%; /* Đặt phần tử .admininfo ở giữa */
-    transform: translateX(-50%); /* Dịch chuyển phần tử .admininfo lên trên */
-    background-color: #fff; /* Đặt màu nền */
-    padding: 10px; /* Khoảng cách giữa các biên bên trong phần tử */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đặt hiệu ứng bóng */
-    border-radius: 5px; /* Đặt vòng tròn cho phần tử .admininfo */
-    opacity: 0; /* Ẩn phần tử .admininfo ban đầu */
-    transition: opacity 0.3s ease; /* Hiển thị chuyển động mờ */
+    position: absolute; 
+    top: -6%; 
+    left: 80%; 
+    transform: translateX(-50%); 
+    background-color: #fff; 
+    padding: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 5px; 
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
     width: 8rem;
     height: 6rem;
 }
 
 .AdminAvatar:hover .admininfo {
-    opacity: 1; /* Hiển thị phần tử .admininfo khi đưa chuột lên .AdminAvatar */
+    opacity: 1; 
 }
 
 .adminavatar {
     width: 80px;
     height: 80px;
     margin-right: 10px;
-    border-radius: 50%; /* Bo tròn hình ảnh */
+    border-radius: 50%; 
 }
 
 .adminname {
@@ -183,7 +172,6 @@
     margin-top: 0;
 }
 
-/* Danh sách quản lý */
 .AdminTableList {
     padding: 0;
     margin: 0;
@@ -203,14 +191,13 @@
     color: #333;
     transition: color 0.3s;
     display: block;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font chữ */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
 }
 
 .AdminTableList a:hover {
     color: #318b45;
 }
 
-/* Các phần bổ sung cho quản lý đơn hàng */
 .AdminHeader {
     padding: 22px 10px;
     font-size: 24px;
@@ -233,7 +220,6 @@
     margin-bottom: 20px;
 }
 
-/* Phần nội dung chính */
 .AdminContent {
     margin-top: 50px;
     padding: 4px;
@@ -244,7 +230,6 @@
     background-color: floralwhite;
 }
 
-/* Bảng hiển thị chi tiết người dùng */
 .OrderTable {
     width: 100%;
     border-collapse: collapse;

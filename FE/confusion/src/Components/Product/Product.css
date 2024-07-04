@@ -3,7 +3,6 @@
     justify-content: center;
     /* align-items: center; */
     height: 640px;
-    /* Chiều cao bằng chiều cao của cửa sổ trình duyệt */
     padding: 20px;
     overflow-y: auto;
     /* margin-top: -20px; */
@@ -11,9 +10,7 @@
 
 .product-detail-content {
     flex: 1;
-    /* Để phần nội dung tự động mở rộng */
     max-width: 50%;
-    /* Điều chỉnh chiều rộng tối đa của phần nội dung */
     padding: 20px;
 }
 
@@ -21,11 +18,8 @@
     max-width: 100%;
     height: auto;
     margin: 0 auto 20px;
-    /* Canh giữa theo chiều ngang và thêm margin bottom */
     display: block;
-    /* Để hình ảnh được hiển thị là một block element */
     width: 50%;
-    /* Điều chỉnh chiều rộng của hình ảnh */
 }
 
 .product-detail-table {

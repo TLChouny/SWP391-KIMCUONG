@@ -29,7 +29,7 @@ function ManageProduct() {
 
 
     useEffect(() => {
-        setProducts(SampleProducts);  // Initialize with sample products
+        setProducts(SampleProducts); 
     }, []);
 
 

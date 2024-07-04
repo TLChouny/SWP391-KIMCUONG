@@ -34,7 +34,6 @@
     max-width: 100%;
     height: auto;
     margin-bottom: -14px;
-    /* Space between images */
     margin-left: 20%;
 }
 
@@ -52,7 +51,6 @@
 
 .bodycate-container-image-2 {
     margin-top: 30px;
-    /* Optional: additional margin for the second image */
     height: auto;
 }
 
