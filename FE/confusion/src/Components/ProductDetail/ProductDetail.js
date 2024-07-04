@@ -51,9 +51,8 @@ const ProductDetail = () => {
 
     return (
         <>
-            <Headerlogin />
-            <Menuheaderlogin />
-            <ToastContainer /> {/* Để toastify hoạt động, cần đặt ToastContainer ở một nơi duy nhất trong ứng dụng */}
+            
+            <ToastContainer />
             <div className="product-detail-container">
                 {loading ? (
                     <div className="loading-spinner">

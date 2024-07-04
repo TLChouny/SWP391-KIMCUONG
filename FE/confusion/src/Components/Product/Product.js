@@ -54,11 +54,7 @@ const Product = () => {
     };
     return (
         <>
-            <Header />
-            <Menuheader />
             <ToastContainer />
-
-            {/* Product Detail Section */}
             <div className="product-detail-container">
                 {loading ? (
                     <div className="loading-spinner">

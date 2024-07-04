@@ -41,6 +41,9 @@ import Aboutus from './Components/About us/Aboutus';
 import About from './Components/About/About';
 import Aboutuslogin from './Components/Aboutuslogin/Aboutuslogin';
 import Aboutlogin from './Components/Aboutlogin/Aboutlogin';
+import News from './Components/News/News';
+import ProductDetaillist from './Components/ProductDetaillist/ProductDetaillist';
+import ProductlistDetail from './Components/ProductlistDetail/ProductlistDetail';
 function App() {
   return (
     <Router>
@@ -68,8 +71,8 @@ function App() {
           <Route path='/albumlogin/Earring' element={<Earringsproductmenulogin/>}/>
           <Route path='/albumlogin/Necklace' element={<Necklacesproductmenulogin/>}/>
           <Route path='/albumlogin/Ring' element={<Ringsproductmenulogin/>}/>
-          <Route path="/productdetail/:productId" element={<><ProductDetail/></>} />
-          <Route path="/product/:productId" element={<Product/>} />
+          <Route path="/productdetail/:productId" element={<><ProductDetaillist/></>} />
+          <Route path="/product/:productId" element={<ProductlistDetail/>} />
           <Route path='/cart' element={<><Headerlogin/><Menuheaderlogin/><Cart/></>}/>
           <Route path='/payment' element={<Payment/>}/>
           <Route path='/Profile' element={<><Headerlogin/><Menuheaderlogin/><Profile/></>}/>
