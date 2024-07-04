@@ -15,6 +15,7 @@ import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
+import { Link as ScrollLink } from 'react-scroll';
 import "./ManageAccount.css";
 import { Link } from "react-router-dom";
 import SampleAccounts from "../Sample/SampleAccounts";
@@ -25,7 +26,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Modal, Form, Input } from 'antd';
-import { Link as ScrollLink } from 'react-scroll';
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -94,7 +94,8 @@ const ManageAccount = () => {
     const [selectedUser, setSelectedUser] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [editUser, setEditUser] = useState(null);
-
+    const [editSuccessModalOpen, setEditSuccessModalOpen] = useState(false); // State cho modal thông báo
+    
     useEffect(() => {
         setAccounts(SampleAccounts);
     }, []);
@@ -109,10 +110,10 @@ const ManageAccount = () => {
         setSelectedUser(null);
     };
 
-    const handleCancel = () => {
-        setIsModalOpen(false);
-        setSelectedUser(null);
-    };
+    // const handleCancel = () => {
+    //     setIsModalOpen(false);
+    //     setSelectedUser(null);
+    // };
 
     const showEditModal = (user) => {
         setEditUser(user);
@@ -121,8 +122,18 @@ const ManageAccount = () => {
 
     const handleEditOk = () => {
         // Logic to save changes
-        setIsEditModalOpen(false);
-        setEditUser(null);
+        const updatedAccounts = accounts.map(user => {
+            if (user.id === editUser.id) {
+                return editUser; // Cập nhật thông tin cho người dùng đã chỉnh sửa
+            }
+            return user; // Giữ nguyên thông tin của các người dùng khác
+        });
+
+        setAccounts(updatedAccounts); // Cập nhật lại danh sách accounts
+        setIsEditModalOpen(false); // Đóng modal chỉnh sửa
+        setEditUser(null); // Đặt lại editUser về null để chuẩn bị cho lần chỉnh sửa tiếp theo
+
+        setEditSuccessModalOpen(true); // Mở modal thông báo thành công
     };
 
     const handleEditCancel = () => {
@@ -162,7 +173,7 @@ const ManageAccount = () => {
                                 <TableCell>UseName</TableCell>
                                 <TableCell>Phone</TableCell>
                                 <TableCell>Address</TableCell>
-                                <TableCell>Actions</TableCell>
+                                <TableCell></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -236,37 +247,44 @@ const ManageAccount = () => {
     const [adminPage, setAdminPage] = useState(0);
     const [managerPage, setManagerPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [visibleSection, setVisibleSection] = useState(null);
 
     return (
         <div className="ManageAccount">
             <ToastContainer />
-            <div className="header">
+            <div className="Top">
                 <Link to="/admin">
-                    <button className="logout-button">
-                        <div className="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M160 217.1c0-9 3.6-17.6 9.9-24l122.3-122.3c7.2-7.2 17.1-11.3 27.3-11.3s20.1 4.1 27.3 11.3L438.1 160c6.4 6.4 9.9 15 9.9 24s-3.6 17.6-9.9 24l-122.3 122.3c-7.2 7.2-17.1 11.3-27.3 11.3s-20.1-4.1-27.3-11.3L169.9 241.1C163.6 234.7 160 225.1 160 217.1zM224 256c0 8.4 3.3 16.3 9.3 22.3l122.3 122.3c2 2 5.4 0.6 5.4-2.3V320h160c8.8 0 16-7.2 16-16v-64c0-8.8-7.2-16-16-16H261.1V192c0-2.9-3.5-4.4-5.4-2.3L128.4 311.4C124.4 315.4 124 320 124 320s-0.4 4.6 3.6 8.6l122.3 122.3c4 4 9.4 6.1 14.8 6.1c5.4 0 10.7-2.1 14.8-6.1l122.3-122.3c12.5-12.5 12.5-32.7 0-45.2L266.8 73.9c-12.5-12.5-32.7-12.5-45.2 0L99.3 196.1c-2 2-3.6 5.4-2.3 5.4h71.3v-63.6c0-2.9 3.5-4.4 5.4-2.3L256 237.7C260 241.7 260 256 256 256H224zM64 64L224 64c8.8 0 16-7.2 16-16s-7.2-16-16-16L64 32c-17.7 0-32 14.3-32 32l0 320c0 17.7 14.3 32 32 32l160 0c8.8 0 16-7.2 16-16s-7.2-16-16-16L64 368c-8.8 0-16-7.2-16-16L48 80C48 71.2 55.2 64 64 64z"></path></svg></div>
+                <button className="Btn">
+                        <div className="sign">
+                            <svg viewBox="0 0 512 512">
+                                <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+                            </svg>
+                        </div>
                         <div className="text">Logout</div>
-                    </button></Link>
+                    </button>
+                    </Link>
             </div>
             <div className="left-panel">
                 <div className="AdminAvatar">
                     <Link to=""><img src="../assets/admin.png" className="adminavatar" alt="Avatar" /></Link>
                     <p className="adminname">Admin, Long Châu</p>
                 </div>
-                <div className="AdminTable">
-                    <ul className="AdminTableList">
-                        <li><ScrollLink to="Manage-Customer" smooth={true}>Manage Customer</ScrollLink></li>
-                        <li><ScrollLink to="Manage-Sale-Staff" smooth={true}>Manage Sale Staff</ScrollLink></li>
-                        <li><ScrollLink to="Manage-Delivery-Staff" smooth={true}>Manage Delivery Staff</ScrollLink></li>
-                        <li><Link to="/">My Profile</Link></li>
-                    </ul>
-                </div>
+                <div className="AdminTableList">
+                <div onClick={() => setVisibleSection('Manage-Customer')}>Manage Customer</div>
+                <div onClick={() => setVisibleSection('Manage-Sale-Staff')}>Manage Sale Staff</div>
+                <div onClick={() => setVisibleSection('Manage-Delivery-Staff')}>Manage Delivery Staff</div>
+                <div onClick={() => setVisibleSection('Manage-Admin')}>Manage Admin</div>
+                <div onClick={() => setVisibleSection('Manage-Manager')}>Manage Manager</div>
+                <div className="x">My Profile</div>
+            </div>
+          
             </div>
             <div className="right-panel">
                 <div className="Title">
-                    {/* <p>Manage Accounts</p> */}
+                    <p>Manage Accounts</p>
                 </div>
                 <div className="AdminContent">
-                <div id="Manage-Customer" className="Manage-Customer">
+                {/* <div id="Manage-Customer" className="Manage-Customer">
                     {renderTable(
                         accounts.filter(user => user.role === 'customer'),
                         'Manage Customer',
@@ -315,12 +333,28 @@ const ManageAccount = () => {
                         rowsPerPage,
                         setRowsPerPage
                     )}
-                </div>
+                </div> */}
+                  {visibleSection === 'Manage-Customer' && renderTable(accounts.filter(user => user.role === 'customer'), "Manage Customer", customerPage, setCustomerPage, rowsPerPage, setRowsPerPage)}
+            {visibleSection === 'Manage-Sale-Staff' && renderTable(accounts.filter(user => user.role === 'sale staff'), "Manage Sale Staff", saleStaffPage, setSaleStaffPage, rowsPerPage, setRowsPerPage)}
+            {visibleSection === 'Manage-Delivery-Staff' && renderTable(accounts.filter(user => user.role === 'delivery staff'), "Manage Delivery Staff", deliveryStaffPage, setDeliveryStaffPage, rowsPerPage, setRowsPerPage)}
+            {visibleSection === 'Manage-Admin' && renderTable(accounts.filter(user => user.role === 'admin'), "Manage Admin", adminPage, setAdminPage, rowsPerPage, setRowsPerPage)}
+            {visibleSection === 'Manage-Manager' && renderTable(accounts.filter(user => user.role === 'manager'), "Manage Manager", managerPage, setManagerPage, rowsPerPage, setRowsPerPage)}
+            <Modal title="User Details" open={isModalOpen} onOk={handleOk}>
+                {selectedUser && (
+                    <div>
+                        <p>ID: {selectedUser.id}</p>
+                        <p>Role: {selectedUser.role}</p>
+                        <p>Username: {selectedUser.username}</p>
+                        <p>Phone: {selectedUser.phone}</p>
+                        <p>Address: {selectedUser.address}</p>
+                    </div>
+                )}
+                </Modal>
             </div>
         </div>
             {
         selectedUser && (
-            <Modal title="User Details" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title="User Details" open={isModalOpen} onOk={handleOk}>
                 <p>ID: {selectedUser.id}</p>
                 <p>Role: {selectedUser.role}</p>
                 <p>Username: {selectedUser.username}</p>
@@ -352,6 +386,10 @@ const ManageAccount = () => {
             </Modal>
         )
     }
+      {/* Modal thông báo chỉnh sửa thành công */}
+      <Modal title="Edit Successful" visible={editSuccessModalOpen} onOk={() => setEditSuccessModalOpen(false)} onCancel={() => setEditSuccessModalOpen(false)}>
+                <p>User details have been successfully updated.</p>
+            </Modal>
         </div >
     );
 };

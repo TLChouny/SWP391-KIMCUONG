@@ -190,7 +190,7 @@
     list-style-type: none;    
 }
 
-.AdminTableList li {
+.AdminTableList > div {
     padding: 10px 2px;
     font-size: 16px;
     display: flex;
@@ -198,19 +198,11 @@
     margin-bottom: 20px;
 }
 
-.AdminTableList a {
-    text-decoration: none;
-    color: #333;
-    transition: color 0.3s;
-    display: block;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font chữ */
+.Title {
+    font-size: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: solid;
 }
-
-.AdminTableList a:hover {
-    color: #318b45;
-}
-
-/* Các phần bổ sung cho quản lý đơn hàng */
 .AdminHeader {
     padding: 22px 10px;
     font-size: 24px;
@@ -262,8 +254,4 @@
     background-color: tan;
     font-weight: bold;
     color: #303030;
-}
-
-.AdminTableList li img {
-    margin-right: 10px;
 }
