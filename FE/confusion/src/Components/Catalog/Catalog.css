@@ -15,11 +15,11 @@ html, body, #root {
   }
   
   .fixed-menuheader {
-    top: 64px; /* Adjust this based on the height of your Header */
+    top: 64px;
   }
   
   .content-container {
     overflow: auto;
-    height: calc(90vh - 128px); /* Adjust this based on the combined height of your Header and Menuheader */
+    height: calc(90vh - 128px); 
   }
   

@@ -38,7 +38,7 @@ const Login = () => {
                 } else if (roles.includes('ROLE_ADMIN')) {
                     navigate("/admin");
                 } else {
-                    navigate("/"); // Navigate to homepage or a default route
+                    navigate("/"); 
                 }
             
                 toast.success('Login successful!');

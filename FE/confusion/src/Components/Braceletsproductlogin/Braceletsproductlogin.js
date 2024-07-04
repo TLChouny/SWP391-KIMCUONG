@@ -2,28 +2,26 @@ import React, { useEffect, useState } from "react";
 import "./Braceletsproductlogin.css";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast from react-toastify
-import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
+import { ToastContainer, toast } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const URL = "http://localhost:8080/api/products";
 
 export default function Braceletsproductlogin() {
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]); // State to manage the cart items
+  const [cart, setCart] = useState([]); 
 
   useEffect(() => {
     fetch(URL)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data); // Log the data to check its structure
-        // Filter products to show only those with category 'bracelet'
+        console.log(data); 
         const filteredProducts = data.filter(product => product.ProductCategory === 'bracelet');
         setProducts(filteredProducts);
       })
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
-  // Function to handle adding a product to cart
   const addToCart = (product, event) => {
     const imgElement = event.target.closest('.product-item').querySelector('img');
 
@@ -89,7 +87,7 @@ export default function Braceletsproductlogin() {
           <p>No bracelets products found.</p>
         )}
       </div>
-      <ToastContainer /> {/* Place ToastContainer at a higher level in your app to display toasts */}
+      <ToastContainer /> 
     </>
   );
 }

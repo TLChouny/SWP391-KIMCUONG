@@ -37,7 +37,7 @@ const items = [
   },
   {
     label: 'About us',
-    path: '/about',
+    path: '/aboutus',
   },
   {
     label: 'News',
@@ -53,9 +53,7 @@ const Menuheaderlogin = () => {
   const navigate = useNavigate();
 
   const handleSubMenuClick = (e, path) => {
-    // Prevent the submenu from closing
     e.preventDefault();
-    // Navigate to the desired path
     navigate(path);
   };
 

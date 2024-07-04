@@ -1,8 +1,7 @@
 .footer {
     background-color: #FADCF9;
-    /* width: 100vw;  Ensure the footer spans the full viewport width */
+    /* width: 100vw; */
     box-sizing: border-box;
-    /* Ensure padding is included in width */
     display: flex;
     /* flex-direction: column; */
     align-items: center;
@@ -36,6 +35,7 @@
     display: flex;
     align-items: center;
     line-height: 24px;
+    color: black;
 }
 
 .footer-column li svg {
@@ -47,7 +47,6 @@
     padding: 10px;
     width: 100%;
     background-color: #FADCF9;
-    /* Matches the footer background */
 }
 
 .logofooter {
@@ -62,11 +61,9 @@
 .footer {
     display: flex;
     align-items: center;
-    /* Để căn giữa theo chiều dọc */
 }
 
 .footer-column-second li {
     margin-left: 10px;
-    /* Khoảng cách giữa biểu tượng và danh sách */
     line-height: 36px;
 }

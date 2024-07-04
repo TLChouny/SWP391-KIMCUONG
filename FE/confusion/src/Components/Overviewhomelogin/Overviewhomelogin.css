@@ -13,8 +13,8 @@
 
 .overview-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Four equal columns */
-    gap: 20px; /* Gap between grid items */
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 20px; 
     
 }
 
@@ -23,5 +23,5 @@
 }
 
 .overview-item img {
-    max-width: 100%; /* Ensure images don't exceed their container */
+    max-width: 100%; 
 }

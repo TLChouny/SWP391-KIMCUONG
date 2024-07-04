@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button, Spin, Modal } from "antd";
-import { ToastContainer, toast } from "react-toastify"; // Import toast và ToastContainer từ react-toastify
-import "react-toastify/dist/ReactToastify.css"; // Import CSS cho toastify
+import { ToastContainer, toast } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css"; 
 import "./Product.css";
 import Header from "../Header/Header";
 import Menuheader from "../Menu/Menuheader";
@@ -27,13 +27,11 @@ const Product = () => {
     }, [productId]);
 
     const handleBuyNow = () => {
-        // Check if user is logged in (example check)
-        const isLoggedIn = localStorage.getItem("isLoggedIn"); // Example check for logged in status
+        const isLoggedIn = localStorage.getItem("isLoggedIn"); 
 
         if (!isLoggedIn) {
-            setShowLoginModal(true); // Show login modal if not logged in
+            setShowLoginModal(true); 
         } else {
-            // Perform buy now action
             toast.success("The product has been added to cart");
             setTimeout(() => {
                 toast.dismiss();
@@ -54,11 +52,7 @@ const Product = () => {
     };
     return (
         <>
-            <Header />
-            <Menuheader />
             <ToastContainer />
-
-            {/* Product Detail Section */}
             <div className="product-detail-container">
                 {loading ? (
                     <div className="loading-spinner">
@@ -119,7 +113,6 @@ const Product = () => {
                 )}
             </div>
 
-            {/* Login Modal */}
             <Modal
                 title="Login Required"
                 visible={showLoginModal}
@@ -130,7 +123,7 @@ const Product = () => {
                     </Button>,
                     <Button key="login" type="primary" onClick={() => {
                         setShowLoginModal(false);
-                        navigate("/prelogin"); // Redirect to login page
+                        navigate("/prelogin"); 
                     }}>
                         Login
                     </Button>,

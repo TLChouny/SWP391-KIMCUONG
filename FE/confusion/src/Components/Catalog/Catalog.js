@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../Header/Header";
 import Menuheader from "../Menu/Menuheader";
-import "./Catalog.css"; // Assuming the CSS file is named Albumlist.css
+import "./Catalog.css"; 
 import Productcatalog from "../Productcatalog/Productcatalog";
 
 export default function Catalog() {

@@ -1,35 +1,30 @@
 import React, { useEffect, useState } from "react";
 import "./Ringsproduct.css";
-import { Button, Modal } from "antd"; // Import Modal from Ant Design
+import { Button, Modal } from "antd";
 import { Link } from "react-router-dom";
 
 const URL = "http://localhost:8080/api/products";
 
 export default function Ringsproduct() {
   const [products, setProducts] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false); // State to manage modal visibility
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     fetch(URL)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data); // Log the data to check its structure
-        // Filter products to show only those with category 'bracelet'
+        console.log(data); 
         const filteredProducts = data.filter(product => product.ProductCategory === 'ring');
         setProducts(filteredProducts);
       })
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
-  // Function to handle adding a product to cart
   const addToCart = (product) => {
     console.log(`Adding ${product.ProductName} to cart.`);
-    // Add your cart handling logic here
-    // For now, show the login modal
     setModalVisible(true);
   };
 
-  // Function to handle closing the modal
   const handleModalClose = () => {
     setModalVisible(false);
   };

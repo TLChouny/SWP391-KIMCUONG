@@ -20,7 +20,7 @@ function ManageProduct() {
     const [showProductForm, setShowProductForm] = useState(false);
 
     useEffect(() => {
-        setProducts(SampleProducts);  // Initialize with sample products
+        setProducts(SampleProducts); 
     }, []);
 
     const addProduct = () => {

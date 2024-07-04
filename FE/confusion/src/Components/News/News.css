@@ -29,9 +29,7 @@
 .news-container {
     display: grid;
     grid-template-columns: auto auto auto auto;
-    /* Creates 4 equal columns */
     gap: 20px;
-    /* Adds space between the items */
     margin-top: 36px;
 }
 

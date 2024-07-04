@@ -18,17 +18,15 @@ export default function Contactlogin() {
     });
 
     const [emailError, setEmailError] = useState(false);
-    const [phoneNumberError, setPhoneNumberError] = useState(false); // State để đánh dấu lỗi số điện thoại
+    const [phoneNumberError, setPhoneNumberError] = useState(false);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
 
-        // Kiểm tra và giới hạn số lượng ký tự nhập vào ô "Phone Number"
         if (name === "phoneNumber" && value.length > 10) {
-            return; // Nếu vượt quá 10 số, không thay đổi giá trị
+            return; 
         }
 
-        // Kiểm tra chỉ cho phép nhập số vào ô "Phone Number"
         if (name === "phoneNumber" && /[^0-9]/.test(value)) {
             setPhoneNumberError(true);
             return;
@@ -39,29 +37,26 @@ export default function Contactlogin() {
             [name]: value
         }));
 
-        // Reset lỗi khi người dùng thay đổi giá trị ô "Phone Number"
+       
         if (name === "phoneNumber") {
             setPhoneNumberError(false);
         }
     };
 
     const handleFormSubmit = async () => {
-        // Kiểm tra điều kiện có dữ liệu nhập vào hay không
         if (!formData.name || !formData.email || !formData.phoneNumber || !formData.message) {
             toast.error("Please fill in the form to contact us.");
             return;
         }
 
-        // Kiểm tra định dạng email
         if (!formData.email.endsWith("@gmail.com")) {
             toast.error("Please enter a valid email address (e.g.example@gmail.com)");
             setEmailError(true);
             return;
         }
 
-        // Kiểm tra độ dài số điện thoại
         if (formData.phoneNumber.length !== 10) {
-            toast.error("Số điện thoại phải có đúng 10 chữ số.");
+            toast.error("Phone number must have exactly 10 digits.");
             setPhoneNumberError(true);
             return;
         }
@@ -83,8 +78,8 @@ export default function Contactlogin() {
                     phoneNumber: "",
                     message: ""
                 });
-                setEmailError(false); // Xóa lỗi email nếu có
-                setPhoneNumberError(false); // Xóa lỗi số điện thoại nếu có
+                setEmailError(false); 
+                setPhoneNumberError(false);
             } else {
                 toast.error("Failed to send message. Please try again later.");
             }

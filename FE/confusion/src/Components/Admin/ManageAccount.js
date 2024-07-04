@@ -121,6 +121,7 @@ const ManageAccount = () => {
     };
 
     const handleEditOk = () => {
+<<<<<<< HEAD
         // Logic to save changes
         const updatedAccounts = accounts.map(user => {
             if (user.id === editUser.id) {
@@ -134,6 +135,10 @@ const ManageAccount = () => {
         setEditUser(null); // Đặt lại editUser về null để chuẩn bị cho lần chỉnh sửa tiếp theo
 
         setEditSuccessModalOpen(true); // Mở modal thông báo thành công
+=======
+        setIsEditModalOpen(false);
+        setEditUser(null);
+>>>>>>> 214743ce3182744bdfc63e9a9c885f4bef1f3752
     };
 
     const handleEditCancel = () => {
@@ -281,7 +286,10 @@ const ManageAccount = () => {
             </div>
             <div className="right-panel">
                 <div className="Title">
+<<<<<<< HEAD
                     <p>Manage Accounts</p>
+=======
+>>>>>>> 214743ce3182744bdfc63e9a9c885f4bef1f3752
                 </div>
                 <div className="AdminContent">
                 {/* <div id="Manage-Customer" className="Manage-Customer">

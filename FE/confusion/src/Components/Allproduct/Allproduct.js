@@ -1,33 +1,29 @@
 import React, { useEffect, useState } from "react";
 import "./Allproduct.css";
-import { Button, Modal } from "antd"; // Import Modal from Ant Design
+import { Button, Modal } from "antd"; 
 import { Link } from "react-router-dom";
 
 const URL = "http://localhost:8080/api/products";
 
 export default function AllProduct() {
   const [products, setProducts] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false); // State to manage modal visibility
+  const [modalVisible, setModalVisible] = useState(false); 
 
   useEffect(() => {
     fetch(URL)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data); // Log the data to check its structure
+        console.log(data); 
         setProducts(data);
       })
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
-  // Function to handle adding a product to cart
   const addToCart = (product) => {
     console.log(`Adding ${product.ProductName} to cart.`);
-    // Add your cart handling logic here
-    // For now, show the login modal
     setModalVisible(true);
   };
 
-  // Function to handle closing the modal
   const handleModalClose = () => {
     setModalVisible(false);
   };
@@ -76,7 +72,6 @@ export default function AllProduct() {
         <p>No products found.</p>
       )}
 
-      {/* Login Modal */}
       <Modal
         title="Login Required"
         visible={modalVisible}

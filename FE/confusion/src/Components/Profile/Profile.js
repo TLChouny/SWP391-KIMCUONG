@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Menu, Spin } from "antd";
+import { Link } from "react-router-dom";
+import Profileuser from "../Profileuser/Profileuser";
 
-const URL = "http://localhost:8080/api/auth/signin";
+// const URL = "http://localhost:8080/api/auth/signin";
 
 const Profile = () => {
     const [username, setUsername] = useState("");
     const [loading, setLoading] = useState(true);
-    const [selectedMenuItem, setSelectedMenuItem] = useState("profile"); // Default selected menu item
+    const [selectedMenuItem, setSelectedMenuItem] = useState("profile"); 
 
     const fetchUsername = async () => {
         try {
@@ -48,10 +50,7 @@ const Profile = () => {
         switch (selectedMenuItem) {
             case "profile":
                 return (
-                    <div>
-                        <h2>User Profile</h2>
-                        <p>This is the content for User Profile.</p>
-                    </div>
+                    <Profileuser />
                 );
             case "order-history":
                 return (
@@ -91,11 +90,10 @@ const Profile = () => {
                     <Menu.Item key="order-history">Order History</Menu.Item>
                     <Menu.Item key="bill-info">Information of Bill</Menu.Item>
                     <Menu.Item key="warranty-lookup">Warranty Lookup</Menu.Item>
-                    <Menu.Item key="logout" icon={<LogoutOutlined />}>Logout</Menu.Item>
+                    <Menu.Item key="logout" icon={<LogoutOutlined />}><Link to="/">Logout</Link></Menu.Item>
                 </Menu>
             </div>
             <div style={{ flex: 1, padding: 16 }}>
-                {/* Render content based on selected menu item */}
                 {renderMenuContent()}
             </div>
         </div>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import AboutUs from "../../data/AboutUs.json";
-import "./Aboutus.css"; 
+import "./Aboutuslogin.css"; 
 
-export default function Aboutus() {
+export default function Aboutuslogin() {
     const [about, setAbout] = useState(AboutUs);
 
     return (
