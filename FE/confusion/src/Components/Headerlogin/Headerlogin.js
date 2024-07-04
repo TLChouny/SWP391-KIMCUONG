@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Menu, Dropdown, Input, Space } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import axios from 'axios';
 
 const { Search } = Input;
 
 const Headerlogin = () => {
   const [cart, setCart] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem('cart'));
@@ -23,6 +27,31 @@ const Headerlogin = () => {
     setCart([]);
   };
 
+  // Function to handle search
+  const onSearch = async (value) => {
+    if (value.trim() === "") {
+      setDropdownVisible(false);
+      setSearchResults([]);
+      return;
+    }
+
+    try {
+      const response = await axios.get(`http://localhost:8080/api/products?search=${value}`);
+      const filteredResults = response.data.filter(product => product.ProductName.toLowerCase().includes(value.toLowerCase()));
+      setSearchResults(filteredResults);
+      setDropdownVisible(true);
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+    }
+  };
+
+  // Function to handle clicking on a search result
+  const handleSearchResultClick = (product) => {
+    setDropdownVisible(false);
+    navigate(`/albumlogin/${product.ProductCategory.toLowerCase()}`);
+  };
+
+  // Create dropdown menu items from search results
   const menu = (
     <Menu>
       <Menu.Item key="1"><Link to="/Profile">Profile</Link></Menu.Item>
@@ -31,20 +60,30 @@ const Headerlogin = () => {
     </Menu>
   );
 
-  const onSearch = (value, _e, info) => console.log(info?.source, value);
+  const searchMenu = (
+    <Menu>
+      {searchResults.map((product) => (
+        <Menu.Item key={product.ProductId} onClick={() => handleSearchResultClick(product)}>
+          {product.ProductName}
+        </Menu.Item>
+      ))}
+    </Menu>
+  );
 
   return (
     <div className='header-page'>
       <div>
         <Space direction="vertical">
-          <Search
-            placeholder="Search..."
-            onSearch={onSearch}
-            style={{
-              width: 200,
-              marginLeft: "60%"
-            }}
-          />
+          <Dropdown overlay={searchMenu} visible={dropdownVisible} onVisibleChange={(visible) => setDropdownVisible(visible)}>
+            <Search
+              placeholder="Search..."
+              onSearch={onSearch}
+              style={{
+                width: 200,
+                marginLeft: "60%"
+              }}
+            />
+          </Dropdown>
         </Space>
       </div>
 

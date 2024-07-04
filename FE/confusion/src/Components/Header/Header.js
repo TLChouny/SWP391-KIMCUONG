@@ -1,53 +1,91 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Input, Space, Modal, Button } from 'antd'; // Import Modal and Button from Ant Design
-import "../Header/Header.css"
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Input, Space, Modal, Button, Dropdown, Menu } from 'antd';
+import "../Header/Header.css";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+
 const { Search } = Input;
 
-const onSearch = (value, _e, info) => console.log(info?.source, value);
-
 const Header = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
-    const [modalVisible, setModalVisible] = useState(false); // State to control modal visibility
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
+    const [dropdownVisible, setDropdownVisible] = useState(false);
+    const navigate = useNavigate();
+
+    // Function to handle search
+    const onSearch = async (value) => {
+        if (value.trim() === "") {
+            setDropdownVisible(false);
+            setSearchResults([]);
+            return;
+        }
+
+        try {
+            const response = await axios.get(`http://localhost:8080/api/products?search=${value}`);
+            const filteredResults = response.data.filter(product => product.ProductName.toLowerCase().includes(value.toLowerCase()));
+            setSearchResults(filteredResults);
+            setDropdownVisible(true);
+        } catch (error) {
+            console.error('Error fetching search results:', error);
+        }
+    };
 
     // Function to handle click on shopping cart icon
     const handleShoppingCartClick = () => {
         if (!isLoggedIn) {
-            setModalVisible(true); // Show modal if user is not logged in
+            setModalVisible(true);
         } else {
-            // Proceed with shopping cart functionality for logged-in user
             console.log('Proceed with shopping cart');
         }
     };
 
     // Function to handle modal close
     const handleModalClose = () => {
-        setModalVisible(false); // Close modal
+        setModalVisible(false);
     };
 
     // Function to handle login action (simulate for demo purposes)
     const handleLogin = () => {
-        // Implement your actual login logic here
         console.log('Login logic will go here');
-        setIsLoggedIn(true); // Update isLoggedIn state after successful login
-        setModalVisible(false); // Close the modal after login
+        setIsLoggedIn(true);
+        setModalVisible(false);
     };
+
+    // Function to handle clicking on a search result
+    const handleSearchResultClick = (product) => {
+        setDropdownVisible(false);
+        navigate(`/album/${product.ProductCategory.toLowerCase()}`);
+    };
+
+    // Create dropdown menu items from search results
+    const menu = (
+        <Menu>
+            {searchResults.map((product) => (
+                <Menu.Item key={product.ProductId} onClick={() => handleSearchResultClick(product)}>
+                    {product.ProductName}
+                </Menu.Item>
+            ))}
+        </Menu>
+    );
 
     return (
         <div className='header-page'>
             {/* Search bar section */}
             <div>
                 <Space direction="vertical">
-                    <Search
-                        placeholder="Search..."
-                        onSearch={onSearch}
-                        style={{
-                            width: 200,
-                            marginLeft: "60%"
-                        }}
-                    />
+                    <Dropdown overlay={menu} visible={dropdownVisible} onVisibleChange={(visible) => setDropdownVisible(visible)}>
+                        <Search
+                            placeholder="Search..."
+                            onSearch={onSearch}
+                            style={{
+                                width: 200,
+                                marginLeft: "60%"
+                            }}
+                        />
+                    </Dropdown>
                 </Space>
             </div>
 
@@ -62,7 +100,7 @@ const Header = () => {
                 <Link to="/prelogin"><AccountCircleIcon style={{ fontSize: 34 }} /></Link>
                 <AddShoppingCartIcon
                     style={{ fontSize: 34, marginLeft: 20, cursor: 'pointer' }}
-                    onClick={handleShoppingCartClick} // Attach click handler
+                    onClick={handleShoppingCartClick}
                 />
             </div>
 
@@ -72,7 +110,7 @@ const Header = () => {
                 visible={modalVisible}
                 onCancel={handleModalClose}
                 footer={[
-                    <Button key="cancel" onClick={handleModalClose} style={{marginRight: "2%"}}>
+                    <Button key="cancel" onClick={handleModalClose} style={{ marginRight: "2%" }}>
                         Close
                     </Button>,
                     <Link to="/prelogin">
