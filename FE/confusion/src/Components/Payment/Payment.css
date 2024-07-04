@@ -1,0 +1,26 @@
+.payment-container {
+    padding: 20px;
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.product-image {
+    width: 100px;
+    margin-right: 20px;
+}
+
+.product-details {
+    margin: 0;
+}
+
+.total-price {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
