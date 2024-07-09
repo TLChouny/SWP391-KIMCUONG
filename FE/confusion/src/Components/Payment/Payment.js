@@ -54,19 +54,8 @@ const Payment = () => {
                                 <input type="radio" id="cash-on-delivery" name="payment-method" value="cash-on-delivery" />
                                 <label htmlFor="cash-on-delivery">Cash on Delivery</label>
                             </div>
-                            <div className="discount-code">
-                                <label htmlFor="discount-code">Discount Code:</label>
-                                <Input id="discount-code" placeholder="Enter discount code" />
-                            </div>
-                            <div className="select-discount">
-                                <label htmlFor="select-discount">Select Discount Code:</label>
-                                <Select id="select-discount" placeholder="Select a discount" style={{ width: '100%' }}>
-                                    <Option value="discount10">10% OFF</Option>
-                                    <Option value="discount20">20% OFF</Option>
-                                    <Option value="discount30">30% OFF</Option>
-                                </Select>
-                            </div>
-                            <Button type="primary" style={{ marginTop: "20px" }}>Apply Discount</Button>
+                            
+                            
                         </form>
                     </div>
                 </div>
