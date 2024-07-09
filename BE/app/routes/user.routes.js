@@ -10,5 +10,10 @@ module.exports = function(app) {
     next();
   });
 
-  app.get("/api/user/updateUserProfile", userController.updateUserProfile);
+  app.get("/api/user/profile", [authJwt.verifyToken], userController.getUserInfo);  
+  app.put("/api/user/profile", [authJwt.verifyToken], userController.updateUserProfile);  
 };
+
+//endpoint để người dùng có thể xem và chỉnh sửa thông tin
+//truy cập /api/user/profile để xem thông tin 
+//và sử dụng phương thức HTTP PUT tới cùng endpoint để cập nhật thông tin

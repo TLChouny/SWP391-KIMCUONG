@@ -12,7 +12,7 @@ db.admin = require("./admin.model");
 db.promotion = require("./promotion.model");
 db.warranty = require("./warranty.model");
 db.order = require("./order.model");
-
+db.shipment = require("./shipment.model");
 db.ROLES = ["user", "admin", "manager", "delivery", "sale"];
 
 module.exports = db;
