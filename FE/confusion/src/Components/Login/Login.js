@@ -131,7 +131,7 @@ const Login = () => {
                     </Form>
                 </div>
             </div>
-            <ToastContainer style={{ textAlign: "left" }} />
+            <ToastContainer style={{ textAlign: "left", width: "20%" }} />
         </div>
     );
 }
