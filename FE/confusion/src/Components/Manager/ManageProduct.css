@@ -1,10 +1,6 @@
 /* Overall page layout */
 .ManageProduct {
-<<<<<<< HEAD
     display: flex;
-=======
-    display: flex; 
->>>>>>> 214743ce3182744bdfc63e9a9c885f4bef1f3752
     height: 100vh;
     margin: 0;
     overflow: hidden;
@@ -12,10 +8,6 @@
     background-color: #ddd;
 }
 
-<<<<<<< HEAD
-/* Create product button */
-=======
->>>>>>> 214743ce3182744bdfc63e9a9c885f4bef1f3752
 .ManageProduct .but {
     width: 148px;
     height: 50px;
@@ -35,19 +27,11 @@
     font-size: 1.2em;
 }
 
-<<<<<<< HEAD
-/* Modal overlay */
-=======
->>>>>>> 214743ce3182744bdfc63e9a9c885f4bef1f3752
 .modal-container {
     display: flex;
     align-items: center;
     justify-content: center;
-<<<<<<< HEAD
-    background-color: rgba(0, 0, 0, 0.4);
-=======
     background-color: rgba(0, 0, 0, 0.4); 
->>>>>>> 214743ce3182744bdfc63e9a9c885f4bef1f3752
     position: fixed;
     top: 0;
     left: 0;
@@ -108,10 +92,6 @@
     border-color: #dc3545;
 }
 
-<<<<<<< HEAD
-/* Product table */
-=======
->>>>>>> 214743ce3182744bdfc63e9a9c885f4bef1f3752
 .manager-table-product {
     margin: 10px; /* Adjusted margin */
     padding: 20px;
@@ -159,10 +139,7 @@
     padding: 12px;
 }
 
-<<<<<<< HEAD
-/* Additional styles for form and list */
-=======
->>>>>>> 214743ce3182744bdfc63e9a9c885f4bef1f3752
+
 .qlsp {
     margin-top: 2rem;
     width: 100%;

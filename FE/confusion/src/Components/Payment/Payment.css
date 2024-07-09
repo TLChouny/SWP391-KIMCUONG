@@ -1,26 +1,72 @@
 .payment-container {
     padding: 20px;
+    font-family: Arial, sans-serif;
 }
 
-.product-item {
+.payment-content {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    padding: 10px;
+    justify-content: space-between;
 }
 
-.product-image {
-    width: 100px;
-    margin-right: 20px;
+.cart-items, .payment-method {
+    width: 48%;
 }
 
 .product-details {
-    margin: 0;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.product-main {
+    display: flex;
+    align-items: center;
+}
+
+.product-main img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-details-item {
+    display: flex;
+    justify-content: space-between;
 }
 
 .total-price {
     margin-top: 20px;
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
+}
+
+.payment-method {
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.payment-option {
+    margin-bottom: 10px;
+}
+
+.payment-option input {
+    margin-right: 10px;
+}
+
+.discount-code, .select-discount {
+    margin-top: 20px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
 }
