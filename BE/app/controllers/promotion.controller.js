@@ -34,11 +34,11 @@ exports.findAll = (req, res) => {
 exports.findById = (req, res) => {
   // Find a single promotion by promotionId
   Promotion.findOne({ promotionId: req.params.id })
-    .then((promotions) => {
-      if (!promotions) {
+    .then((promotion) => {
+      if (!promotion) {
         return res.status(404).json({ message: "Promotion not found" });
       }
-      res.status(200).json(promotions);
+      res.status(200).json(promotion);
     })
     .catch((err) => {
       res.status(500).json({ message: err.message });
@@ -47,22 +47,20 @@ exports.findById = (req, res) => {
 
 exports.findByProductId = (req, res) => {
   // Find promotions by productId
-  Promotion.findOne({ ProductId: req.params.id })
+  Promotion.find({ ProductId: req.params.id })
     .then((promotions) => {
-      if (!promotions) {
+      if (!promotions.length) {
         return res
           .status(404)
-          .json({ message: "No product found for the given ProductId" });
+          .json({ message: "No promotions found for the given ProductId" });
       }
-
-      // Return the full product object, including the _id
       res.status(200).json(promotions);
     })
     .catch((err) => {
       console.error(err);
       res
         .status(500)
-        .json({ message: "An error occurred while fetching the product" });
+        .json({ message: "An error occurred while fetching the promotions" });
     });
 };
 
@@ -71,16 +69,16 @@ exports.update = (req, res) => {
   Promotion.findOneAndUpdate(
     { promotionId: req.params.id },
     {
-      ProductId: req.body.productId,
+      ProductId: req.body.ProductId,
       promotionValue: req.body.promotionValue,
     },
     { new: true }
   )
-    .then((updatePromotion) => {
-      if (!updatePromotion) {
+    .then((updatedPromotion) => {
+      if (!updatedPromotion) {
         return res.status(404).json({ message: "Promotion not found" });
       }
-      res.status(200).json(updatePromotion);
+      res.status(200).json(updatedPromotion);
     })
     .catch((err) => {
       res.status(500).json({ message: err.message });
@@ -88,10 +86,10 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  // Delete a promotion by saleId
+  // Delete a promotion by promotionId
   Promotion.findOneAndRemove({ promotionId: req.params.id })
-    .then((promotions) => {
-      if (!promotions) {
+    .then((promotion) => {
+      if (!promotion) {
         return res.status(404).json({ message: "Promotion not found" });
       }
       res.status(200).json({ message: "Promotion deleted successfully" });

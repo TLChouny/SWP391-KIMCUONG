@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const PromotionSchema = new mongoose.Schema({
   promotionId: {
-    type: Number,
+    type: String,
     required: true,
     unique: true,
   },
