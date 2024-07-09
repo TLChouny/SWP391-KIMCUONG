@@ -95,7 +95,7 @@ const ManageAccount = () => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [editUser, setEditUser] = useState(null);
     const [editSuccessModalOpen, setEditSuccessModalOpen] = useState(false); // State cho modal thông báo
-    
+
     useEffect(() => {
         setAccounts(SampleAccounts);
     }, []);
@@ -257,7 +257,7 @@ const ManageAccount = () => {
             <ToastContainer />
             <div className="Top">
                 <Link to="/admin">
-                <button className="Btn">
+                    <button className="Btn">
                         <div className="sign">
                             <svg viewBox="0 0 512 512">
                                 <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
@@ -265,7 +265,7 @@ const ManageAccount = () => {
                         </div>
                         <div className="text">Logout</div>
                     </button>
-                    </Link>
+                </Link>
             </div>
             <div className="left-panel">
                 <div className="AdminAvatar">
@@ -273,14 +273,14 @@ const ManageAccount = () => {
                     <p className="adminname">Admin, Long Châu</p>
                 </div>
                 <div className="AdminTableList">
-                <div onClick={() => setVisibleSection('Manage-Customer')}>Manage Customer</div>
-                <div onClick={() => setVisibleSection('Manage-Sale-Staff')}>Manage Sale Staff</div>
-                <div onClick={() => setVisibleSection('Manage-Delivery-Staff')}>Manage Delivery Staff</div>
-                <div onClick={() => setVisibleSection('Manage-Admin')}>Manage Admin</div>
-                <div onClick={() => setVisibleSection('Manage-Manager')}>Manage Manager</div>
-                <div className="x">My Profile</div>
-            </div>
-          
+                    <div onClick={() => setVisibleSection('Manage-Customer')}>Manage Customer</div>
+                    <div onClick={() => setVisibleSection('Manage-Sale-Staff')}>Manage Sale Staff</div>
+                    <div onClick={() => setVisibleSection('Manage-Delivery-Staff')}>Manage Delivery Staff</div>
+                    <div onClick={() => setVisibleSection('Manage-Admin')}>Manage Admin</div>
+                    <div onClick={() => setVisibleSection('Manage-Manager')}>Manage Manager</div>
+                    <div className="x">My Profile</div>
+                </div>
+
             </div>
             <div className="right-panel">
                 <div className="Title">
@@ -288,7 +288,7 @@ const ManageAccount = () => {
 
                 </div>
                 <div className="AdminContent">
-                {/* <div id="Manage-Customer" className="Manage-Customer">
+                    {/* <div id="Manage-Customer" className="Manage-Customer">
                     {renderTable(
                         accounts.filter(user => user.role === 'customer'),
                         'Manage Customer',
@@ -338,59 +338,59 @@ const ManageAccount = () => {
                         setRowsPerPage
                     )}
                 </div> */}
-                  {visibleSection === 'Manage-Customer' && renderTable(accounts.filter(user => user.role === 'customer'), "Manage Customer", customerPage, setCustomerPage, rowsPerPage, setRowsPerPage)}
-            {visibleSection === 'Manage-Sale-Staff' && renderTable(accounts.filter(user => user.role === 'sale staff'), "Manage Sale Staff", saleStaffPage, setSaleStaffPage, rowsPerPage, setRowsPerPage)}
-            {visibleSection === 'Manage-Delivery-Staff' && renderTable(accounts.filter(user => user.role === 'delivery staff'), "Manage Delivery Staff", deliveryStaffPage, setDeliveryStaffPage, rowsPerPage, setRowsPerPage)}
-            {visibleSection === 'Manage-Admin' && renderTable(accounts.filter(user => user.role === 'admin'), "Manage Admin", adminPage, setAdminPage, rowsPerPage, setRowsPerPage)}
-            {visibleSection === 'Manage-Manager' && renderTable(accounts.filter(user => user.role === 'manager'), "Manage Manager", managerPage, setManagerPage, rowsPerPage, setRowsPerPage)}
-            <Modal title="User Details" open={isModalOpen} onOk={handleOk}>
-                {selectedUser && (
-                    <div>
+                    {visibleSection === 'Manage-Customer' && renderTable(accounts.filter(user => user.role === 'customer'), "Manage Customer", customerPage, setCustomerPage, rowsPerPage, setRowsPerPage)}
+                    {visibleSection === 'Manage-Sale-Staff' && renderTable(accounts.filter(user => user.role === 'sale staff'), "Manage Sale Staff", saleStaffPage, setSaleStaffPage, rowsPerPage, setRowsPerPage)}
+                    {visibleSection === 'Manage-Delivery-Staff' && renderTable(accounts.filter(user => user.role === 'delivery staff'), "Manage Delivery Staff", deliveryStaffPage, setDeliveryStaffPage, rowsPerPage, setRowsPerPage)}
+                    {visibleSection === 'Manage-Admin' && renderTable(accounts.filter(user => user.role === 'admin'), "Manage Admin", adminPage, setAdminPage, rowsPerPage, setRowsPerPage)}
+                    {visibleSection === 'Manage-Manager' && renderTable(accounts.filter(user => user.role === 'manager'), "Manage Manager", managerPage, setManagerPage, rowsPerPage, setRowsPerPage)}
+                    <Modal title="User Details" open={isModalOpen} onOk={handleOk}>
+                        {selectedUser && (
+                            <div>
+                                <p>ID: {selectedUser.id}</p>
+                                <p>Role: {selectedUser.role}</p>
+                                <p>Username: {selectedUser.username}</p>
+                                <p>Phone: {selectedUser.phone}</p>
+                                <p>Address: {selectedUser.address}</p>
+                            </div>
+                        )}
+                    </Modal>
+                </div>
+            </div>
+            {
+                selectedUser && (
+                    <Modal title="User Details" open={isModalOpen} onOk={handleOk}>
                         <p>ID: {selectedUser.id}</p>
                         <p>Role: {selectedUser.role}</p>
                         <p>Username: {selectedUser.username}</p>
                         <p>Phone: {selectedUser.phone}</p>
                         <p>Address: {selectedUser.address}</p>
-                    </div>
-                )}
-                </Modal>
-            </div>
-        </div>
+                    </Modal>
+                )
+            }
             {
-        selectedUser && (
-            <Modal title="User Details" open={isModalOpen} onOk={handleOk}>
-                <p>ID: {selectedUser.id}</p>
-                <p>Role: {selectedUser.role}</p>
-                <p>Username: {selectedUser.username}</p>
-                <p>Phone: {selectedUser.phone}</p>
-                <p>Address: {selectedUser.address}</p>
-            </Modal>
-        )
-    }
-    {
-        editUser && (
-            <Modal title="Edit User" open={isEditModalOpen} onOk={handleEditOk} onCancel={handleEditCancel}>
-                <Form layout="vertical">
-                    <Form.Item label="ID">
-                        <Input value={editUser.id} name="id" onChange={handleInputChange} disabled />
-                    </Form.Item>
-                    <Form.Item label="Role">
-                        <Input value={editUser.role} name="role" onChange={handleInputChange} />
-                    </Form.Item>
-                    <Form.Item label="Username">
-                        <Input value={editUser.username} name="username" onChange={handleInputChange} />
-                    </Form.Item>
-                    <Form.Item label="Phone">
-                        <Input value={editUser.phone} name="phone" onChange={handleInputChange} />
-                    </Form.Item>
-                    <Form.Item label="Address">
-                        <Input value={editUser.address} name="address" onChange={handleInputChange} />
-                    </Form.Item>
-                </Form>
-            </Modal>
-        )
-    }
-      <Modal title="Edit Successful" visible={editSuccessModalOpen} onOk={() => setEditSuccessModalOpen(false)} onCancel={() => setEditSuccessModalOpen(false)}>
+                editUser && (
+                    <Modal title="Edit User" open={isEditModalOpen} onOk={handleEditOk} onCancel={handleEditCancel}>
+                        <Form layout="vertical">
+                            <Form.Item label="ID">
+                                <Input value={editUser.id} name="id" onChange={handleInputChange} disabled />
+                            </Form.Item>
+                            <Form.Item label="Role">
+                                <Input value={editUser.role} name="role" onChange={handleInputChange} />
+                            </Form.Item>
+                            <Form.Item label="Username">
+                                <Input value={editUser.username} name="username" onChange={handleInputChange} />
+                            </Form.Item>
+                            <Form.Item label="Phone">
+                                <Input value={editUser.phone} name="phone" onChange={handleInputChange} />
+                            </Form.Item>
+                            <Form.Item label="Address">
+                                <Input value={editUser.address} name="address" onChange={handleInputChange} />
+                            </Form.Item>
+                        </Form>
+                    </Modal>
+                )
+            }
+            <Modal title="Edit Successful" visible={editSuccessModalOpen} onOk={() => setEditSuccessModalOpen(false)} onCancel={() => setEditSuccessModalOpen(false)}>
                 <p>User details have been successfully updated.</p>
             </Modal>
         </div >
