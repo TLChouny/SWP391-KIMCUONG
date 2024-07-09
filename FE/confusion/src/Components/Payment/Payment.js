@@ -24,7 +24,7 @@ const Payment = () => {
             <h1>Payment Page</h1>
             {cart.length > 0 ? (
                 <div className="payment-content">
-                    <div className="cart-items">
+                    <div className="payment-items">
                         {cart.map(item => (
                             <div className="product-details" key={item.ProductId}>
                                 <div className="product-main">

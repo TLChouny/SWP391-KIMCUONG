@@ -8,7 +8,7 @@
     justify-content: space-between;
 }
 
-.cart-items, .payment-method {
+.payment-items, .payment-method {
     width: 48%;
 }
 
