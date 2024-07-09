@@ -1,10 +1,10 @@
 .cart {
-    /* margin: 20px auto; */
+    margin: 10px auto;
     /* max-width: 800px; */
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 640px;
+    height: 720px;
     overflow-y: auto;
 }
 
