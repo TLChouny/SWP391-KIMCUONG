@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form, Input, Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify'; // Import toast and ToastContainer from react-toastify
+import { toast, ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css';
 import "../Register/Register.css";
 
@@ -63,7 +63,7 @@ const Register = () => {
 
     return (
         <div className="signin-container">
-            <ToastContainer style={{textAlign: "left"}} /> {/* Place ToastContainer at an appropriate level */}
+            <ToastContainer style={{textAlign: "left"}} />
             <div className="background-image-container">                    
                 <img src="../assets/background.png" alt="Background" className="background-image" />
             </div>

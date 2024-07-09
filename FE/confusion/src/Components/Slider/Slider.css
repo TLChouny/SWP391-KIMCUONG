@@ -9,14 +9,14 @@
 }
 
 .sliderimage img {
-    max-width: 30%; /* Đảm bảo hình ảnh không vượt quá chiều rộng của container */
-    height: auto; /* Đảm bảo tỷ lệ khung hình được duy trì */
-    object-fit: cover; /* Đảm bảo hình ảnh bao phủ toàn bộ khu vực được chỉ định */
-    margin:0px; /* Khoảng cách giữa các hình ảnh */
+    max-width: 30%; 
+    height: auto; 
+    object-fit: cover;
+    margin:0px; 
 }
 
 .titleimage{
-    font-size: 24px; /* Kích thước phông chữ */
+    font-size: 24px; 
     display: flex;
     justify-content: center;
     margin-top: -16%;

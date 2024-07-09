@@ -1,0 +1,71 @@
+.payment-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    height: 740px;
+    overflow-y: auto
+}
+
+.payment-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-items, .payment-method {
+    width: 48%;
+}
+
+.product-details {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.product-main {
+    display: flex;
+    align-items: center;
+}
+
+.product-main img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-details-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-price {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.payment-method {
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.payment-option {
+    margin-bottom: 10px;
+}
+
+.payment-option input {
+    margin-right: 10px;
+}
+
+.discount-code, .select-discount {
+    margin-top: 20px;
+}
+
+button {
+
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+

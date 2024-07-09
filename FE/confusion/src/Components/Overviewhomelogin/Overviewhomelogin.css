@@ -1,0 +1,27 @@
+.overview-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+
+}
+
+.overview-container h1{
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 20px; 
+    
+}
+
+.overview-item {
+    text-align: center;
+}
+
+.overview-item img {
+    max-width: 100%; 
+}

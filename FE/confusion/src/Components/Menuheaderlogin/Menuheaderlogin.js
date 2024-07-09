@@ -10,34 +10,34 @@ const items = [
   },
   {
     label: 'Album',
-    path: '/album',
+    path: '/catalogin',
     children: [
       {
         type: 'group',
         children: [
           {
-            label: 'Vòng tay',
-            path: '/album/vong-tay',
+            label: 'Bracelet',
+            path: '/albumlogin/Bracelet',
           },
           {
-            label: 'Bông tai',
-            path: '/album/bong-tai',
+            label: 'Earring',
+            path: '/albumlogin/Earring',
           },
           {
-            label: 'Dây chuyền',
-            path: '/album/day-chuyen',
+            label: 'Necklace',
+            path: '/albumlogin/Necklace',
           },
           {
-            label: 'Nhẫn',
-            path: '/album/nhan',
+            label: 'Ring',
+            path: '/albumlogin/Ring',
           },
         ],
       },
     ],
   },
   {
-    label: 'Review',
-    path: '/review',
+    label: 'About us',
+    path: '/aboutus',
   },
   {
     label: 'News',
@@ -53,9 +53,7 @@ const Menuheaderlogin = () => {
   const navigate = useNavigate();
 
   const handleSubMenuClick = (e, path) => {
-    // Prevent the submenu from closing
     e.preventDefault();
-    // Navigate to the desired path
     navigate(path);
   };
 

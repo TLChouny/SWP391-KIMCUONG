@@ -18,17 +18,15 @@ export default function Contact() {
     });
 
     const [emailError, setEmailError] = useState(false);
-    const [phoneNumberError, setPhoneNumberError] = useState(false); // State để đánh dấu lỗi số điện thoại
+    const [phoneNumberError, setPhoneNumberError] = useState(false); 
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
 
-        // Kiểm tra và giới hạn số lượng ký tự nhập vào ô "Phone Number"
         if (name === "phoneNumber" && value.length > 10) {
-            return; // Nếu vượt quá 10 số, không thay đổi giá trị
+            return; 
         }
 
-        // Kiểm tra chỉ cho phép nhập số vào ô "Phone Number"
         if (name === "phoneNumber" && /[^0-9]/.test(value)) {
             setPhoneNumberError(true);
             return;
@@ -39,29 +37,25 @@ export default function Contact() {
             [name]: value
         }));
 
-        // Reset lỗi khi người dùng thay đổi giá trị ô "Phone Number"
         if (name === "phoneNumber") {
             setPhoneNumberError(false);
         }
     };
 
     const handleFormSubmit = async () => {
-        // Kiểm tra điều kiện có dữ liệu nhập vào hay không
         if (!formData.name || !formData.email || !formData.phoneNumber || !formData.message) {
-            toast.error("Bạn vui lòng nhập vào form để liên hệ với chúng tôi.");
+            toast.error("Please fill in the form to contact us.");
             return;
         }
 
-        // Kiểm tra định dạng email
         if (!formData.email.endsWith("@gmail.com")) {
-            toast.error("Vui lòng nhập địa chỉ email hợp lệ (ví dụ: example@gmail.com)");
+            toast.error("Please enter a valid email address (e.g.example@gmail.com)");
             setEmailError(true);
             return;
         }
 
-        // Kiểm tra độ dài số điện thoại
         if (formData.phoneNumber.length !== 10) {
-            toast.error("Số điện thoại phải có đúng 10 chữ số.");
+            toast.error("Phone number must have exactly 10 digits.");
             setPhoneNumberError(true);
             return;
         }
@@ -83,8 +77,8 @@ export default function Contact() {
                     phoneNumber: "",
                     message: ""
                 });
-                setEmailError(false); // Xóa lỗi email nếu có
-                setPhoneNumberError(false); // Xóa lỗi số điện thoại nếu có
+                setEmailError(false); 
+                setPhoneNumberError(false); 
             } else {
                 toast.error("Failed to send message. Please try again later.");
             }
@@ -96,7 +90,7 @@ export default function Contact() {
 
     return (
         <div className="contactall">
-            <ToastContainer />
+            <ToastContainer style={{width: "18%"}} />
             <h1>Contact Us</h1>
             <div className="contactalldes">
                 <div className="contact-title">
@@ -140,7 +134,7 @@ export default function Contact() {
                                 value={formData.phoneNumber}
                                 onChange={handleInputChange}
                                 error={phoneNumberError}
-                                helperText={phoneNumberError ? "Chỉ được nhập số và không quá 10 chữ số." : ""}
+                                helperText={phoneNumberError ? "Only enter numbers and no more than 10 digits." : ""}
                                 sx={{ m: 1, width: '109ch' }}
                             />
                         </div>
