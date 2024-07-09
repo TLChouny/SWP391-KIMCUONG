@@ -2,40 +2,6 @@ const db = require("../models");
 const Order = db.order;
 const Product = db.product;
 
-// exports.create = (req, res) => {
-//   const {
-//     orderId,
-//     userId,
-//     orderProducts,
-//     totalPrice,
-//     orderStatus,
-//     orderDate,
-//     orderAddress,
-//     paymentMethod,
-//   } = req.body;
-
-//   // Create and save the order
-//   const order = new Order({
-//     orderId,
-//     userId,
-//     orderProducts,
-//     totalPrice,
-//     orderStatus,
-//     orderDate,
-//     orderAddress,
-//     paymentMethod,
-//   });
-
-//   order
-//     .save()
-//     .then(() => {
-//       res.status(201).json({ message: "Order created successfully", order });
-//     })
-//     .catch((err) => {
-//       res.status(500).json({ message: err.message });
-//     });
-// };
-
 exports.create = (req, res) => {
   const {
     orderId,
@@ -46,9 +12,9 @@ exports.create = (req, res) => {
     orderDate,
     orderAddress,
     paymentMethod,
-    shipmentId,
   } = req.body;
 
+  // Create and save the order
   const order = new Order({
     orderId,
     userId,
@@ -58,7 +24,6 @@ exports.create = (req, res) => {
     orderDate,
     orderAddress,
     paymentMethod,
-    shipmentId,
   });
 
   order

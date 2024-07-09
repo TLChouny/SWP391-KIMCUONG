@@ -53,10 +53,6 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  shipmentId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Shipment",
-  },
 });
 
 const Order = mongoose.model("Order", OrderSchema);
