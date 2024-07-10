@@ -24,8 +24,6 @@ const Payment = () => {
     };
 
     const handleApplyCoupon = () => {
-        // Add logic to verify and apply the coupon code here
-        // For demonstration, we are setting a fixed discount
         if (couponCode === 'DISCOUNT10') {
             setDiscount(0.1); // 10% discount
             setIsCouponValid(true);
