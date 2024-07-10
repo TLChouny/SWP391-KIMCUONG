@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Payment.css';
 import { Button, Input, Form } from 'antd';
 import { ToastContainer, toast } from 'react-toastify';
@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Payment = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const cart = location.state?.cart || [];
     const [couponCode, setCouponCode] = useState('');
     const [discount, setDiscount] = useState(0);
@@ -19,7 +20,7 @@ const Payment = () => {
         if (parts.length === 1) {
             return parts[0] + "đ";
         } else {
-            return parts.join(".") +"đ";
+            return parts.join(".") + "đ";
         }
     };
 
@@ -38,7 +39,10 @@ const Payment = () => {
             toast.error('Please choose payment method');
             return;
         }
-       
+
+        if (paymentMethod === 'cash-on-delivery') {
+            navigate('/orderhistory', { state: { cart, totalPrice: discountedPrice > 0 ? discountedPrice : totalPrice, paymentMethod } });
+        }
     };
 
     const totalPrice = cart.reduce((total, item) => total + item.ProductPrice * item.quantity, 0);
@@ -59,7 +63,7 @@ const Payment = () => {
                                         <h2>{item.ProductName}</h2>
                                         <div className='product-details-item'>
                                             <p>x {item.quantity}</p>
-                                            <p style={{fontWeight: "bold", fontSize: 20}}>{formatPrice(item.ProductPrice)}</p>
+                                            <p style={{ fontWeight: "bold", fontSize: 20 }}>{formatPrice(item.ProductPrice)}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -93,12 +97,12 @@ const Payment = () => {
                                 <label htmlFor="cash-on-delivery">Cash on Delivery</label>
                             </div>
                             <div className="coupon-section">
-                                <h2>Coupon Code</h2>
+                                <h2>Choose promotion code </h2>
                                 <Input
-                                    placeholder="Enter coupon code"
+                                    placeholder="Enter promotion code"
                                     value={couponCode}
                                     onChange={(e) => setCouponCode(e.target.value)}
-                                    style={{ width: '200px', marginRight: '10px' }}
+                                    style={{ width: '200px', marginRight: '10px', marginTop: "20px" }}
                                 />
                                 <Button onClick={handleApplyCoupon}>Apply</Button>
                                 {!isCouponValid && <p style={{ color: 'red' }}>Invalid coupon code</p>}

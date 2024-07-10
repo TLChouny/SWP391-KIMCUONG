@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
-import { Container, Row, Col, Form, Button, Table, Modal } from 'react-bootstrap';
+import { Button, Form, Input, Modal, Table } from 'antd';
 import SampleProducts from '../Sample/SampleProducts';
 import './ManageProduct.css';
+
+const { Item: FormItem } = Form;
 
 function ManageProduct() {
     const [productID, setProductID] = useState('');
@@ -20,7 +22,7 @@ function ManageProduct() {
     const [showProductForm, setShowProductForm] = useState(false);
 
     useEffect(() => {
-        setProducts(SampleProducts); 
+        setProducts(SampleProducts);
     }, []);
 
     const addProduct = () => {
@@ -38,7 +40,7 @@ function ManageProduct() {
             };
             setProducts([...products, newProduct]);
             clearForm();
-            setShowProductForm(false); // Close the add product modal
+            setShowProductForm(false);
         }
     };
 
@@ -120,176 +122,189 @@ function ManageProduct() {
             </div>
             <div className="right-panel">
                 <div>
-                    <button className="but" onClick={() => setShowProductForm(true)}>
+                    <Button type="primary" onClick={() => setShowProductForm(true)}>
                         Create product
-                    </button>
-                    <Modal show={showProductForm} onHide={() => setShowProductForm(false)} className="modal-container">
-                        <Modal.Header closeButton>
-                            <Modal.Title>Thêm sản phẩm mới</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <Container>
-                                <Row>
-                                    <Col>
-                                        <Form>
-                                            <Form.Group controlId="formProductID">
-                                                <Form.Label>ID</Form.Label>
-                                                <Form.Control
-                                                    type="text"
-                                                    placeholder="Enter product ID"
-                                                    value={productID}
-                                                    onChange={(e) => setProductID(e.target.value)}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group controlId="formProductName">
-                                                <Form.Label>Tên sản phẩm</Form.Label>
-                                                <Form.Control
-                                                    type="text"
-                                                    placeholder="Enter product name"
-                                                    value={productName}
-                                                    onChange={(e) => setProductName(e.target.value)}
-                                                />
-                                            </Form.Group>
-                                            {/* Add other form fields for product details */}
-                                            <Button variant="primary" onClick={addProduct}>
-                                                Thêm sản phẩm
-                                            </Button>
-                                        </Form>
-                                    </Col>
-                                </Row>
-                            </Container>
-                        </Modal.Body>
+                    </Button>
+                    <Modal
+                        title="Thêm sản phẩm mới"
+                        visible={showProductForm}
+                        onCancel={() => setShowProductForm(false)}
+                        footer={null}
+                    >
+                        <Form layout="vertical">
+                            <FormItem label="ID">
+                                <Input
+                                    placeholder="Enter product ID"
+                                    value={productID}
+                                    onChange={(e) => setProductID(e.target.value)}
+                                />
+                            </FormItem>
+                            <FormItem label="Tên sản phẩm">
+                                <Input
+                                    placeholder="Enter product name"
+                                    value={productName}
+                                    onChange={(e) => setProductName(e.target.value)}
+                                />
+                            </FormItem>
+                            <FormItem label="Image">
+                                <Input
+                                    placeholder="Enter product image URL"
+                                    value={productImage}
+                                    onChange={(e) => setProductImage(e.target.value)}
+                                />
+                            </FormItem>
+                            <FormItem label="Main Ingredient">
+                                <Input
+                                    placeholder="Enter main ingredient"
+                                    value={mainIngredient}
+                                    onChange={(e) => setMainIngredient(e.target.value)}
+                                />
+                            </FormItem>
+                            <FormItem label="Secondary Ingredient">
+                                <Input
+                                    placeholder="Enter secondary ingredient"
+                                    value={secondaryIngredient}
+                                    onChange={(e) => setSecondaryIngredient(e.target.value)}
+                                />
+                            </FormItem>
+                            <FormItem label="Cover">
+                                <Input
+                                    placeholder="Enter cover"
+                                    value={cover}
+                                    onChange={(e) => setCover(e.target.value)}
+                                />
+                            </FormItem>
+                            <FormItem label="Type">
+                                <Input
+                                    placeholder="Enter product type"
+                                    value={productType}
+                                    onChange={(e) => setProductType(e.target.value)}
+                                />
+                            </FormItem>
+                            <FormItem label="Price">
+                                <Input
+                                    placeholder="Enter product price"
+                                    value={productPrice}
+                                    onChange={(e) => setProductPrice(e.target.value)}
+                                />
+                            </FormItem>
+                            <FormItem label="Quantity">
+                                <Input
+                                    placeholder="Enter product quantity"
+                                    value={productQuantity}
+                                    onChange={(e) => setProductQuantity(e.target.value)}
+                                />
+                            </FormItem>
+                            <Button type="primary" onClick={addProduct}>
+                                Thêm sản phẩm
+                            </Button>
+                        </Form>
                     </Modal>
 
                     <div className="manager-table-product">
-                        <Table striped bordered hover className="mt-3">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Image</th>
-                                    <th>Main Ingredient</th>
-                                    <th>Secondary Ingredient</th>
-                                    <th>Cover</th>
-                                    <th>Type</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {products.map(product => (
-                                    <tr key={product.id}>
-                                        <td>{product.id}</td>
-                                        <td>{product.name}</td>
-                                        <td>{product.image}</td>
-                                        <td>{product.mainIngredient}</td>
-                                        <td>{product.secondaryIngredient}</td>
-                                        <td>{product.cover}</td>
-                                        <td>{product.type}</td>
-                                        <td>{product.price}</td>
-                                        <td>{product.quantity}</td>
-                                        <td>
-                                            <Button variant="edit" onClick={() => openEditModal(product)}>Edit</Button>
-                                            <Button variant="delete" onClick={() => deleteProduct(product.id)}>Delete</Button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
+                        <Table className="mt-3" dataSource={products} rowKey="id">
+                            <Table.Column title="ID" dataIndex="id" key="id" />
+                            <Table.Column title="Name" dataIndex="name" key="name" />
+                            <Table.Column title="Image" dataIndex="image" key="image" />
+                            <Table.Column title="Main Ingredient" dataIndex="mainIngredient" key="mainIngredient" />
+                            <Table.Column title="Secondary Ingredient" dataIndex="secondaryIngredient" key="secondaryIngredient" />
+                            <Table.Column title="Cover" dataIndex="cover" key="cover" />
+                            <Table.Column title="Type" dataIndex="type" key="type" />
+                            <Table.Column title="Price" dataIndex="price" key="price" />
+                            <Table.Column title="Quantity" dataIndex="quantity" key="quantity" />
+                            <Table.Column
+                                title="Actions"
+                                key="actions"
+                                render={(text, record) => (
+                                    <>
+                                        <Button type="link" onClick={() => openEditModal(record)}>
+                                            Edit
+                                        </Button>
+                                        <Button type="link" onClick={() => deleteProduct(record.id)}>
+                                            Delete
+                                        </Button>
+                                    </>
+                                )}
+                            />
                         </Table>
                     </div>
+
+                    <Modal
+                        title="Edit Product"
+                        visible={showModal}
+                        onOk={saveEditProduct}
+                        onCancel={handleCloseModal}
+                    >
+                        {modalProduct && (
+                            <Form layout="vertical">
+                                <FormItem label="ID">
+                                    <Input
+                                        name="id"
+                                        value={modalProduct.id}
+                                        onChange={handleEditChange}
+                                    />
+                                </FormItem>
+                                <FormItem label="Name">
+                                    <Input
+                                        name="name"
+                                        value={modalProduct.name}
+                                        onChange={handleEditChange}
+                                    />
+                                </FormItem>
+                                <FormItem label="Image">
+                                    <Input
+                                        name="image"
+                                        value={modalProduct.image}
+                                        onChange={handleEditChange}
+                                    />
+                                </FormItem>
+                                <FormItem label="Main Ingredient">
+                                    <Input
+                                        name="mainIngredient"
+                                        value={modalProduct.mainIngredient}
+                                        onChange={handleEditChange}
+                                    />
+                                </FormItem>
+                                <FormItem label="Secondary Ingredient">
+                                    <Input
+                                        name="secondaryIngredient"
+                                        value={modalProduct.secondaryIngredient}
+                                        onChange={handleEditChange}
+                                    />
+                                </FormItem>
+                                <FormItem label="Cover">
+                                    <Input
+                                        name="cover"
+                                        value={modalProduct.cover}
+                                        onChange={handleEditChange}
+                                    />
+                                </FormItem>
+                                <FormItem label="Type">
+                                    <Input
+                                        name="type"
+                                        value={modalProduct.type}
+                                        onChange={handleEditChange}
+                                    />
+                                </FormItem>
+                                <FormItem label="Price">
+                                    <Input
+                                        name="price"
+                                        value={modalProduct.price}
+                                        onChange={handleEditChange}
+                                    />
+                                </FormItem>
+                                <FormItem label="Quantity">
+                                    <Input
+                                        name="quantity"
+                                        value={modalProduct.quantity}
+                                        onChange={handleEditChange}
+                                    />
+                                </FormItem>
+                            </Form>
+                        )}
+                    </Modal>
                 </div>
             </div>
-        
-            <Modal show={showModal} onHide={handleCloseModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Edit Product</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group controlId="formProductName">
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="name"
-                                value={modalProduct ? modalProduct.name : ''}
-                                onChange={handleEditChange}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="formProductImage">
-                            <Form.Label>Image</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="image"
-                                value={modalProduct ? modalProduct.image : ''}
-                                onChange={handleEditChange}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="formMainIngredient">
-                            <Form.Label>Main Ingredient</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="mainIngredient"
-                                value={modalProduct ? modalProduct.mainIngredient : ''}
-                                onChange={handleEditChange}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="formSecondaryIngredient">
-                            <Form.Label>Secondary Ingredient</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="secondaryIngredient"
-                                value={modalProduct ? modalProduct.secondaryIngredient : ''}
-                                onChange={handleEditChange}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="formCover">
-                            <Form.Label>Cover</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="cover"
-                                value={modalProduct ? modalProduct.cover : ''}
-                                onChange={handleEditChange}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="formProductType">
-                            <Form.Label>Type</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="type"
-                                value={modalProduct ? modalProduct.type : ''}
-                                onChange={handleEditChange}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="formProductPrice">
-                            <Form.Label>Price</Form.Label>
-                            <Form.Control
-                                type="number"
-                                name="price"
-                                value={modalProduct ? modalProduct.price : ''}
-                                onChange={handleEditChange}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="formProductQuantity">
-                            <Form.Label>Quantity</Form.Label>
-                            <Form.Control
-                                type="number"
-                                name="quantity"
-                                value={modalProduct ? modalProduct.quantity : ''}
-                                onChange={handleEditChange}
-                            />
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModal}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={saveEditProduct}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
         </div>
     );
 }

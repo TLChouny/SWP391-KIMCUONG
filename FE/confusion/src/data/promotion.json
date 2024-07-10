@@ -1,0 +1,70 @@
+[
+  {
+    "promotionId": "PR000001",
+    "promotionValue": 0.04
+  },
+  {
+    "promotionId": "PR000002",
+    "promotionValue": 0.07
+  },
+  {
+    "promotionId": "PR000003",
+    "promotionValue": 0.03
+  },
+  {
+    "promotionId": "PR000004",
+    "promotionValue": 0.2
+  },
+  {
+    "promotionId": "PR000005",
+    "promotionValue": 0.1
+  },
+  {
+    "promotionId": "PR000006",
+    "promotionValue": 0.035
+  },
+  {
+    "promotionId": "PR000007",
+    "promotionValue": 0.06
+  },
+  {
+    "promotionId": "PR000008",
+    "promotionValue": 0.09
+  },
+  {
+    "promotionId": "PR000009",
+    "promotionValue": 0.12
+  },
+  {
+    "promotionId": "PR000010",
+    "promotionValue": 0.11
+  },
+  {
+    "promotionId": "PR000011",
+    "promotionValue": 0.15
+  },
+  {
+    "promotionId": "PR000012",
+    "promotionValue": 0.21
+  },
+  {
+    "promotionId": "PR000013",
+    "promotionValue": 0.32
+  },
+  {
+    "promotionId": "PR000014",
+    "promotionValue": 0.17
+  },
+  {
+    "promotionId": "PR000015",
+    "promotionValue": 0.18
+  },
+  {
+    "promotionId": "PR000016",
+    "promotionValue": 0.09
+  },
+  {
+    "promotionId": "PR000017",
+    "promotionValue": 0.05
+  }
+]
