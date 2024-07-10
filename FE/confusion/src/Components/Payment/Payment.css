@@ -42,6 +42,9 @@
 .total-price {
     margin-top: 20px;
     text-align: right;
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: rgba(236, 213, 213, 0.749) ;
 }
 
 .payment-method {

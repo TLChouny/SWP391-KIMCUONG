@@ -41,7 +41,7 @@ const items = [
   },
   {
     label: 'News',
-    path: '/news',
+    path: '/new',
   },
   {
     label: 'Contact',
