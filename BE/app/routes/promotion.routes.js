@@ -20,8 +20,6 @@ module.exports = function (app) {
 
   app.get("/api/promotions/:id", promotionController.findById);
 
-  app.get("/api/promotions/product/:id", promotionController.findByProductId);
-
   app.put(
     "/api/manager/promotions/:id",
     [authJwt.verifyToken, authJwt.isManager],

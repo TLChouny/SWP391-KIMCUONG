@@ -6,11 +6,6 @@ const PromotionSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  ProductId: {
-    type: String,
-    required: true,
-    ref: "Product",
-  },
   promotionValue: {
     type: Number,
     required: true,
