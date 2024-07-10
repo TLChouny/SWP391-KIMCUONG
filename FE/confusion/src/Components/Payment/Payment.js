@@ -19,7 +19,7 @@ const Payment = () => {
         if (parts.length === 1) {
             return parts[0] + "đ";
         } else {
-            return parts.join(".") + "đ";
+            return parts.join(".") +"đ";
         }
     };
 
@@ -61,7 +61,7 @@ const Payment = () => {
                                         <h2>{item.ProductName}</h2>
                                         <div className='product-details-item'>
                                             <p>x {item.quantity}</p>
-                                            <p>{formatPrice(item.ProductPrice)}</p>
+                                            <p style={{fontWeight: "bold", fontSize: 20}}>{formatPrice(item.ProductPrice)}</p>
                                         </div>
                                     </div>
                                 </div>
