@@ -5,7 +5,6 @@ exports.create = (req, res) => {
   // Create a new promotion
   const promotion = new Promotion({
     promotionId: req.body.promotionId,
-    ProductId: req.body.ProductId,
     promotionValue: req.body.promotionValue,
   });
 
@@ -45,31 +44,11 @@ exports.findById = (req, res) => {
     });
 };
 
-exports.findByProductId = (req, res) => {
-  // Find promotions by productId
-  Promotion.find({ ProductId: req.params.id })
-    .then((promotions) => {
-      if (!promotions.length) {
-        return res
-          .status(404)
-          .json({ message: "No promotions found for the given ProductId" });
-      }
-      res.status(200).json(promotions);
-    })
-    .catch((err) => {
-      console.error(err);
-      res
-        .status(500)
-        .json({ message: "An error occurred while fetching the promotions" });
-    });
-};
-
 exports.update = (req, res) => {
   // Update a promotion by promotionId
   Promotion.findOneAndUpdate(
     { promotionId: req.params.id },
     {
-      ProductId: req.body.ProductId,
       promotionValue: req.body.promotionValue,
     },
     { new: true }
