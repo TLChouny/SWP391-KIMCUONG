@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const WarrantySchema = new mongoose.Schema({
   warrantyId: {
-    type: Number,
+    type: String,
     required: true,
     unique: true,
   },
   productId: {
-    type: Number,
+    type: String,
     required: true,
     ref: "Product",
   },
