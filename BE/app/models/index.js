@@ -12,6 +12,8 @@ db.admin = require("./admin.model");
 db.promotion = require("./promotion.model");
 db.warranty = require("./warranty.model");
 db.order = require("./order.model");
+db.point = require("./point.model");
+
 db.ROLES = ["user", "admin", "manager", "delivery", "sale"];
 
 module.exports = db;

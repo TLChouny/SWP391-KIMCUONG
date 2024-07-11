@@ -4,12 +4,6 @@ const User = db.user;
 const Role = db.role;
 // Admin Controller
 
-// Get admin dashboard data
-exports.getDashboard = (req, res) => {
-  // Logic to get dashboard data
-  res.json({ message: "Admin Dashboard Data" });
-};
-
 // Get all users
 exports.getAllUsers = async (req, res) => {
   User.find({})
