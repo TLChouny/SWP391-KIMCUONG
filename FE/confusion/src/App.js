@@ -44,6 +44,9 @@ import Aboutlogin from './Components/Aboutlogin/Aboutlogin';
 import News from './Components/News/News';
 import ProductDetaillist from './Components/ProductDetaillist/ProductDetaillist';
 import ProductlistDetail from './Components/ProductlistDetail/ProductlistDetail';
+import New from './Components/new/new';
+import Newlogin from './Components/newlogin/newlogin';
+import OrderHistory from './Components/OrderHistory/OrderHistory';
 function App() {
   return (
     <Router>
@@ -78,7 +81,9 @@ function App() {
           <Route path='/Profile' element={<><Headerlogin/><Menuheaderlogin/><Profile/></>}/>
           <Route path='/about' element={<><About/></>}/>
           <Route path='/aboutus' element={<Aboutlogin/>}/>
-          {/* <Route path='/news' element={<News/>}/> */}
+          <Route path='/news' element={<><Header/><Menuheader/><New/></>}/>
+          <Route path='/new' element={<><Headerlogin/><Menuheaderlogin/><Newlogin/></>}/>
+          <Route path="/orderhistory" element={<OrderHistory/>}/>
         </Routes>
       </>
     </Router>

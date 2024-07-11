@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Menu, Spin } from "antd";
 import { Link } from "react-router-dom";
-import Profileuser from "../Profileuser/Profileuser";
+import ProfileUser from "../Profileuser/Profileuser"; 
 
-// const URL = "http://localhost:8080/api/auth/signin";
+const URL = "http://localhost:8080/api/user/profile";
 
 const Profile = () => {
     const [username, setUsername] = useState("");
     const [loading, setLoading] = useState(true);
-    const [selectedMenuItem, setSelectedMenuItem] = useState("profile"); 
+    const [selectedMenuItem, setSelectedMenuItem] = useState("profile");
 
     const fetchUsername = async () => {
         try {
@@ -17,17 +17,12 @@ const Profile = () => {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
+                    "x-access-token": localStorage.getItem('accessToken'),
                 },
-                credentials: "include",
             });
             const data = await response.json();
             if (response.ok) {
-                if (data.username) {
-                    setUsername(data.username);
-                } else {
-                    console.error("Username not found in response:", data);
-                }
+                setUsername(data.username);
             } else {
                 console.error("Failed to fetch username:", data);
             }
@@ -49,9 +44,7 @@ const Profile = () => {
     const renderMenuContent = () => {
         switch (selectedMenuItem) {
             case "profile":
-                return (
-                    <Profileuser />
-                );
+                return <ProfileUser />;
             case "order-history":
                 return (
                     <div>
@@ -87,7 +80,7 @@ const Profile = () => {
                 </div>
                 <Menu mode="vertical" selectedKeys={[selectedMenuItem]} onClick={handleMenuClick}>
                     <Menu.Item key="profile">User Profile</Menu.Item>
-                    <Menu.Item key="order-history">Order History</Menu.Item>
+<Menu.Item key="order-history">Order History</Menu.Item>
                     <Menu.Item key="bill-info">Information of Bill</Menu.Item>
                     <Menu.Item key="warranty-lookup">Warranty Lookup</Menu.Item>
                     <Menu.Item key="logout" icon={<LogoutOutlined />}><Link to="/">Logout</Link></Menu.Item>

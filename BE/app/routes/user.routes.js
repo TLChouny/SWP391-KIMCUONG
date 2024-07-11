@@ -12,6 +12,7 @@ module.exports = function(app) {
 
   app.get("/api/user/profile", [authJwt.verifyToken], userController.getUserInfo);  
   app.put("/api/user/profile", [authJwt.verifyToken], userController.updateUserProfile);  
+  app.put("/api/user/changepassword", [authJwt.verifyToken], userController.changePassword);
 };
 
 //endpoint để người dùng có thể xem và chỉnh sửa thông tin
