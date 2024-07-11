@@ -3,6 +3,7 @@ const crypto = require("crypto");
 const db = require("../models");
 const Order = db.order;
 const { authJwt } = require("../middlewares");
+const pointController = require("../controllers/point.controller"); // Ensure this import is correct
 
 // MoMo payment parameters
 const accessKey = "F8BBA842ECF85";
@@ -83,9 +84,17 @@ module.exports = function (app) {
           });
           try {
             const savedOrder = await order.save();
+
+            // Calculate points based on totalPrice (assuming 1 point per 1000 VNĐ)
+            const pointsToAdd = Math.floor(totalPrice / 1000);
+
+            // Update user points
+            await pointController.addPoints(userId, pointsToAdd);
+
             res.status(200).json({
               message: "Payment successful, order saved",
               order: savedOrder,
+              point: pointsToAdd,
               paymentUrl: response.payUrl,
             });
           } catch (error) {
