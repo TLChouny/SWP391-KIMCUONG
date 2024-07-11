@@ -256,7 +256,7 @@ const ManageAccount = () => {
         <div className="ManageAccount">
             <ToastContainer />
             <div className="Top">
-                <Link to="/admin">
+                <Link to="/">
                     <button className="Btn">
                         <div className="sign">
                             <svg viewBox="0 0 512 512">
