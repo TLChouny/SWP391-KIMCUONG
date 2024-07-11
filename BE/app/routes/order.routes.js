@@ -10,30 +10,34 @@ module.exports = function (app) {
     next();
   });
 
-  app.post("/api/orders/create", [authJwt.verifyToken], orderController.create);
+  app.post(
+    "/api/orders/create",
+    [authJwt.verifyToken, authJwt.isSale],
+    orderController.create
+  );
 
-  // Manager
+  // sale staff
   app.get(
     "/api/orders",
-    [authJwt.verifyToken, authJwt.isManager],
+    [authJwt.verifyToken, authJwt.isSale],
     orderController.findAll
   );
 
   app.get(
     "/api/orders/:id",
-    [authJwt.verifyToken, authJwt.isManager],
+    [authJwt.verifyToken, authJwt.isSale],
     orderController.findById
   );
 
   app.put(
     "/api/orders/:id",
-    [authJwt.verifyToken, authJwt.isManager],
+    [authJwt.verifyToken, authJwt.isSale],
     orderController.update
   );
 
   app.delete(
     "/api/orders/:id",
-    [authJwt.verifyToken, authJwt.isManager],
+    [authJwt.verifyToken, authJwt.isSale],
     orderController.delete
   );
 
