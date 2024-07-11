@@ -15,7 +15,6 @@ import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import { Link as ScrollLink } from 'react-scroll';
 import "./ManageAccount.css";
 import { Link } from "react-router-dom";
 import SampleAccounts from "../Sample/SampleAccounts";
@@ -72,7 +71,7 @@ function TablePaginationActions(props) {
             </IconButton>
             <IconButton
                 onClick={handleLastPageButtonClick}
-                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+disabled={page >= Math.ceil(count / rowsPerPage) - 1}
                 aria-label="last page"
             >
                 {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
@@ -95,6 +94,7 @@ const ManageAccount = () => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [editUser, setEditUser] = useState(null);
     const [editSuccessModalOpen, setEditSuccessModalOpen] = useState(false); // State cho modal thông báo
+    const [form] = Form.useForm(); // Khởi tạo form
 
     useEffect(() => {
         setAccounts(SampleAccounts);
@@ -110,10 +110,10 @@ const ManageAccount = () => {
         setSelectedUser(null);
     };
 
-    // const handleCancel = () => {
-    //     setIsModalOpen(false);
-    //     setSelectedUser(null);
-    // };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+        setSelectedUser(null);
+    };
 
     const showEditModal = (user) => {
         setEditUser(user);
@@ -121,35 +121,26 @@ const ManageAccount = () => {
     };
 
     const handleEditOk = () => {
+        form.validateFields().then(values => {
+            const updatedAccounts = accounts.map(user => {
+                if (user.id === editUser.id) {
+                    return { ...editUser, ...values }; // Cập nhật thông tin cho người dùng đã chỉnh sửa
+                }
+                return user; // Giữ nguyên thông tin của các người dùng khác
+            });
+            toast.success('Account is edited successfully');
+            setAccounts(updatedAccounts); // Cập nhật lại danh sách accounts
+            setIsEditModalOpen(false); // Đóng modal chỉnh sửa
+            setEditUser(null); // Đặt lại editUser về null để chuẩn bị cho lần chỉnh sửa tiếp theo
 
-        // Logic to save changes
-        const updatedAccounts = accounts.map(user => {
-            if (user.id === editUser.id) {
-                return editUser; // Cập nhật thông tin cho người dùng đã chỉnh sửa
-            }
-            return user; // Giữ nguyên thông tin của các người dùng khác
+        }).catch(info => {
+            console.log('Validate Failed:', info);
         });
-
-        setAccounts(updatedAccounts); // Cập nhật lại danh sách accounts
-        setIsEditModalOpen(false); // Đóng modal chỉnh sửa
-        setEditUser(null); // Đặt lại editUser về null để chuẩn bị cho lần chỉnh sửa tiếp theo
-
-        setEditSuccessModalOpen(true); // Mở modal thông báo thành công
-        // setIsEditModalOpen(false);
-        // setEditUser(null);
     };
 
     const handleEditCancel = () => {
         setIsEditModalOpen(false);
         setEditUser(null);
-    };
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setEditUser(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
     };
 
     const handleDelete = (id) => {
@@ -159,6 +150,28 @@ const ManageAccount = () => {
             toast.success('Account is deleted successfully');
             console.log(`Deleted staff with ID: ${id}`);
         }
+    };
+
+    const validateUniqueUsername = (rule, value) => {
+        if (accounts.some(user => user.username === value && user.id !== editUser.id)) {
+            return Promise.reject('Username already exists!');
+        }
+        return Promise.resolve();
+    };
+
+    const validateUniquePhone = (rule, value) => {
+if (accounts.some(user => user.phone === value && user.id !== editUser.id)) {
+            return Promise.reject('Phone number already exists!');
+        }
+        return Promise.resolve();
+    };
+
+    const validatePhoneNumberLength = (rule, value) => {
+        const phoneRegex = /^[0-9]{10,11}$/; // Regex to check for 10 or 11 digits
+        if (!phoneRegex.test(value)) {
+            return Promise.reject('Phone number must be 10 or 11 digits!');
+        }
+        return Promise.resolve();
     };
 
     const renderTable = (filteredUsers, title, page, setPage, rowsPerPage, setRowsPerPage) => {
@@ -173,7 +186,7 @@ const ManageAccount = () => {
                             <TableRow>
                                 <TableCell>ID</TableCell>
                                 <TableCell>Role</TableCell>
-                                <TableCell>UseName</TableCell>
+                                <TableCell>Username</TableCell>
                                 <TableCell>Phone</TableCell>
                                 <TableCell>Address</TableCell>
                                 <TableCell></TableCell>
@@ -200,7 +213,7 @@ const ManageAccount = () => {
                                             <>
                                                 <IconButton className="crud-icon" aria-label="edit" onClick={() => showEditModal(user)}>
                                                     <EditIcon />
-                                                </IconButton>
+</IconButton>
                                                 <IconButton className="crud-icon" aria-label="delete" onClick={() => handleDelete(user.id)}>
                                                     <DeleteIcon />
                                                 </IconButton>
@@ -209,11 +222,6 @@ const ManageAccount = () => {
                                     </TableCell>
                                 </TableRow>
                             ))}
-                            {emptyRows > 0 && (
-                                <TableRow style={{ height: 53 * emptyRows }}>
-                                    <TableCell colSpan={6} />
-                                </TableRow>
-                            )}
                         </TableBody>
                         <TableFooter>
                             <TableRow>
@@ -244,6 +252,7 @@ const ManageAccount = () => {
         );
     };
 
+
     const [customerPage, setCustomerPage] = useState(0);
     const [saleStaffPage, setSaleStaffPage] = useState(0);
     const [deliveryStaffPage, setDeliveryStaffPage] = useState(0);
@@ -256,11 +265,11 @@ const ManageAccount = () => {
         <div className="ManageAccount">
             <ToastContainer />
             <div className="Top">
-                <Link to="/">
+                <Link to="/Register">
                     <button className="Btn">
                         <div className="sign">
                             <svg viewBox="0 0 512 512">
-                                <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+<path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
                             </svg>
                         </div>
                         <div className="text">Logout</div>
@@ -280,12 +289,10 @@ const ManageAccount = () => {
                     <div onClick={() => setVisibleSection('Manage-Manager')}>Manage Manager</div>
                     <div className="x">My Profile</div>
                 </div>
-
             </div>
             <div className="right-panel">
                 <div className="Title">
                     <p>Manage Accounts</p>
-
                 </div>
                 <div className="AdminContent">
                     {/* <div id="Manage-Customer" className="Manage-Customer">
@@ -310,12 +317,12 @@ const ManageAccount = () => {
                 </div>
                 <div id="Manage-Delivery-Staff">
                     {renderTable(
-                        accounts.filter(user => user.role === 'delivery staff'),
-                        'Manage Delivery Staff',
+                        accounts.filter(user => user.role === 'delivery staff'),ManageAccount.js
+'Manage Delivery Staff',
                         deliveryStaffPage,
                         setDeliveryStaffPage,
                         rowsPerPage,
-                        setRowsPerPage
+setRowsPerPage
                     )}
                 </div>
                 <div id="Manage-Admin">
@@ -358,38 +365,53 @@ const ManageAccount = () => {
             </div>
             {
                 selectedUser && (
-                    <Modal title="User Details" open={isModalOpen} onOk={handleOk}>
+                    <Modal title="User Details" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                         <p>ID: {selectedUser.id}</p>
-                        <p>Role: {selectedUser.role}</p>
+                        <p>Role: {selectedUser.role}</p>ManageAccount.js
                         <p>Username: {selectedUser.username}</p>
                         <p>Phone: {selectedUser.phone}</p>
                         <p>Address: {selectedUser.address}</p>
-                    </Modal>
+</Modal>
                 )
             }
             {
                 editUser && (
-                    <Modal title="Edit User" open={isEditModalOpen} onOk={handleEditOk} onCancel={handleEditCancel}>
-                        <Form layout="vertical">
-                            <Form.Item label="ID">
-                                <Input value={editUser.id} name="id" onChange={handleInputChange} disabled />
+                    <Modal title="Edit User" visible={isEditModalOpen} onOk={handleEditOk} onCancel={handleEditCancel}>
+                        <Form form={form} layout="vertical" name="edit_account_form" initialValues={editUser}>
+                            <Form.Item
+                                name="username"
+                                label="Username"
+                                rules={[
+                                    { required: true, message: 'Please input the username!' },
+                                    { validator: validateUniqueUsername } // Add custom validation
+                                ]}
+                            >
+                                <Input />
                             </Form.Item>
-                            <Form.Item label="Role">
-                                <Input value={editUser.role} name="role" onChange={handleInputChange} />
+                            <Form.Item
+                                name="phone"
+                                label="Phone"
+                                rules={[
+                                    { required: true, message: 'Please input the phone number!' },
+                                    { validator: validateUniquePhone }, // Add custom validation
+                                    { validator: validatePhoneNumberLength } // Add phone number length validation
+                                ]}
+                            >
+                                <Input />
                             </Form.Item>
-                            <Form.Item label="Username">
-                                <Input value={editUser.username} name="username" onChange={handleInputChange} />
-                            </Form.Item>
-                            <Form.Item label="Phone">
-                                <Input value={editUser.phone} name="phone" onChange={handleInputChange} />
-                            </Form.Item>
-                            <Form.Item label="Address">
-                                <Input value={editUser.address} name="address" onChange={handleInputChange} />
+                            <Form.Item 
+                                name="address"
+                                label="Address"
+                                rules={[{ required: true, message: 'Please input the address!' }]}
+                            >
+                                <Input />
                             </Form.Item>
                         </Form>
                     </Modal>
+
                 )
             }
+            {/* Modal thông báo chỉnh sửa thành công */}
             <Modal title="Edit Successful" visible={editSuccessModalOpen} onOk={() => setEditSuccessModalOpen(false)} onCancel={() => setEditSuccessModalOpen(false)}>
                 <p>User details have been successfully updated.</p>
             </Modal>
