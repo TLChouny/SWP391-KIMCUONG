@@ -18,7 +18,23 @@ exports.getAllUsers = async (req, res) => {
 // Create a new user
 exports.createUser = async (req, res) => {
   try {
-    const newUser = new User(req.body);
+    const { username, email, password, phoneNumber, address } = req.body;
+
+    // Find the 'user' role ObjectId
+    const defaultUserRole = await Role.findOne({ name: 'user' });
+
+    if (!defaultUserRole) {
+      return res.status(500).json({ message: 'Default role "user" not found' });
+    }
+
+    const newUser = new User({
+      username,
+      email,
+      password,
+      phoneNumber,
+      address,
+      roles: [defaultUserRole._id], // Assign default role ObjectId
+    });
     await newUser.save();
     res.status(201).json(newUser);
   } catch (err) {
