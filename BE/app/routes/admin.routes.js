@@ -2,30 +2,48 @@ const { authJwt } = require("../middlewares");
 const adminController = require("../controllers/admin.controller");
 
 module.exports = function (app) {
-    app.use(function (req, res, next) {
-      res.header(
-        "Access-Control-Allow-Headers",
-        "x-access-token, Origin, Content-Type, Accept"
-      );
-      next();
-    });
-  
-    app.get(
-      "/api/admin/getDashboard",
-      [authJwt.verifyToken, authJwt.isAdmin],
-      adminController.getDashboard
+  // Middleware to set headers allowing CORS and handling tokens
+  app.use(function (req, res, next) {
+    res.header(
+      "Access-Control-Allow-Headers",
+      "x-access-token, Origin, Content-Type, Accept"
     );
-  
-    app.get('/api/admin/getAllUsers',[authJwt.verifyToken, authJwt.isAdmin],adminController.getAllUsers);
+    next();
+  });
 
-    app.get("/api/admin/users/:role",[authJwt.verifyToken, authJwt.isAdmin],adminController.getUsersByRole);
+  app.get(
+    "/api/admin/getAllUsers",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    adminController.getAllUsers
+  );
 
-    app.post('/api/admin/createUser',[authJwt.verifyToken, authJwt.isAdmin],  adminController.createUser);
+  app.get(
+    "/api/admin/users/:role",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    adminController.getUsersByRole
+  );
 
-    app.get('/api/admin/getUserById',[authJwt.verifyToken, authJwt.isAdmin],  adminController.getUserById);
+  app.post(
+    "/api/admin/createUser",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    adminController.createUser
+  );
 
-    app.put('/api/admin/updateUser',[authJwt.verifyToken, authJwt.isAdmin],  adminController.updateUser);
+  app.get(
+    "/api/admin/getUserById/:id", // Updated to include id parameter
+    [authJwt.verifyToken, authJwt.isAdmin],
+    adminController.getUserById
+  );
 
-    app.delete('/api/admin/deleteUser',[authJwt.verifyToken, authJwt.isAdmin],  adminController.deleteUser);
-  };
-  
+  app.put(
+    "/api/admin/updateUser/:id", // Updated to include id parameter
+    [authJwt.verifyToken, authJwt.isAdmin],
+    adminController.updateUser
+  );
+
+  app.delete(
+    "/api/admin/deleteUser/:id", // Updated to include id parameter
+    [authJwt.verifyToken, authJwt.isAdmin],
+    adminController.deleteUser
+  );
+};
