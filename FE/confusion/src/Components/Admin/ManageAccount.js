@@ -71,7 +71,7 @@ function TablePaginationActions(props) {
             </IconButton>
             <IconButton
                 onClick={handleLastPageButtonClick}
-disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
                 aria-label="last page"
             >
                 {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
@@ -95,16 +95,10 @@ const ManageAccount = () => {
     const [editUser, setEditUser] = useState(null);
     const [editSuccessModalOpen, setEditSuccessModalOpen] = useState(false); // State cho modal thông báo
     const [form] = Form.useForm(); // Khởi tạo form
-    const [profile, setProfile] = useState(null);
 
     useEffect(() => {
-    //     setAccounts(SampleAccounts);
-    // }, []);
-    fetch('/api/user/profile')
-    .then(response => response.json())
-    .then(data => setProfile(data))
-    .catch(error => console.error('Error fetching profile data:', error));
-}, []);
+        setAccounts(SampleAccounts);
+    }, []);
 
     const showModal = (user) => {
         setSelectedUser(user);
@@ -165,15 +159,8 @@ const ManageAccount = () => {
         return Promise.resolve();
     };
 
-    const validateUniqueEmail = (rule, value) => {
-        if (accounts.some(user => user.email === value && user.mail !== editUser.email)) {
-            return Promise.reject('Email already exists!');
-        }
-        return Promise.resolve();
-    };
-
     const validateUniquePhone = (rule, value) => {
-if (accounts.some(user => user.phone === value && user.id !== editUser.id)) {
+        if (accounts.some(user => user.phone === value && user.id !== editUser.id)) {
             return Promise.reject('Phone number already exists!');
         }
         return Promise.resolve();
@@ -200,7 +187,6 @@ if (accounts.some(user => user.phone === value && user.id !== editUser.id)) {
                                 <TableCell>ID</TableCell>
                                 <TableCell>Role</TableCell>
                                 <TableCell>Username</TableCell>
-                                <TableCell>Email</TableCell>
                                 <TableCell>Phone</TableCell>
                                 <TableCell>Address</TableCell>
                                 <TableCell></TableCell>
@@ -217,7 +203,6 @@ if (accounts.some(user => user.phone === value && user.id !== editUser.id)) {
                                     </TableCell>
                                     <TableCell>{user.role}</TableCell>
                                     <TableCell>{user.username}</TableCell>
-                                    <TableCell>{user.email}</TableCell>
                                     <TableCell>{user.phone}</TableCell>
                                     <TableCell>{user.address}</TableCell>
                                     <TableCell align="center" className="crud-icons">
@@ -228,7 +213,7 @@ if (accounts.some(user => user.phone === value && user.id !== editUser.id)) {
                                             <>
                                                 <IconButton className="crud-icon" aria-label="edit" onClick={() => showEditModal(user)}>
                                                     <EditIcon />
-</IconButton>
+                                                </IconButton>
                                                 <IconButton className="crud-icon" aria-label="delete" onClick={() => handleDelete(user.id)}>
                                                     <DeleteIcon />
                                                 </IconButton>
@@ -284,7 +269,7 @@ if (accounts.some(user => user.phone === value && user.id !== editUser.id)) {
                     <button className="Btn">
                         <div className="sign">
                             <svg viewBox="0 0 512 512">
-<path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+                                <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
                             </svg>
                         </div>
                         <div className="text">Logout</div>
@@ -371,7 +356,6 @@ setRowsPerPage
                                 <p>ID: {selectedUser.id}</p>
                                 <p>Role: {selectedUser.role}</p>
                                 <p>Username: {selectedUser.username}</p>
-                                <p>Email: {selectedUser.email}</p>
                                 <p>Phone: {selectedUser.phone}</p>
                                 <p>Address: {selectedUser.address}</p>
                             </div>
@@ -383,34 +367,23 @@ setRowsPerPage
                 selectedUser && (
                     <Modal title="User Details" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                         <p>ID: {selectedUser.id}</p>
-                        <p>Role: {selectedUser.role}</p>ManageAccount.js
+                        <p>Role: {selectedUser.role}</p>
                         <p>Username: {selectedUser.username}</p>
-                        <p>Email: {selectedUser.email}</p>
                         <p>Phone: {selectedUser.phone}</p>
                         <p>Address: {selectedUser.address}</p>
-</Modal>
+                    </Modal>
                 )
             }
             {
                 editUser && (
                     <Modal title="Edit User" visible={isEditModalOpen} onOk={handleEditOk} onCancel={handleEditCancel}>
                         <Form form={form} layout="vertical" name="edit_account_form" initialValues={editUser}>
-                        <Form.Item
+                            <Form.Item
                                 name="username"
                                 label="Username"
                                 rules={[
                                     { required: true, message: 'Please input the username!' },
                                     { validator: validateUniqueUsername } // Add custom validation
-                                ]}
-                            >
-                                <Input />
-                            </Form.Item>
-                            <Form.Item
-                                name="email"
-                                label="Email"
-                                rules={[
-                                    { required: true, message: 'Please input the email!' },
-                                    { validator: validateUniqueEmail } // Add custom validation
                                 ]}
                             >
                                 <Input />
@@ -426,7 +399,7 @@ setRowsPerPage
                             >
                                 <Input />
                             </Form.Item>
-                            <Form.Item 
+                            <Form.Item
                                 name="address"
                                 label="Address"
                                 rules={[{ required: true, message: 'Please input the address!' }]}

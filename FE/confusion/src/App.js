@@ -47,6 +47,7 @@ import ProductlistDetail from './Components/ProductlistDetail/ProductlistDetail'
 import New from './Components/new/new';
 import Newlogin from './Components/newlogin/newlogin';
 import OrderHistory from './Components/OrderHistory/OrderHistory';
+import SaleStaff from './Components/SaleStaff/SaleStaff';
 function App() {
   return (
     <Router>
@@ -84,6 +85,8 @@ function App() {
           <Route path='/news' element={<><Header/><Menuheader/><New/></>}/>
           <Route path='/new' element={<><Headerlogin/><Menuheaderlogin/><Newlogin/></>}/>
           <Route path="/orderhistory" element={<OrderHistory/>}/>
+          <Route path="/salestaff" element={<SaleStaff/>}/>
+
         </Routes>
       </>
     </Router>
