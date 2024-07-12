@@ -95,10 +95,16 @@ const ManageAccount = () => {
     const [editUser, setEditUser] = useState(null);
     const [editSuccessModalOpen, setEditSuccessModalOpen] = useState(false); // State cho modal thông báo
     const [form] = Form.useForm(); // Khởi tạo form
+    const [profile, setProfile] = useState(null);
 
     useEffect(() => {
-        setAccounts(SampleAccounts);
-    }, []);
+    //     setAccounts(SampleAccounts);
+    // }, []);
+    fetch('/api/user/profile')
+    .then(response => response.json())
+    .then(data => setProfile(data))
+    .catch(error => console.error('Error fetching profile data:', error));
+}, []);
 
     const showModal = (user) => {
         setSelectedUser(user);
@@ -159,6 +165,13 @@ const ManageAccount = () => {
         return Promise.resolve();
     };
 
+    const validateUniqueEmail = (rule, value) => {
+        if (accounts.some(user => user.email === value && user.mail !== editUser.email)) {
+            return Promise.reject('Email already exists!');
+        }
+        return Promise.resolve();
+    };
+
     const validateUniquePhone = (rule, value) => {
 if (accounts.some(user => user.phone === value && user.id !== editUser.id)) {
             return Promise.reject('Phone number already exists!');
@@ -187,6 +200,7 @@ if (accounts.some(user => user.phone === value && user.id !== editUser.id)) {
                                 <TableCell>ID</TableCell>
                                 <TableCell>Role</TableCell>
                                 <TableCell>Username</TableCell>
+                                <TableCell>Email</TableCell>
                                 <TableCell>Phone</TableCell>
                                 <TableCell>Address</TableCell>
                                 <TableCell></TableCell>
@@ -203,6 +217,7 @@ if (accounts.some(user => user.phone === value && user.id !== editUser.id)) {
                                     </TableCell>
                                     <TableCell>{user.role}</TableCell>
                                     <TableCell>{user.username}</TableCell>
+                                    <TableCell>{user.email}</TableCell>
                                     <TableCell>{user.phone}</TableCell>
                                     <TableCell>{user.address}</TableCell>
                                     <TableCell align="center" className="crud-icons">
@@ -356,6 +371,7 @@ setRowsPerPage
                                 <p>ID: {selectedUser.id}</p>
                                 <p>Role: {selectedUser.role}</p>
                                 <p>Username: {selectedUser.username}</p>
+                                <p>Email: {selectedUser.email}</p>
                                 <p>Phone: {selectedUser.phone}</p>
                                 <p>Address: {selectedUser.address}</p>
                             </div>
@@ -369,6 +385,7 @@ setRowsPerPage
                         <p>ID: {selectedUser.id}</p>
                         <p>Role: {selectedUser.role}</p>ManageAccount.js
                         <p>Username: {selectedUser.username}</p>
+                        <p>Email: {selectedUser.email}</p>
                         <p>Phone: {selectedUser.phone}</p>
                         <p>Address: {selectedUser.address}</p>
 </Modal>
@@ -378,12 +395,22 @@ setRowsPerPage
                 editUser && (
                     <Modal title="Edit User" visible={isEditModalOpen} onOk={handleEditOk} onCancel={handleEditCancel}>
                         <Form form={form} layout="vertical" name="edit_account_form" initialValues={editUser}>
-                            <Form.Item
+                        <Form.Item
                                 name="username"
                                 label="Username"
                                 rules={[
                                     { required: true, message: 'Please input the username!' },
                                     { validator: validateUniqueUsername } // Add custom validation
+                                ]}
+                            >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item
+                                name="email"
+                                label="Email"
+                                rules={[
+                                    { required: true, message: 'Please input the email!' },
+                                    { validator: validateUniqueEmail } // Add custom validation
                                 ]}
                             >
                                 <Input />

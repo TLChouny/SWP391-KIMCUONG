@@ -1,93 +1,120 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 import { Button, Form, Input, Modal, Table } from 'antd';
 import SampleProducts from '../Sample/SampleProducts';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './ManageProduct.css';
 
-const { Item: FormItem } = Form;
-
-function ManageProduct() {
-    const [productID, setProductID] = useState('');
-    const [productName, setProductName] = useState('');
-    const [productImage, setProductImage] = useState('');
-    const [mainIngredient, setMainIngredient] = useState('');
-    const [secondaryIngredient, setSecondaryIngredient] = useState('');
-    const [cover, setCover] = useState('');
-    const [productType, setProductType] = useState('');
-    const [productPrice, setProductPrice] = useState('');
-    const [productQuantity, setProductQuantity] = useState('');
-    const [products, setProducts] = useState([]);
+const ManageProduct = () => {
+    const [products, setProducts] = useState(SampleProducts);
     const [modalProduct, setModalProduct] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [showProductForm, setShowProductForm] = useState(false);
 
-    useEffect(() => {
-        setProducts(SampleProducts);
-    }, []);
+    const [form] = Form.useForm(); // Form instance for Add Product modal
+    const [editForm] = Form.useForm(); // Form instance for Edit Product modal
 
     const addProduct = () => {
-        if (productName.trim() !== '' && productType.trim() !== '' && productQuantity !== '') {
-            const newProduct = {
-                id: productID,
-                name: productName,
-                image: productImage,
-                mainIngredient: mainIngredient,
-                secondaryIngredient: secondaryIngredient,
-                cover: cover,
-                type: productType,
-                price: productPrice,
-                quantity: parseInt(productQuantity)
-            };
-            setProducts([...products, newProduct]);
-            clearForm();
-            setShowProductForm(false);
-        }
-    };
+        form.validateFields().then(values => {
+            // Check if ID is unique
+            if (products.some(product => product.id === values.id)) {
+                toast.error('ID must be unique');
+                return;
+            }
 
-    const clearForm = () => {
-        setProductID('');
-        setProductName('');
-        setProductImage('');
-        setMainIngredient('');
-        setSecondaryIngredient('');
-        setCover('');
-        setProductType('');
-        setProductPrice('');
-        setProductQuantity('');
+            // Check if Name is unique
+            if (products.some(product => product.name === values.name)) {
+                toast.error('Name must be unique');
+                return;
+            }
+            const newProduct = {
+                id: values.id,
+                name: values.name,
+                image: values.image,
+                mainIngredient: values.mainIngredient,
+                secondaryIngredient: values.secondaryIngredient,
+                cover: values.cover,
+                type: values.type,
+                price: parseFloat(values.price), // Convert to number
+                quantity: parseInt(values.quantity), // Convert to number
+            };
+    
+            // Check if price and quantity are positive numbers
+            if (newProduct.price <= 0 || isNaN(newProduct.price)) {
+                toast.error('Price must be a positive number');
+                return;
+            }
+            if (newProduct.quantity <= 0 || isNaN(newProduct.quantity)) {
+                toast.error('Quantity must be a positive number');
+                return;
+            }
+    
+            setProducts([...products, newProduct]);
+            form.resetFields();
+            setShowProductForm(false);
+            toast.success('Product added successfully');
+        }).catch(errorInfo => {
+            console.log('Validation failed:', errorInfo);
+        });
     };
+    
+    const saveEditProduct = () => {
+            editForm.validateFields().then(values => {
+                // Check if Name is unique among other products (excluding the current one)
+                if (products.some(product => product.name === values.name && product.id !== modalProduct.id)) {
+                    toast.error('Name must be unique');
+                    return;
+                }
+            const updatedProducts = products.map(p =>
+                p.id === modalProduct.id ? {
+                    ...p,
+...values,
+                    price: parseFloat(values.price), // Convert to number
+                    quantity: parseInt(values.quantity), // Convert to number
+                } : p
+            );
+    
+            // Check if price and quantity are positive numbers
+            const editedProduct = updatedProducts.find(p => p.id === modalProduct.id);
+            if (editedProduct.price <= 0 || isNaN(editedProduct.price)) {
+                toast.error('Price must be a positive number');
+                return;
+            }
+            if (editedProduct.quantity <= 0 || isNaN(editedProduct.quantity)) {
+                toast.error('Quantity must be a positive number');
+                return;
+            }
+    
+            setProducts(updatedProducts);
+            setShowModal(false);
+            toast.success('Product updated successfully');
+        }).catch(errorInfo => {
+            console.log('Validation failed:', errorInfo);
+        });
+    };    
 
     const deleteProduct = (id) => {
-        const updatedProducts = products.filter(product => product.id !== id);
-        setProducts(updatedProducts);
+        if (window.confirm('Are you sure to delete this product?')) {
+            const updatedProducts = products.filter(product => product.id !== id);
+            setProducts(updatedProducts);
+            toast.success('Product deleted successfully');
+        }
     };
 
     const openEditModal = (product) => {
         setModalProduct(product);
         setShowModal(true);
-    };
-
-    const saveEditProduct = () => {
-        const updatedProducts = products.map(p =>
-            p.id === modalProduct.id ? modalProduct : p
-        );
-        setProducts(updatedProducts);
-        setShowModal(false);
+        editForm.setFieldsValue(product); // Set initial values for Edit Product form
     };
 
     const handleCloseModal = () => setShowModal(false);
 
-    const handleEditChange = (e) => {
-        const { name, value } = e.target;
-        setModalProduct(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
-
     return (
         <div className="ManageProduct">
+            <ToastContainer />
             <div className="Top">
-                <Link to="/">
+                <Link to="/register">
                     <button className="Btn">
                         <div className="sign">
                             <svg viewBox="0 0 512 512">
@@ -104,206 +131,222 @@ function ManageProduct() {
                         <img src="../assets/admin.png" className="adminavatar" alt="Avatar" />
                     </Link>
                     <p className="adminname">Manager, Long Châu</p>
-                    <div className="admininfo">
-                        Tên: Long Châu<br />
-                        SĐT: 0784871238<br />
-                        Role: Manager
-                    </div>
                 </div>
-                <div className="AdminTable">
-                    <div className="AdminTableList">
-                        <div><Link smooth to="#mtt-5">Manage Product</Link></div>
-                        <div><Link smooth to="/">Manage PHIẾU CHỨNG NHẬN</Link></div>
-                        <div><Link smooth to="/">Manage PHIẾU BẢO HÀNH</Link></div>
-                        <div><Link smooth to="/">Manage PHIẾU GIẢM GIÁ</Link></div>
-                        <div><Link smooth to="/">My Profile</Link></div>
-                    </div>
+                <div className="AdminTableList">
+                    <div><Link smooth to="/manager">Manage Product</Link></div>
+<div><Link smooth to="/certificate">Manage Certification Form</Link></div>
+                    <div><Link smooth to="/">Manage Warranty</Link></div>
+                    <div><Link smooth to="/">Manage Coupons</Link></div>
+                    <div><Link smooth to="/">My Profile</Link></div>
                 </div>
             </div>
             <div className="right-panel">
-                <div>
-                    <Button type="primary" onClick={() => setShowProductForm(true)}>
-                        Create product
-                    </Button>
-                    <Modal
-                        title="Thêm sản phẩm mới"
-                        visible={showProductForm}
-                        onCancel={() => setShowProductForm(false)}
-                        footer={null}
-                    >
-                        <Form layout="vertical">
-                            <FormItem label="ID">
-                                <Input
-                                    placeholder="Enter product ID"
-                                    value={productID}
-                                    onChange={(e) => setProductID(e.target.value)}
-                                />
-                            </FormItem>
-                            <FormItem label="Tên sản phẩm">
-                                <Input
-                                    placeholder="Enter product name"
-                                    value={productName}
-                                    onChange={(e) => setProductName(e.target.value)}
-                                />
-                            </FormItem>
-                            <FormItem label="Image">
-                                <Input
-                                    placeholder="Enter product image URL"
-                                    value={productImage}
-                                    onChange={(e) => setProductImage(e.target.value)}
-                                />
-                            </FormItem>
-                            <FormItem label="Main Ingredient">
-                                <Input
-                                    placeholder="Enter main ingredient"
-                                    value={mainIngredient}
-                                    onChange={(e) => setMainIngredient(e.target.value)}
-                                />
-                            </FormItem>
-                            <FormItem label="Secondary Ingredient">
-                                <Input
-                                    placeholder="Enter secondary ingredient"
-                                    value={secondaryIngredient}
-                                    onChange={(e) => setSecondaryIngredient(e.target.value)}
-                                />
-                            </FormItem>
-                            <FormItem label="Cover">
-                                <Input
-                                    placeholder="Enter cover"
-                                    value={cover}
-                                    onChange={(e) => setCover(e.target.value)}
-                                />
-                            </FormItem>
-                            <FormItem label="Type">
-                                <Input
-                                    placeholder="Enter product type"
-                                    value={productType}
-                                    onChange={(e) => setProductType(e.target.value)}
-                                />
-                            </FormItem>
-                            <FormItem label="Price">
-                                <Input
-                                    placeholder="Enter product price"
-                                    value={productPrice}
-                                    onChange={(e) => setProductPrice(e.target.value)}
-                                />
-                            </FormItem>
-                            <FormItem label="Quantity">
-                                <Input
-                                    placeholder="Enter product quantity"
-                                    value={productQuantity}
-                                    onChange={(e) => setProductQuantity(e.target.value)}
-                                />
-                            </FormItem>
-                            <Button type="primary" onClick={addProduct}>
-                                Thêm sản phẩm
-                            </Button>
-                        </Form>
-                    </Modal>
+                <Button type="primary" onClick={() => setShowProductForm(true)} className='create-product'>
+                    Create product
+                </Button>
+                <Modal
+                    title="Add New Product"
+                    visible={showProductForm}
+                    onCancel={() => setShowProductForm(false)}
+                    footer={[
+                        <Button key="cancel" onClick={() => setShowProductForm(false)}>
+                            Cancel
+                        </Button>,
+                        <Button key="submit" type="primary" onClick={addProduct}>
+                            Add Product
+                        </Button>,
+                    ]}
+                >
+                    <Form form={form} layout="vertical">
+                        <Form.Item
+                            name="id"
+                            label="ID"
+                            rules={[
+                                { required: true, message: 'Please enter product ID' },
+                            ]}
+                            validateTrigger={['onChange', 'onBlur']}
+                        >
+                            <Input placeholder="Enter product ID" />
+                        </Form.Item>
+                        <Form.Item
+                            name="name"
+                            label="Name"
+                            rules={[{ required: true, message: 'Please enter product name' }]}
+                            validateTrigger={['onChange', 'onBlur']}
+                        >
+                            <Input placeholder="Enter product name" />
+                        </Form.Item>
+                        <Form.Item
+                            name="image"
+                            label="Image"
+                            rules={[{ required: true, message: 'Please enter product image URL' }]}
+                            validateTrigger={['onChange', 'onBlur']}
+                        >
+                            <Input placeholder="Enter product image URL" />
+                        </Form.Item>
+                        <Form.Item
+                            name="mainIngredient"
+                            label="Main Ingredient"
+                            rules={[{ required: true, message: 'Please enter product main ingredient' }]}
+                            validateTrigger={['onChange', 'onBlur']}
+                        >
+                            <Input placeholder="Enter main ingredient" />
+                        </Form.Item>
+                        <Form.Item
+name="secondaryIngredient"
+                            label="Secondary Ingredient"
+                            rules={[{ required: true, message: 'Please enter product secondary ingredient' }]}
+                            validateTrigger={['onChange', 'onBlur']}
+                        >
+                            <Input placeholder="Enter secondary ingredient" />
+                        </Form.Item>
+                        <Form.Item
+                            name="cover"
+                            label="Cover"
+                            rules={[{ required: true, message: 'Please enter product cover' }]}
+                            validateTrigger={['onChange', 'onBlur']}
+                        >
+                            <Input placeholder="Enter cover" />
+                        </Form.Item>
+                        <Form.Item
+                            name="type"
+                            label="Type"
+                            rules={[{ required: true, message: 'Please enter product type' }]}
+                            validateTrigger={['onChange', 'onBlur']}
+                        >
+                            <Input placeholder="Enter product type" />
+                        </Form.Item>
+                        <Form.Item
+                            name="price"
+                            label="Price"
+                            rules={[
+                                { required: true, message: 'Please enter product price' },
+                            ]}
+                            validateTrigger={['onChange', 'onBlur']}
+                        >
+                            <Input placeholder="Enter product price" />
+                        </Form.Item>
+                        <Form.Item
+                            name="quantity"
+                            label="Quantity"
+                            rules={[{ required: true, message: 'Please enter product quanity' }]}
+                            validateTrigger={['onChange', 'onBlur']}
+                        >
+                            <Input placeholder="Enter product quantity" />
+                        </Form.Item>
+                    </Form>
+                </Modal>
 
-                    <div className="manager-table-product">
-                        <Table className="mt-3" dataSource={products} rowKey="id">
-                            <Table.Column title="ID" dataIndex="id" key="id" />
-                            <Table.Column title="Name" dataIndex="name" key="name" />
-                            <Table.Column title="Image" dataIndex="image" key="image" />
-                            <Table.Column title="Main Ingredient" dataIndex="mainIngredient" key="mainIngredient" />
-                            <Table.Column title="Secondary Ingredient" dataIndex="secondaryIngredient" key="secondaryIngredient" />
-                            <Table.Column title="Cover" dataIndex="cover" key="cover" />
-                            <Table.Column title="Type" dataIndex="type" key="type" />
-                            <Table.Column title="Price" dataIndex="price" key="price" />
-                            <Table.Column title="Quantity" dataIndex="quantity" key="quantity" />
-                            <Table.Column
-                                title="Actions"
-                                key="actions"
-                                render={(text, record) => (
-                                    <>
-                                        <Button type="link" onClick={() => openEditModal(record)}>
-                                            Edit
-                                        </Button>
-                                        <Button type="link" onClick={() => deleteProduct(record.id)}>
-                                            Delete
-                                        </Button>
-                                    </>
-                                )}
-                            />
-                        </Table>
-                    </div>
-
-                    <Modal
-                        title="Edit Product"
-                        visible={showModal}
-                        onOk={saveEditProduct}
-                        onCancel={handleCloseModal}
-                    >
-                        {modalProduct && (
-                            <Form layout="vertical">
-                                <FormItem label="ID">
-                                    <Input
-                                        name="id"
-                                        value={modalProduct.id}
-                                        onChange={handleEditChange}
-                                    />
-                                </FormItem>
-                                <FormItem label="Name">
-                                    <Input
-                                        name="name"
-                                        value={modalProduct.name}
-                                        onChange={handleEditChange}
-                                    />
-                                </FormItem>
-                                <FormItem label="Image">
-                                    <Input
-                                        name="image"
-                                        value={modalProduct.image}
-                                        onChange={handleEditChange}
-                                    />
-                                </FormItem>
-                                <FormItem label="Main Ingredient">
-                                    <Input
-                                        name="mainIngredient"
-                                        value={modalProduct.mainIngredient}
-                                        onChange={handleEditChange}
-                                    />
-                                </FormItem>
-                                <FormItem label="Secondary Ingredient">
-                                    <Input
-                                        name="secondaryIngredient"
-                                        value={modalProduct.secondaryIngredient}
-                                        onChange={handleEditChange}
-                                    />
-                                </FormItem>
-                                <FormItem label="Cover">
-                                    <Input
-                                        name="cover"
-                                        value={modalProduct.cover}
-                                        onChange={handleEditChange}
-                                    />
-                                </FormItem>
-                                <FormItem label="Type">
-                                    <Input
-                                        name="type"
-                                        value={modalProduct.type}
-                                        onChange={handleEditChange}
-                                    />
-                                </FormItem>
-                                <FormItem label="Price">
-                                    <Input
-                                        name="price"
-                                        value={modalProduct.price}
-                                        onChange={handleEditChange}
-                                    />
-                                </FormItem>
-                                <FormItem label="Quantity">
-                                    <Input
-                                        name="quantity"
-                                        value={modalProduct.quantity}
-                                        onChange={handleEditChange}
-                                    />
-                                </FormItem>
-                            </Form>
+                <Table dataSource={products} rowKey="id">
+                    <Table.Column title="ID" dataIndex="id" key="id" />
+                    <Table.Column title="Name" dataIndex="name" key="name" />
+                    <Table.Column title="Image" dataIndex="image" key="image" />
+                    <Table.Column title="Main Ingredient" dataIndex="mainIngredient" key="mainIngredient" />
+                    <Table.Column title="Secondary Ingredient" dataIndex="secondaryIngredient" key="secondaryIngredient" />
+                    <Table.Column title="Cover" dataIndex="cover" key="cover" />
+                    <Table.Column title="Type" dataIndex="type" key="type" />
+                    <Table.Column title="Price" dataIndex="price" key="price" />
+<Table.Column title="Quantity" dataIndex="quantity" key="quantity" />
+                    <Table.Column
+                        title="Actions"
+                        key="actions"
+                        render={(text, record) => (
+                            <>
+                                <Button type="link" onClick={() => openEditModal(record)}>
+                                    Edit
+                                </Button>
+                                <Button type="link" onClick={() => deleteProduct(record.id)}>
+                                    Delete
+                                </Button>
+                            </>
                         )}
-                    </Modal>
-                </div>
+                    />
+                </Table>
+
+                <Modal
+    title="Edit Product"
+    visible={showModal}
+    onOk={saveEditProduct}
+    onCancel={handleCloseModal}
+>
+    <Form form={editForm} layout="vertical" initialValues={modalProduct}>
+        <Form.Item
+            name="id"
+            label="ID"
+        >
+            <Input disabled />
+        </Form.Item>
+        <Form.Item
+            name="name"
+            label="Name"
+            rules={[{ required: true, message: 'Please enter product name' }]}
+            validateTrigger={['onChange', 'onBlur']}
+        >
+            <Input />
+        </Form.Item>
+        <Form.Item
+            name="image"
+            label="Image"
+            rules={[{ required: true, message: 'Please enter product image URL' }]}
+            validateTrigger={['onChange', 'onBlur']}
+        >
+            <Input />
+        </Form.Item>
+        <Form.Item
+            name="mainIngredient"
+            label="Main Ingredient"
+            rules={[{ required: true, message: 'Please enter main ingredient' }]}
+            validateTrigger={['onChange', 'onBlur']}
+        >
+            <Input />
+        </Form.Item>
+        <Form.Item
+            name="secondaryIngredient"
+            label="Secondary Ingredient"
+            rules={[{ required: true, message: 'Please enter secondary ingredient' }]}
+            validateTrigger={['onChange', 'onBlur']}
+        >
+            <Input />
+        </Form.Item>
+        <Form.Item
+            name="cover"
+            label="Cover"
+            rules={[{ required: true, message: 'Please enter cover' }]}
+            validateTrigger={['onChange', 'onBlur']}
+        >
+            <Input />
+        </Form.Item>
+        <Form.Item
+            name="type"
+            label="Type"
+            rules={[{ required: true, message: 'Please enter product type' }]}
+            validateTrigger={['onChange', 'onBlur']}
+        >
+            <Input />
+        </Form.Item>
+        <Form.Item
+            name="price"
+            label="Price"
+            rules={[
+                { required: true, message: 'Please enter product price' },
+            ]}
+            validateTrigger={['onChange', 'onBlur']}
+        >
+            <Input />
+        </Form.Item>
+        <Form.Item
+            name="quantity"
+label="Quantity"
+            rules={[
+                { required: true, message: 'Please enter product quantity' },
+            ]}
+            validateTrigger={['onChange', 'onBlur']}
+        >
+            <Input />
+        </Form.Item>
+    </Form>
+</Modal>
+
             </div>
         </div>
     );
