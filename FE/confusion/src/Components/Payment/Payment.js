@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './Payment.css';
-import { Button, Input, Form } from 'antd';
+import { Button, Form, Select } from 'antd';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+
+const { Option } = Select;
 
 const Payment = () => {
     const location = useLocation();
@@ -13,6 +16,21 @@ const Payment = () => {
     const [discount, setDiscount] = useState(0);
     const [isCouponValid, setIsCouponValid] = useState(true);
     const [paymentMethod, setPaymentMethod] = useState('');
+    const [promotions, setPromotions] = useState([]);
+    const [selectedPromotion, setSelectedPromotion] = useState(null); // State to store the selected promotion
+
+    useEffect(() => {
+        fetchPromotions();
+    }, []);
+
+    const fetchPromotions = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/promotions');
+            setPromotions(response.data);
+        } catch (error) {
+            console.error('Error fetching promotions:', error);
+        }
+    };
 
     const formatPrice = (price) => {
         let parts = price.toFixed(0).toString().split(".");
@@ -25,13 +43,20 @@ const Payment = () => {
     };
 
     const handleApplyCoupon = () => {
-        if (couponCode === 'DISCOUNT10') {
-            setDiscount(0.1); // 10% discount
+        if (selectedPromotion) {
+            setDiscount(selectedPromotion.promotionValue);
             setIsCouponValid(true);
+            toast.success(`Bạn đang sử dụng mã giảm giá ${selectedPromotion.promotionId} có mức giảm giá là ${selectedPromotion.promotionValue}`);
         } else {
             setDiscount(0);
             setIsCouponValid(false);
         }
+    };
+
+    const handleSelectChange = (value) => {
+        const selectedPromo = promotions.find(promo => promo.promotionId === value);
+        setCouponCode(value);
+        setSelectedPromotion(selectedPromo);
     };
 
     const handlePayment = () => {
@@ -40,7 +65,7 @@ const Payment = () => {
             return;
         }
 
-        if (paymentMethod === 'cash-on-delivery') {
+        if (paymentMethod === 'momo') {
             navigate('/orderhistory', { state: { cart, totalPrice: discountedPrice > 0 ? discountedPrice : totalPrice, paymentMethod } });
         }
     };
@@ -84,9 +109,9 @@ const Payment = () => {
                                     value="credit-card"
                                     onChange={(e) => setPaymentMethod(e.target.value)}
                                 />
-                                <label htmlFor="credit-card">VN Pay</label>
+                                <label htmlFor="credit-card">Momo</label>
                             </div>
-                            <div className="payment-option">
+                            {/* <div className="payment-option">
                                 <input
                                     type="radio"
                                     id="cash-on-delivery"
@@ -95,15 +120,19 @@ const Payment = () => {
                                     onChange={(e) => setPaymentMethod(e.target.value)}
                                 />
                                 <label htmlFor="cash-on-delivery">Cash on Delivery</label>
-                            </div>
+                            </div> */}
                             <div className="coupon-section">
                                 <h2>Choose promotion code </h2>
-                                <Input
-                                    placeholder="Enter promotion code"
-                                    value={couponCode}
-                                    onChange={(e) => setCouponCode(e.target.value)}
+                                <Select
                                     style={{ width: '200px', marginRight: '10px', marginTop: "20px" }}
-                                />
+                                    placeholder="Select promotion code"
+                                    onChange={handleSelectChange}
+                                    value={couponCode}
+                                >
+                                    {promotions.map(promo => (
+                                        <Option key={promo._id} value={promo.promotionId}>{promo.promotionId}</Option>
+                                    ))}
+                                </Select>
                                 <Button onClick={handleApplyCoupon}>Apply</Button>
                                 {!isCouponValid && <p style={{ color: 'red' }}>Invalid coupon code</p>}
                             </div>

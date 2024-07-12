@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Menu, Spin } from "antd";
 import { Link } from "react-router-dom";
-import ProfileUser from "../Profileuser/Profileuser"; 
+import ProfileUser from "../Profileuser/Profileuser";
 
 const URL = "http://localhost:8080/api/user/profile";
 
@@ -44,7 +44,7 @@ const Profile = () => {
     const renderMenuContent = () => {
         switch (selectedMenuItem) {
             case "profile":
-                return <ProfileUser />;
+                return <ProfileUser setUsername={setUsername} />;
             case "order-history":
                 return (
                     <div>
@@ -80,7 +80,7 @@ const Profile = () => {
                 </div>
                 <Menu mode="vertical" selectedKeys={[selectedMenuItem]} onClick={handleMenuClick}>
                     <Menu.Item key="profile">User Profile</Menu.Item>
-<Menu.Item key="order-history">Order History</Menu.Item>
+                    <Menu.Item key="order-history">Order History</Menu.Item>
                     <Menu.Item key="bill-info">Information of Bill</Menu.Item>
                     <Menu.Item key="warranty-lookup">Warranty Lookup</Menu.Item>
                     <Menu.Item key="logout" icon={<LogoutOutlined />}><Link to="/">Logout</Link></Menu.Item>
