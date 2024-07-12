@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 import { Button, Form, Input, Modal, Table } from 'antd';
-import SampleProducts from '../Sample/SampleProducts';
+import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './ManageProduct.css';
 
+const URL = "http://localhost:8080/api/products";
+
 const ManageProduct = () => {
-    const [products, setProducts] = useState(SampleProducts);
+    const [products, setProducts] = useState([]);
     const [modalProduct, setModalProduct] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [showProductForm, setShowProductForm] = useState(false);
@@ -15,41 +17,52 @@ const ManageProduct = () => {
     const [form] = Form.useForm(); // Form instance for Add Product modal
     const [editForm] = Form.useForm(); // Form instance for Edit Product modal
 
+    useEffect(() => {
+        // Fetch products from API
+        axios.get(URL)
+            .then(response => {
+                setProducts(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error fetching the products!', error);
+            });
+    }, []);
+
     const addProduct = () => {
         form.validateFields().then(values => {
             // Check if ID is unique
-            if (products.some(product => product.id === values.id)) {
+            if (products.some(product => product.ProductId === values.id)) {
                 toast.error('ID must be unique');
                 return;
             }
 
             // Check if Name is unique
-            if (products.some(product => product.name === values.name)) {
+            if (products.some(product => product.ProductName === values.name)) {
                 toast.error('Name must be unique');
                 return;
             }
             const newProduct = {
-                id: values.id,
-                name: values.name,
-                image: values.image,
-                mainIngredient: values.mainIngredient,
-                secondaryIngredient: values.secondaryIngredient,
-                cover: values.cover,
-                type: values.type,
-                price: parseFloat(values.price), // Convert to number
-                quantity: parseInt(values.quantity), // Convert to number
+                ProductId: values.id,
+                ProductName: values.name,
+                ProductImageURL: values.image,
+                ProductMain: values.mainIngredient,
+                ProductSub: values.secondaryIngredient,
+                ProductMounting: values.cover,
+                ProductCategory: values.type,
+                ProductPrice: parseFloat(values.price), // Convert to number
+                ProductQuantity: parseInt(values.quantity), // Convert to number
             };
-    
+
             // Check if price and quantity are positive numbers
-            if (newProduct.price <= 0 || isNaN(newProduct.price)) {
+            if (newProduct.ProductPrice <= 0 || isNaN(newProduct.ProductPrice)) {
                 toast.error('Price must be a positive number');
                 return;
             }
-            if (newProduct.quantity <= 0 || isNaN(newProduct.quantity)) {
+            if (newProduct.ProductQuantity <= 0 || isNaN(newProduct.ProductQuantity)) {
                 toast.error('Quantity must be a positive number');
                 return;
             }
-    
+
             setProducts([...products, newProduct]);
             form.resetFields();
             setShowProductForm(false);
@@ -58,45 +71,50 @@ const ManageProduct = () => {
             console.log('Validation failed:', errorInfo);
         });
     };
-    
+
     const saveEditProduct = () => {
-            editForm.validateFields().then(values => {
-                // Check if Name is unique among other products (excluding the current one)
-                if (products.some(product => product.name === values.name && product.id !== modalProduct.id)) {
-                    toast.error('Name must be unique');
-                    return;
-                }
+        editForm.validateFields().then(values => {
+            // Check if Name is unique among other products (excluding the current one)
+            if (products.some(product => product.ProductName === values.name && product.ProductId !== modalProduct.ProductId)) {
+                toast.error('Name must be unique');
+                return;
+            }
             const updatedProducts = products.map(p =>
-                p.id === modalProduct.id ? {
+                p.ProductId === modalProduct.ProductId ? {
                     ...p,
-...values,
-                    price: parseFloat(values.price), // Convert to number
-                    quantity: parseInt(values.quantity), // Convert to number
+                    ProductName: values.name,
+                    ProductImageURL: values.image,
+                    ProductMain: values.mainIngredient,
+                    ProductSub: values.secondaryIngredient,
+                    ProductMounting: values.cover,
+                    ProductCategory: values.type,
+                    ProductPrice: parseFloat(values.price), // Convert to number
+                    ProductQuantity: parseInt(values.quantity), // Convert to number
                 } : p
             );
-    
+
             // Check if price and quantity are positive numbers
-            const editedProduct = updatedProducts.find(p => p.id === modalProduct.id);
-            if (editedProduct.price <= 0 || isNaN(editedProduct.price)) {
+            const editedProduct = updatedProducts.find(p => p.ProductId === modalProduct.ProductId);
+            if (editedProduct.ProductPrice <= 0 || isNaN(editedProduct.ProductPrice)) {
                 toast.error('Price must be a positive number');
                 return;
             }
-            if (editedProduct.quantity <= 0 || isNaN(editedProduct.quantity)) {
+            if (editedProduct.ProductQuantity <= 0 || isNaN(editedProduct.ProductQuantity)) {
                 toast.error('Quantity must be a positive number');
                 return;
             }
-    
+
             setProducts(updatedProducts);
             setShowModal(false);
             toast.success('Product updated successfully');
         }).catch(errorInfo => {
             console.log('Validation failed:', errorInfo);
         });
-    };    
+    };
 
     const deleteProduct = (id) => {
         if (window.confirm('Are you sure to delete this product?')) {
-            const updatedProducts = products.filter(product => product.id !== id);
+            const updatedProducts = products.filter(product => product.ProductId !== id);
             setProducts(updatedProducts);
             toast.success('Product deleted successfully');
         }
@@ -105,7 +123,17 @@ const ManageProduct = () => {
     const openEditModal = (product) => {
         setModalProduct(product);
         setShowModal(true);
-        editForm.setFieldsValue(product); // Set initial values for Edit Product form
+        editForm.setFieldsValue({
+            id: product.ProductId,
+            name: product.ProductName,
+            image: product.ProductImageURL,
+            mainIngredient: product.ProductMain,
+            secondaryIngredient: product.ProductSub,
+            cover: product.ProductMounting,
+            type: product.ProductCategory,
+            price: product.ProductPrice,
+            quantity: product.ProductQuantity
+        });
     };
 
     const handleCloseModal = () => setShowModal(false);
@@ -134,7 +162,7 @@ const ManageProduct = () => {
                 </div>
                 <div className="AdminTableList">
                     <div><Link smooth to="/manager">Manage Product</Link></div>
-<div><Link smooth to="/certificate">Manage Certification Form</Link></div>
+                    <div><Link smooth to="/certificate">Manage Certification Form</Link></div>
                     <div><Link smooth to="/">Manage Warranty</Link></div>
                     <div><Link smooth to="/">Manage Coupons</Link></div>
                     <div><Link smooth to="/">My Profile</Link></div>
@@ -178,7 +206,7 @@ const ManageProduct = () => {
                         </Form.Item>
                         <Form.Item
                             name="image"
-                            label="Image"
+                            label="Image URL"
                             rules={[{ required: true, message: 'Please enter product image URL' }]}
                             validateTrigger={['onChange', 'onBlur']}
                         >
@@ -186,16 +214,16 @@ const ManageProduct = () => {
                         </Form.Item>
                         <Form.Item
                             name="mainIngredient"
-                            label="Main Ingredient"
-                            rules={[{ required: true, message: 'Please enter product main ingredient' }]}
+                            label="Main ingredient"
+                            rules={[{ required: true, message: 'Please enter main ingredient' }]}
                             validateTrigger={['onChange', 'onBlur']}
                         >
                             <Input placeholder="Enter main ingredient" />
                         </Form.Item>
                         <Form.Item
-name="secondaryIngredient"
-                            label="Secondary Ingredient"
-                            rules={[{ required: true, message: 'Please enter product secondary ingredient' }]}
+                            name="secondaryIngredient"
+                            label="Secondary ingredient"
+                            rules={[{ required: true, message: 'Please enter secondary ingredient' }]}
                             validateTrigger={['onChange', 'onBlur']}
                         >
                             <Input placeholder="Enter secondary ingredient" />
@@ -206,7 +234,7 @@ name="secondaryIngredient"
                             rules={[{ required: true, message: 'Please enter product cover' }]}
                             validateTrigger={['onChange', 'onBlur']}
                         >
-                            <Input placeholder="Enter cover" />
+                            <Input placeholder="Enter product cover" />
                         </Form.Item>
                         <Form.Item
                             name="type"
@@ -221,135 +249,139 @@ name="secondaryIngredient"
                             label="Price"
                             rules={[
                                 { required: true, message: 'Please enter product price' },
+                                { type: 'number', message: 'Price must be a number' },
                             ]}
                             validateTrigger={['onChange', 'onBlur']}
                         >
-                            <Input placeholder="Enter product price" />
+                            <Input type="number" placeholder="Enter product price" />
                         </Form.Item>
                         <Form.Item
                             name="quantity"
                             label="Quantity"
-                            rules={[{ required: true, message: 'Please enter product quanity' }]}
+                            rules={[
+                                { required: true, message: 'Please enter product quantity' },
+                                { type: 'number', message: 'Quantity must be a number' },
+                            ]}
                             validateTrigger={['onChange', 'onBlur']}
                         >
-                            <Input placeholder="Enter product quantity" />
+                            <Input type="number" placeholder="Enter product quantity" />
                         </Form.Item>
                     </Form>
                 </Modal>
-
-                <Table dataSource={products} rowKey="id">
-                    <Table.Column title="ID" dataIndex="id" key="id" />
-                    <Table.Column title="Name" dataIndex="name" key="name" />
-                    <Table.Column title="Image" dataIndex="image" key="image" />
-                    <Table.Column title="Main Ingredient" dataIndex="mainIngredient" key="mainIngredient" />
-                    <Table.Column title="Secondary Ingredient" dataIndex="secondaryIngredient" key="secondaryIngredient" />
-                    <Table.Column title="Cover" dataIndex="cover" key="cover" />
-                    <Table.Column title="Type" dataIndex="type" key="type" />
-                    <Table.Column title="Price" dataIndex="price" key="price" />
-<Table.Column title="Quantity" dataIndex="quantity" key="quantity" />
+                <Table dataSource={products} rowKey="ProductId">
+                    <Table.Column title="Product ID" dataIndex="ProductId" key="ProductId" />
+                    <Table.Column title="Product Name" dataIndex="ProductName" key="ProductName" />
+                    <Table.Column 
+                        title="Image URL" 
+                        dataIndex="ProductImageURL" 
+                        key="ProductImageURL" 
+                        render={text => <img src={text} alt="Product" style={{ width: '100px' }} />} 
+                    />
+                    <Table.Column title="Main Ingredient" dataIndex="ProductMain" key="ProductMain" />
+                    <Table.Column title="Secondary Ingredient" dataIndex="ProductSub" key="ProductSub" />
+                    <Table.Column title="Cover" dataIndex="ProductMounting" key="ProductMounting" />
+                    <Table.Column title="Type" dataIndex="ProductCategory" key="ProductCategory" />
+                    <Table.Column title="Price" dataIndex="ProductPrice" key="ProductPrice" />
+                    <Table.Column title="Quantity" dataIndex="ProductQuantity" key="ProductQuantity" />
                     <Table.Column
                         title="Actions"
                         key="actions"
                         render={(text, record) => (
                             <>
-                                <Button type="link" onClick={() => openEditModal(record)}>
-                                    Edit
-                                </Button>
-                                <Button type="link" onClick={() => deleteProduct(record.id)}>
-                                    Delete
-                                </Button>
+                                <Button onClick={() => openEditModal(record)}>Edit</Button>
+                                <Button danger onClick={() => deleteProduct(record.ProductId)}>Delete</Button>
                             </>
                         )}
                     />
                 </Table>
-
                 <Modal
-    title="Edit Product"
-    visible={showModal}
-    onOk={saveEditProduct}
-    onCancel={handleCloseModal}
->
-    <Form form={editForm} layout="vertical" initialValues={modalProduct}>
-        <Form.Item
-            name="id"
-            label="ID"
-        >
-            <Input disabled />
-        </Form.Item>
-        <Form.Item
-            name="name"
-            label="Name"
-            rules={[{ required: true, message: 'Please enter product name' }]}
-            validateTrigger={['onChange', 'onBlur']}
-        >
-            <Input />
-        </Form.Item>
-        <Form.Item
-            name="image"
-            label="Image"
-            rules={[{ required: true, message: 'Please enter product image URL' }]}
-            validateTrigger={['onChange', 'onBlur']}
-        >
-            <Input />
-        </Form.Item>
-        <Form.Item
-            name="mainIngredient"
-            label="Main Ingredient"
-            rules={[{ required: true, message: 'Please enter main ingredient' }]}
-            validateTrigger={['onChange', 'onBlur']}
-        >
-            <Input />
-        </Form.Item>
-        <Form.Item
-            name="secondaryIngredient"
-            label="Secondary Ingredient"
-            rules={[{ required: true, message: 'Please enter secondary ingredient' }]}
-            validateTrigger={['onChange', 'onBlur']}
-        >
-            <Input />
-        </Form.Item>
-        <Form.Item
-            name="cover"
-            label="Cover"
-            rules={[{ required: true, message: 'Please enter cover' }]}
-            validateTrigger={['onChange', 'onBlur']}
-        >
-            <Input />
-        </Form.Item>
-        <Form.Item
-            name="type"
-            label="Type"
-            rules={[{ required: true, message: 'Please enter product type' }]}
-            validateTrigger={['onChange', 'onBlur']}
-        >
-            <Input />
-        </Form.Item>
-        <Form.Item
-            name="price"
-            label="Price"
-            rules={[
-                { required: true, message: 'Please enter product price' },
-            ]}
-            validateTrigger={['onChange', 'onBlur']}
-        >
-            <Input />
-        </Form.Item>
-        <Form.Item
-            name="quantity"
-label="Quantity"
-            rules={[
-                { required: true, message: 'Please enter product quantity' },
-            ]}
-            validateTrigger={['onChange', 'onBlur']}
-        >
-            <Input />
-        </Form.Item>
-    </Form>
-</Modal>
-
+                    title="Edit Product"
+                    visible={showModal}
+                    onCancel={handleCloseModal}
+                    footer={[
+                        <Button key="cancel" onClick={handleCloseModal}>
+                            Cancel
+                        </Button>,
+                        <Button key="submit" type="primary" onClick={saveEditProduct}>
+                            Save Changes
+                        </Button>,
+                    ]}
+                >
+                    <Form form={editForm} layout="vertical">
+                        <Form.Item
+                            name="id"
+                            label="ID"
+                            rules={[{ required: true, message: 'Please enter product ID' }]}
+                        >
+                            <Input placeholder="Enter product ID" disabled />
+                        </Form.Item>
+                        <Form.Item
+                            name="name"
+                            label="Name"
+                            rules={[{ required: true, message: 'Please enter product name' }]}
+                        >
+                            <Input placeholder="Enter product name" />
+                        </Form.Item>
+                        <Form.Item
+                            name="image"
+                            label="Image"
+                            rules={[{ required: true, message: 'Please enter product image URL' }]}
+                        >
+                            <Input placeholder="Enter product image URL" />
+                        </Form.Item>
+                        <Form.Item
+                            name="mainIngredient"
+                            label="Main ingredient"
+                            rules={[{ required: true, message: 'Please enter main ingredient' }]}
+                        >
+                            <Input placeholder="Enter main ingredient" />
+                        </Form.Item>
+                        <Form.Item
+                            name="secondaryIngredient"
+                            label="Secondary ingredient"
+                            rules={[{ required: true, message: 'Please enter secondary ingredient' }]}
+                        >
+                            <Input placeholder="Enter secondary ingredient" />
+                        </Form.Item>
+                        <Form.Item
+                            name="cover"
+                            label="Cover"
+                            rules={[{ required: true, message: 'Please enter product cover' }]}
+                        >
+                            <Input placeholder="Enter product cover" />
+                        </Form.Item>
+                        <Form.Item
+                            name="type"
+                            label="Type"
+                            rules={[{ required: true, message: 'Please enter product type' }]}
+                        >
+                            <Input placeholder="Enter product type" />
+                        </Form.Item>
+                        <Form.Item
+                            name="price"
+                            label="Price"
+                            rules={[
+                                { required: true, message: 'Please enter product price' },
+                                { type: 'number', message: 'Price must be a number' },
+                            ]}
+                        >
+                            <Input type="number" placeholder="Enter product price" />
+                        </Form.Item>
+                        <Form.Item
+                            name="quantity"
+                            label="Quantity"
+                            rules={[
+                                { required: true, message: 'Please enter product quantity' },
+                                { type: 'number', message: 'Quantity must be a number' },
+                            ]}
+                        >
+                            <Input type="number" placeholder="Enter product quantity" />
+                        </Form.Item>
+                    </Form>
+                </Modal>
             </div>
         </div>
     );
-}
+};
 
 export default ManageProduct;

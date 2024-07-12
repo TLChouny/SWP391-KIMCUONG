@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Button, Modal, Input, Form } from "antd";
+import './Profileuser.css';  // Assuming you have a separate CSS file
 
 const URL = "http://localhost:8080/api/user/profile";
-const PASSWORD_URL = "http://localhost:8080/api/user/changepassword"; // Endpoint for changing password
+const PASSWORD_URL = "http://localhost:8080/api/user/changepassword";
 
 export default function ProfileUser() {
     const [user, setUser] = useState({
@@ -16,6 +18,9 @@ export default function ProfileUser() {
         currentPassword: '',
         newPassword: ''
     });
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [currentPassword, setCurrentPassword] = useState('');
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -36,105 +41,133 @@ export default function ProfileUser() {
         fetchUserProfile();
     }, []);
 
-    const handleUpdate = async (event) => {
-        event.preventDefault();
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = async () => {
         try {
-            const response = await axios.put(URL, {
-                username: user.username,
-                phoneNumber: user.phoneNumber,
-                address: user.address,
+            // Check if current password matches passwords.currentPassword
+            const checkPasswordResponse = await axios.post("http://localhost:8080/api/user/checkpassword", {
+                currentPassword: passwords.currentPassword,
             }, {
                 headers: {
                     "Content-Type": "application/json",
                     "x-access-token": localStorage.getItem('accessToken'),
                 },
             });
-            console.log("Profile changed successfully", response.data);
-            setUser(response.data);
+
+            if (checkPasswordResponse.data.success) {
+                // If password matches, update profile
+                const profileResponse = await axios.put(URL, {
+                    username: user.username,
+                    phoneNumber: user.phoneNumber,
+                    address: user.address,
+                }, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-access-token": localStorage.getItem('accessToken'),
+                    },
+                });
+                console.log("Profile changed successfully", profileResponse.data);
+                setUser(profileResponse.data);
+
+                // Update password if new password is provided
+                if (passwords.newPassword) {
+                    const passwordResponse = await axios.put(PASSWORD_URL, {
+                        currentPassword: passwords.currentPassword,
+                        newPassword: passwords.newPassword,
+                    }, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "x-access-token": localStorage.getItem('accessToken'),
+                        },
+                    });
+                    console.log("Password changed successfully", passwordResponse.data);
+                }
+
+                setIsModalVisible(false);
+            } else {
+                // If password does not match, show error message
+                console.error("Current password is incorrect");
+                // You can handle this in your UI, for example, show a message or disable the form submit
+            }
         } catch (error) {
-            console.error("There was an error updating the user data!", error);
+            console.error("There was an error updating the user data!", error.response);
         }
     };
 
-    const handlePasswordChange = async (event) => {
-        event.preventDefault();
-        try {
-            const response = await axios.put(PASSWORD_URL, {
-                currentPassword: passwords.currentPassword,
-                newPassword: passwords.newPassword,
-            }, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-access-token": localStorage.getItem('accessToken'),
-                },
-            });
-            console.log("Password changed successfully", response.data);
-            // Cập nhật state hoặc thông báo cho người dùng là đã thay đổi mật khẩu thành công
-        } catch (error) {
-            console.error("There was an error changing the password!", error.response); // In ra error.response để xem chi tiết lỗi từ server
-        }
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
     };
-    
 
     return (
-        <div>
+        <>
             <h1>User Profile</h1>
-            <form onSubmit={handleUpdate}>
-                <div>
-                    <label>Username:</label>
-                    <input
-                        type="text"
-value={user.username}
-                        onChange={(e) => setUser({ ...user, username: e.target.value })}
-                    />
+            <div className="profile-user-container">
+                <div className="profile-user-info">
+                    <label>Username: <Input value={user.username} style={{width: "20%"}} /></label>
                 </div>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        value={user.email}
-                        readOnly
-                    />
+                <div className="profile-user-info">
+                    <label>Email: <Input value={user.email} /></label>
                 </div>
-                <div>
-                    <label>Phone Number:</label>
-                    <input
-                        type="text"
-                        value={user.phoneNumber}
-                        onChange={(e) => setUser({ ...user, phoneNumber: e.target.value })}
-                    />
+                <div className="profile-user-info">
+                    <label>Phone Number: <Input value={user.phoneNumber} /></label>
                 </div>
-                <div>
-                    <label>Address:</label>
-                    <input
-                        type="text"
-                        value={user.address}
-                        onChange={(e) => setUser({ ...user, address: e.target.value })}
-                    />
+                <div className="profile-user-info">
+                    <label>Address: <Input value={user.address} /></label>
                 </div>
-                <button type="submit">Update</button>
-            </form>
+                <Button type="primary" onClick={showModal}>Edit Profile</Button>
 
-            <h2>Change Password</h2>
-            <form onSubmit={handlePasswordChange}>
-                <div>
-                    <label>Current Password:</label>
-                    <input
-                        type="password"
-                        value={passwords.currentPassword}
-                        onChange={(e) => setPasswords({ ...passwords, currentPassword: e.target.value })}
-                    />
-                </div>
-                <div>
-                    <label>New Password:</label>
-                    <input
-                        type="password"
-                        value={passwords.newPassword}
-                        onChange={(e) => setPasswords({ ...passwords, newPassword: e.target.value })}
-                    />
-                </div>
-                <button type="submit">Change Password</button>
-            </form>
-        </div>
+                <Modal title="Edit Profile" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                    <Form>
+                        <Form.Item label="Username" className="form-item">
+                            <Input
+                                type="text"
+                                value={user.username}
+                                onChange={(e) => setUser({ ...user, username: e.target.value })}
+                            />
+                        </Form.Item>
+                        <Form.Item label="Email" className="form-item">
+                            <Input
+                                type="email"
+                                value={user.email}
+                                readOnly
+                            />
+                        </Form.Item>
+                        <Form.Item label="Phone Number" className="form-item">
+                            <Input
+                                type="text"
+                                value={user.phoneNumber}
+                                onChange={(e) => setUser({ ...user, phoneNumber: e.target.value })}
+                            />
+                        </Form.Item>
+                        <Form.Item label="Address" className="form-item">
+                            <Input
+                                type="text"
+                                value={user.address}
+                                onChange={(e) => setUser({ ...user, address: e.target.value })}
+                            />
+                        </Form.Item>
+                        {/* <Form.Item label="Current Password" className="form-item">
+                            <Input
+                                type="password"
+                                value={currentPassword}
+                                onChange={(e) => setCurrentPassword(e.target.value)}
+                            />
+                        </Form.Item>
+
+                        <Form.Item label="New Password" className="form-item">
+                            <Input
+                                type="password"
+                                value={passwords.newPassword}
+                                onChange={(e) => setPasswords({ ...passwords, newPassword: e.target.value })}
+                            />
+                        </Form.Item> */}
+                    </Form>
+                </Modal>
+            </div>
+        </>
     );
 }
